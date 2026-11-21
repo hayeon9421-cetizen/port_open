@@ -5,8 +5,9 @@
 
 # git 명령 
 * 커밋(commit) - 내 로컬 git 저장소에 저장
-* 
-* 
+* 푸시(push) - 내 로컬 git 내용을 원격(Remote) 저장소에 적용
+* 풀(pull) - 원격(Remote) 저장소를 내 로컬 git에 적용후 로컬 소스에도 적용
+* 패치(fatch) - 원격(Remote) 저장소를 내 로컬 git에만 적용 (로컬 소스에 미적용)
   
   
 # github 프로젝트 공유법
