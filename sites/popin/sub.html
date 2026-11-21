@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>POPIN | 팝업 찾기</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-4.0.0.js"></script>
+    <script>
+      $(function (){
+        // 맨 위로 버튼: 400px 이상 스크롤하면 표시, 클릭하면 부드럽게 맨 위로 이동
+        $(document).ready(function(){
+          $(window).scroll(function(){
+            if($(this).scrollTop() > 400){
+            $('.to-top').addClass('show');
+          } else {
+            $('.to-top').removeClass('show');
+          }
+        });
+      
+
+        $('.to-top').click(function(){
+          $('html, body').animate({scrollTop: 0}, 500);
+        });
+      });
+        //서브1: 제목 아래 언더라인이 페이지 로딩 시 왼쪽에서 오른쪽으로 2초 동안 늘어남
+        var $hr = $(".sub-hero hr");
+        var full = $hr.width();
+        $hr.css("width", 0).animate({ width: full }, 2000, "swing");
+      
+      /*
+      $(document).ready(function(){
+
+        // 서브1: 화면에 보일 때마다 언더라인 애니메이션 실행
+        var $hr = $(".sub-hero hr");
+        var full = $hr.width();
+
+        $hr.css("width", 0);
+
+        $(window).on("scroll load", function(){
+
+        var top = $hr.offset().top;
+        var scroll = $(window).scrollTop();
+        var winHeight = $(window).height();
+
+        if(top < scroll + winHeight && top + $hr.height() > scroll){
+
+            $hr.stop().css("width", 0).animate(
+                { width: full },
+                2000,
+                "swing"
+            );
+            } else {
+            $hr.stop();
+            }
+          });
+
+      });
+      */
+
+        // 서브2: 작은 이미지에 마우스를 올리면 왼쪽 큰 이미지가 바뀌고, 벗어나면 기본(sub2_11)으로 돌아감
+        var $big = $(".spot .slide img");
+        function show(i) {
+          $big.removeClass("on").eq(i).addClass("on");
+        }
+        $(".spot-mini img").each(function (i) {
+          $(this)
+            .on("mouseenter focus", function () {
+              show(i);
+            })
+            .on("mouseleave blur", function () {
+              show(0);
+            });
+        });
+
+        // 서브3: 박스가 화면에 보이면 텍스트가 박스 상단에서 아래로 내려오며 표시, 많이 벗어나면 초기화되어 스크롤할 때마다 반복
+        var $boxes = $(".bx");
+        $boxes.find("h4, p").addClass("pre");
+        function checkBoxes() {
+          var vh = $(window).height();
+          $boxes.each(function () {
+            var $box = $(this);
+            var r = this.getBoundingClientRect();
+            var visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+            var shown = $box.data("shown");
+            if (!shown && visible >= r.height * 0.6) {
+              $box.data("shown", true).find("h4, p").removeClass("pre");
+            } else if (shown && visible < r.height * 0.2) {
+              $box.data("shown", false).find("h4, p").addClass("pre");
+            }
+          });
+        }
+        $(window).on("scroll resize", checkBoxes);
+        checkBoxes();
+
+        // 서브4: 이미지와 하단 설명이 화면에 보이면 페이드인, 
+        // 많이 벗어나면 초기화되어 스크롤할 때마다 반복
+        var $figs = $(".pops-in > div").addClass("pre");
+        function checkFigs() {
+          var vh = $(window).height();
+          $figs.each(function () {
+            var $fig = $(this);
+            var r = this.getBoundingClientRect();
+            var visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+            var hidden = $fig.hasClass("pre");
+            if (hidden && visible >= r.height * 0.6) {
+              $fig.removeClass("pre");
+            } else if (!hidden && visible < r.height * 0.2) {
+              $fig.addClass("pre");
+            }
+          });
+        }
+        $(window).on("scroll resize", checkFigs);
+        checkFigs();
+
+        // 서브5: 섹션이 화면에 모두 표시되면 텍스트가 오른쪽에서 왼쪽으로 이동, 
+        // 많이 벗어나면 초기화되어 스크롤할 때마다 반복
+        var $area = $(".area");
+        var $items = $area.find("h2, p").addClass("pre");
+        var shown = false;
+        function check() {
+          var r = $area[0].getBoundingClientRect();
+          var vh = $(window).height();
+          var visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+          var full = Math.min(r.height, vh);
+          if (!shown && visible >= full * 0.75) {
+            shown = true;
+            $items.removeClass("pre");
+          } else if (shown && visible < full * 0.2) {
+            shown = false;
+            $items.addClass("pre");
+          }
+        }
+        $(window).on("scroll resize", check);
+        check();
+
+        // 서브7: 통계 칸에 마우스를 올리면 숫자가 30% 커지고 굵어짐
+        $(".stats > div").hover(
+          function () {
+            $(this).find("b").addClass("on");
+          },
+          function () {
+            $(this).find("b").removeClass("on");
+          }
+        );
+      });
+    </script>
+  </head>
+  <body class="main-font sub2-page">
+    <div class="page">
+      <header class="nav over">
+        <div class="nav-bar">
+          <a class="logo" href="index2.html" aria-label="POPIN 메인으로">
+            <img src="assets/main3_logo.png" alt="POPIN" /></a>
+          <div class="item on">
+            <a class="link" href="#p1">DISCOVER</a>
+            <div class="drop">
+              <a href="sub.html">팝업 찾기</a>
+              <a href="#p2">지역별 팝업</a>
+              <a href="#p2">브랜드 팝업</a>
+              <a href="#p2">신규 팝업</a>
+              <a href="#p2">에디터 추천</a>
+            </div>
+          </div>
+          <div class="item">
+            <a class="link" href="#p3">SPACE</a>
+            <div class="drop">
+              <a href="#p3">공간 찾기</a>
+              <a href="#p3">공간 등록</a>
+              <a href="#p3">공간 매칭</a>
+              <a href="#p3">공간 파트너</a>
+              <a href="#p3">추천 공간</a>
+            </div>
+          </div>
+          <div class="item">
+            <a class="link" href="#p4">BRANDS &amp; SELLERS</a>
+            <div class="drop">
+              <a href="#p4">브랜드 등록</a>
+              <a href="#p4">셀러 찾기</a>
+              <a href="#p5">팝업 기획</a>
+              <a href="#p5">팝업 참여</a>
+              <a href="#p5">공동 팝업</a>
+            </div>
+          </div>
+          <div class="item">
+            <a class="link" href="#p5">MATCH</a>
+            <div class="drop">
+              <a href="#p5">맞춤 매칭</a>
+              <a href="#p5">공간 추천</a>
+              <a href="#p5">협상·견적</a>
+              <a href="#p5">계약 관리</a>
+              <a href="#p5">매칭 현황</a>
+            </div>
+          </div>
+          <span class="sp"></span>
+          <span class="dots"></span>
+          <span class="user"></span>
+          <form onsubmit="return false;">
+            <input type="search" aria-label="검색" />
+            <button aria-label="검색"><span class="mag"></span></button>
+          </form>
+        </div>
+      </header>
+      <section class="sub-hero">
+        <img src="assets/sub_bg.png" alt="핑크 팝업 스토어" />
+        <div class="tag">POPULAR · RANKING · REVIEWS</div>
+        <h2>지금 뜨는 곳엔<b>,</b>이유가 있다<b>.</b></h2>
+        <h3><b>POPIN</b>
+          에서 지금 가장 주목받는 팝업을 만나보세요
+          <b>.</b>
+        </h3>
+        <hr>
+      </section>
+
+      <section class="spot">
+        <div class="spot-in">
+          <div class="slide">
+            <img class="on" src="assets/sub2_11.png" alt="HOKA 팝업">
+            <img src="assets/sub2_12.png" alt="핑크 튤립 팝업">
+            <img src="assets/sub2_13.png" alt="세포라 팝업">
+          </div>
+          <h4>OUTDOOR POP-UPS</h4>
+          <h3>열린 공간에서 더 크게 펼쳐지는 브랜드</h3>
+          <p>브랜드의 경계를 넘어 도시 곳곳에서 펼쳐지는 새로운 팝업의 풍경.</p>
+          <h5>거리도, 무대가 된다.</h5>
+          <div class="spot-mini">
+            <img class="m2" src="assets/sub2_22.png" alt="큰 이미지1" tabindex="0">
+            <img class="m1" src="assets/sub2_21.png" alt="큰 이미지2" tabindex="0">
+            <img class="m3" src="assets/sub2_23.png" alt="큰 이미지3" tabindex="0">
+          </div>
+        </div>
+        <div class="banner">
+          <img src="assets/sub2_3.png" alt="삼양 팝업">
+        </div>
+      </section>
+
+
+
+      <section class="brand" id="brand">
+        <div class="brand-grid">
+          <img src="assets/sub3_1.png" alt="미니언즈 팝업">
+          <div class="bx">
+            <h4>A BRAND,<br>INTO A SPACE.</h4>
+            <p>브랜드의 이야기를 공간으로 만나다.</p>
+          </div>
+          <div class="tall">
+            <h4>MORE THAN<br>A STORE.</h4>
+            <p>보는 것을 넘어, 직접 경험하는 공간.</p>
+          </div>
+          <div class="bx">
+            <h4>HERE FOR A WHILE.<br>MEMORABLE FOR LONGER.</h4>
+            <p>잠깐의 순간을 오래 기억하게 만들다.</p>
+          </div>
+          <img src="assets/sub3_2.png" alt="이니스프리 팝업">
+        </div>
+      </section>
+
+      <section class="pops">
+        <h2>평범한 공간에선, 만날 수 없는 것들</h2>
+        <p class="lead">브랜드의 상상이 현실이 되는 순간부터
+          <b>,</b> 공간을 경험하는 새로운 방식까지<b>.</b> 
+          익숙한 매장의 경계를 벗어나 팝업을 만나 보세요<b>.</b></p>
+        <div class="pops-in">
+          <div class="f1">
+            <img src="assets/sub4-1.png" alt="">
+            <h4>01 / SPACE</h4>
+            <p>예상 밖의 형태와 디자인으로<br>
+              시선을 사로잡는 팝업
+            </p>
+          </div>
+          <div class="f3">
+            <img src="assets/sub4-2.png" alt="Stray Kids 팝업">
+            <h4>02 / EXPERIENCE</h4>
+            <p>팬덤과 브랜드의 세계를 오감으로<br>경험하는 공간</p>
+          </div>
+          <div class="f4">
+            <img src="assets/sub4_3.png" alt="">
+            <h4>03 / BRAND</h4>
+            <p>건물 자체가 하나의 컨텐츠가<br>되는 팝업</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="area">
+        <div class="wrap">
+          <h2>EXPLORE BY AREA</h2>
+          <p>New places.<br>New pop-up experiences.</p>
+          <div class="video">
+            <video src="assets/popin_sub5.mp4" poster="assets/popmart.jpg" autoplay muted loop playsinline aria-label="팝마트 팝업"></video>
+          </div>
+        </div>
+      </section>
+
+      <section class="picks-wrap">
+        <div class="picks">
+          <aside>
+            <h2>EDITOR'S<br>PICKS</h2>
+            <p>What's trending now.</p>
+            <p>The pop-ups everyone is talking about.</p>
+            <div class="arr">&gt;</div>
+          </aside>
+          <div>
+            <div class="row">
+              <div class="t">
+                <span class="n">01</span>
+                <h3>TRENDING
+                  <small>COLOR / ENERGY / NOW</small>
+                </h3>
+              </div>
+              <img src="assets/sub6_1.png" alt="" />
+            </div>
+            <div class="row">
+              <div class="t">
+                <span class="n">02</span>
+                <h3>FEATURED
+                  <small>SPACE / EXPERIENCE / PLAY</small>
+                </h3>
+              </div>
+              <img src="assets/sub6_2.png" alt="" />
+            </div>
+            <div class="row">
+              <div class="t">
+                <span class="n">03</span>
+                <h3>NEW IN
+                  <small>FRESH / NEW / NEXT</small>
+                </h3>
+              </div>
+              <img src="assets/sub6_3.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gal">
+        <div class="gal-row">
+          <img src="assets/sub7_1.png" alt="REAL REVIEWS - See what people are saying.">
+          <img src="assets/sub7_2.png" alt="">
+          <img src="assets/sub7_3.png" alt="">
+        </div>
+        <div class="stats">
+          <div><b>100+</b>
+            <h4>POP-UP EXPERIENCES</h4>
+            <p>다양한 브랜드와 공간에서 만나는
+              <br>새로운 팝업 경험</p>
+          </div>
+          <div>
+            <b>20+</b>
+            <h4>CATEGORIES</h4>
+            <p> 패션부터 뷰티, <strong>F&amp;B</strong>, 
+              전시까지<br>다양한 취향을 한곳에서</p>
+          </div>
+          <div><b>10+</b>
+            <h4>AREAS</h4>
+            <p>서울부터 전국 주요 지역까지<br>
+              가까운 팝업을 발견</p>
+          </div>
+          <div><b>4.8</b>
+            <h4>REVIEWS</h4>
+            <p>방문객의 실제 경험과 리뷰를 통해<br>
+              방문객의 경험을 확인</p>
+          </div>
+        </div>
+      </section>
+      <footer class="ft">
+        <div class="ft-in">
+          <div class="ft-why">
+            <small>WHY POPIN?</small>
+            <h2>팝업 스토어의<br>
+              모든 것을 한곳에서</h2>
+          </div>
+          <ul class="ft-feat">
+            <li>
+              <span class="ico target"></span>
+              <h3>브랜드를 위한</h3>
+              <p>더 넓은 타겟, 더 강한 경험<br>
+                지금 팝업스토어로</p>
+            </li>
+            <li>
+              <span class="ico store"></span>
+              <h3>공간을 위한</h3>
+              <p>유휴 공간의 새로운 가치<br>
+                팝업으로 채워보세요</p>
+            </li>
+            <li>
+              <span class="ico users"></span>
+              <h3>셀러를 위한</h3>
+              <p>더 많은 기회와 새로운 시장<br>
+                지금 팝업에 도전하세요</p>
+            </li>
+            <li>
+              <span class="ico star"></span>
+              <h3>방문객을 위한</h3>
+              <p>다양한 브랜드와 공간을<br>
+                가장 가까이에서</p>
+            </li>
+          </ul>
+          <nav class="ft-links">
+            <div><b>POPIN</b>
+              <span>About POPIN</span>
+              <span>How it works</span>
+              <span>Contact</span>
+            </div>
+            <div><b>FOR VISITORS</b>
+              <span>Discover</span>
+              <span>Search</span>
+              <span>Save</span>
+              <span>Schedule</span>
+            </div>
+            <div><b>FOR BUSINESS</b>
+              <span>Find a Space</span>
+              <span>List a Space</span>
+              <span>Find a Brand</span>
+              <span>Manage Pop-up</span>
+            </div>
+            <div><b>COMPANY</b>
+              <span>About Us</span>
+              <span>Careers</span>
+              <span>News</span>
+            </div>
+            <div><b>SUPPORT</b>
+              <span>FAQ</span>
+              <span>Contact</span>
+              <span>Terms</span>
+              <span>Privacy</span>
+            </div>
+          </nav>
+          <p class="ft-copy">
+            <span>&copy; POPIN ALL RIGHTS RESERVED</span>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <button class="to-top" type="button" aria-label="맨 위로"></button>
+  </body>
+</html>

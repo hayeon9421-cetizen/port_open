@@ -1,0 +1,173 @@
+/* ODDAY 공통 HEADER — index.html / sub1.html 공용. 헤더 규칙은 이 파일만 수정하세요. */
+/* 기준: index 원본 80px 높이, 1600px 컨텐츠 폭, 좌우 430px 정렬 */
+#header {
+    box-sizing: border-box;
+    width: 100vw; /* index 안에서는 max-width로 부모 폭에 맞추고, sub1에서는 뷰포트 기준으로 중앙 정렬 */
+    max-width: 100%;
+    height: 80px;
+    position: sticky;
+    top: 0;
+    z-index: 1000000;
+    background: #fff;
+    border: 0;
+    border-bottom: 1px solid #e6e6e6;
+    font-family: 'Manrope', 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: normal;
+    color: #111;
+}
+#header, #header * { box-sizing: border-box; }
+#header a { color: #111; text-decoration: none; }
+#header .header_wrap {
+    position: relative;
+    width: 1600px;
+    max-width: calc(100% - 48px);
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#header .header_left_textbox,
+#header .header_right_textbox {
+    display: flex;
+    align-items: center;
+    flex: 0 1 430px;
+    min-width: 0;
+    height: 100%;
+}
+#header .header_left_textbox {
+    justify-content: space-between;
+    white-space: nowrap;
+}
+#header .header_right_textbox { justify-content: flex-end; }
+#header .header_left_textbox a,
+#header .header_member_box a {
+    font-family: 'Manrope', 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: normal;
+    white-space: nowrap;
+}
+#header .header_left_textbox a:hover,
+#header .header_member_box a:hover { opacity: .55; }
+
+/* 중앙 ODDAY 로고와 오른쪽 눈 장식 (로고 이미지 기준 중앙 정렬) */
+#header .header_logo.od-logo-with-eyes {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 148px;
+    height: 46px;
+    margin: 0;
+    padding: 0;
+    z-index: 25;
+    display: block;
+    overflow: visible;
+}
+#header .header_logo > a,
+#header .header_logo > a > img {
+    display: block;
+    width: 148px;
+    height: 46px;
+    max-width: none;
+}
+#header .header_logo > a > img { object-fit: contain; }
+#header .od-head-eyes {
+    position: absolute;
+    left: calc(100% + 13px);
+    top: 8px;
+    display: flex;
+    gap: 4px;
+    transform: rotate(-8deg);
+    pointer-events: none;
+}
+#header .od-eye {
+    width: 20px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid #242321;
+    border-radius: 50%;
+    background: #fffaf5;
+}
+#header .od-pupil {
+    display: block;
+    width: 9px;
+    height: 12px;
+    background: #242321;
+    border-radius: 50%;
+    transform: translate(0,0);
+    will-change: transform;
+}
+
+/* 우측 SNS · 검색 · 로그인 영역 */
+#header .header_sns_box,
+#header .header_search_box,
+#header .header_member_box {
+    display: flex;
+    align-items: center;
+}
+#header .header_sns_box { gap: 10px; }
+#header .header_sns_box a,
+#header .header_search_box a {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+    flex: 0 0 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+#header .header_sns_box img,
+#header .header_search_box img {
+    display: block;
+    width: 23px;
+    height: 23px;
+    object-fit: contain;
+    opacity: 1;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    filter: none;
+    transition: opacity .2s ease, transform .2s ease;
+}
+#header .header_sns_box a:hover img { opacity: .68; transform: translateY(-2px); }
+#header .header_search_box a:hover img { opacity: .65; }
+#header .header_search_box { margin-left: 10px; margin-right: 27px; }
+#header .header_member_box div { margin-left: 24px; }
+#header .header_member_box div:first-child { margin-left: 0; }
+
+@media (max-width: 1100px) {
+    #header .header_logo.od-logo-with-eyes,
+    #header .header_logo > a,
+    #header .header_logo > a > img { width: 132px; height: 42px; }
+    #header .od-head-eyes { left: calc(100% + 10px); top: 7px; transform: scale(.88) rotate(-8deg); transform-origin: top left; }
+    #header .header_left_textbox a,
+    #header .header_member_box a { font-size: 12px; }
+}
+@media (max-width: 700px) {
+    #header .header_wrap { max-width: calc(100% - 24px); }
+    #header .header_logo.od-logo-with-eyes,
+    #header .header_logo > a,
+    #header .header_logo > a > img { width: 105px; height: 34px; }
+    #header .od-head-eyes { left: calc(100% + 7px); top: 5px; transform: scale(.69) rotate(-8deg); }
+    #header .header_left_textbox { gap: 7px; }
+    #header .header_left_textbox a,
+    #header .header_member_box a { font-size: 10px; }
+    #header .header_sns_box { gap: 4px; }
+    #header .header_search_box { margin-left: 4px; margin-right: 7px; }
+    #header .header_member_box div { margin-left: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    #header .header_sns_box img { transition: none; }
+}

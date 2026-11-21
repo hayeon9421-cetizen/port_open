@@ -1,0 +1,1093 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ODDAY | Weather Wardrobe</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+   ODDAY SECTION 03
+   WEATHER WARDROBE
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    font-family: 'Manrope', 'Noto Sans KR', sans-serif;
+    color: #171717;
+    background: #faf9f6;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+/* =========================================
+   전체 레이아웃
+========================================= */
+
+.weather-layout {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row-reverse;
+
+    overflow: hidden;
+}
+
+/* =========================================
+   오른쪽 모델 사진
+========================================= */
+
+.editorial {
+    width: 35%;
+    height: 100%;
+
+    flex-shrink: 0;
+    position: relative;
+
+    background: #ddd;
+}
+
+.editorial img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* =========================================
+   왼쪽 상품 영역
+
+   여백 조절
+   padding-top : 상단 여백
+   padding-bottom : 하단 여백
+========================================= */
+
+.wardrobe {
+    width: 65%;
+    height: 100%;
+
+    padding-top: min(180px, 16.7vh);
+    padding-bottom: min(180px, 16.7vh);
+    padding-left: 5.4%;
+    padding-right: 5.4%;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #faf9f6;
+}
+
+/* =========================================
+   상단 타이틀
+========================================= */
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 14px;
+}
+
+.head > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.head > div:last-child {
+    flex: 0 0 auto;
+    max-width: 42%;
+
+    margin-left: auto;
+
+    text-align: right;
+
+    position: relative;
+    top: 9px;
+}
+
+.head h1 {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    gap: .18em;
+
+    white-space: nowrap;
+
+    margin: 0 0 14px;
+
+    line-height: 1.04;
+
+    font-family: 'Anton', 'Manrope', sans-serif;
+    font-weight: 400;
+}
+
+.head h1 .hero-line {
+    display: block;
+
+    font-size: clamp(24px, 2.45vw, 46px);
+    line-height: 1.04;
+
+    letter-spacing: .01em;
+
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.hero-line--main {
+    color: #1d2421;
+}
+
+.hero-line--accent {
+    color: #b67b55;
+}
+
+.head p {
+    margin: 0;
+
+    font-size: clamp(9px, .86vw, 14px);
+    color: #78746f;
+}
+
+/* =========================================
+   날씨 아이콘
+========================================= */
+
+.weather-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    gap: 6px;
+
+    position: relative;
+}
+
+.weather-icon {
+    border: 0;
+    background: transparent;
+
+    padding: 2px 1px;
+
+    font-size: clamp(18px, 1.45vw, 27px);
+
+    opacity: .73;
+    cursor: grab;
+
+    transition: opacity .2s;
+
+    animation: oddayWeatherGlide 4.8s ease-in-out infinite;
+
+    animation-delay:
+        calc(var(--weather-index, 0) * -.63s);
+
+    will-change: transform;
+}
+
+.weather-icon:hover,
+.weather-icon.active {
+    opacity: 1;
+}
+
+.weather-icon.is-dragging {
+    opacity: 1;
+    animation-play-state: paused;
+}
+
+@keyframes oddayWeatherGlide {
+
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(0, -5px, 0);
+    }
+
+}
+
+/* =========================================
+   드래그 안내 문구
+========================================= */
+
+.hint {
+    font-size: clamp(8px, .67vw, 12px);
+
+    text-align: right;
+
+    margin: 10px 0 0;
+
+    color: #8f8a84;
+
+    white-space: nowrap;
+}
+
+.hint mark {
+    background: linear-gradient(
+        to bottom,
+        transparent 35%,
+        #B5E5F7 35%,
+        #B5E5F7 94%,
+        transparent 94%
+    );
+
+    color: #333A40;
+    font-weight: 600;
+
+    padding: 0 3px;
+
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+/* =========================================
+   상품 전체 영역
+========================================= */
+
+.drop-area {
+    margin-top: 1%;
+
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+}
+
+/* =========================================
+   상품 4개 - 2열 × 2행
+========================================= */
+
+.cards {
+    flex: 1;
+
+    min-height: 0;
+
+    width: 100%;
+    height: 96%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    grid-template-rows:
+        repeat(2, minmax(0, 1fr));
+
+    /* 옷 좌우 간격 */
+    column-gap: 0px;
+
+    /* 옷 위아래 간격 */
+    row-gap: 0px;
+
+    align-items: stretch;
+}
+
+/* =========================================
+   개별 상품
+========================================= */
+
+.product {
+    border: 0;
+    background: transparent;
+
+    text-align: left;
+
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* 왼쪽 상품 안쪽으로 이동 */
+.cards > .product:nth-child(odd) {
+    transform: translateX(10px);
+}
+
+/* 오른쪽 상품 안쪽으로 이동 */
+.cards > .product:nth-child(even) {
+    transform: translateX(-10px);
+}
+
+/* 아래쪽 두 상품 위로 당기기 */
+.cards > .product:nth-child(n+3) {
+    margin-top: -12px;
+}
+
+/* =========================================
+   옷 이미지 영역
+========================================= */
+
+.photo {
+    width: 100%;
+
+    height: 72%;
+    flex: 0 0 72%;
+
+    min-height: 0;
+
+    background: transparent;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: visible;
+}
+
+/* =========================================
+   옷 이미지 크기 설정
+
+   기존 92.4% → 100% 확대
+
+   이 부분의 width를 변경하면
+   옷 이미지 크기를 조절할 수 있음.
+========================================= */
+
+.photo img {
+    width: 100%;
+    height: 100%;
+
+    max-height: 100%;
+
+    object-fit: contain;
+
+    background: transparent;
+
+    transform: scale(1.045);
+
+    transition: opacity .2s;
+}
+
+/* =========================================
+   상품 설명
+========================================= */
+
+.caption {
+    flex: 0 0 auto;
+
+    width: 100%;
+
+    display: flex;
+
+    gap: 6px;
+
+    padding: 3px 0 0 8%;
+
+    font-size: clamp(10px, .84vw, 14px);
+
+    line-height: 1.4;
+
+    letter-spacing: .03em;
+}
+
+.caption b {
+    color: #d52b3e;
+
+    font-size: 1.06em;
+}
+
+.caption small {
+    display: block;
+
+    font-size: .9em;
+
+    color: #666;
+
+    margin-top: 2px;
+}
+
+.status {
+    display: none;
+}
+
+.small {
+    font-size: 10px;
+    color: #98928b;
+}
+
+/* =========================================
+   PC 화면 설정
+
+   상품 전체를 27px 아래로 이동
+
+   translateY(27px)의 숫자를
+   변경하면 위아래 위치 조절 가능
+========================================= */
+
+@media (min-width: 651px) {
+
+    .drop-area {
+        transform: translateY(27px);
+    }
+
+    .photo img {
+        width: 100%;
+        transform: scale(1.045);
+    }
+
+}
+
+/* =========================================
+   모바일 화면
+========================================= */
+
+@media (max-width: 650px) {
+
+    .editorial {
+        width: 30%;
+    }
+
+    .wardrobe {
+        width: 70%;
+
+        padding: 6% 4% 3%;
+    }
+
+    .head {
+        flex-wrap: wrap;
+
+        gap: 6px;
+    }
+
+    .head > div:last-child {
+        width: 100%;
+        max-width: 100%;
+
+        margin-left: 0;
+
+        top: 5px;
+    }
+
+    .weather-icons {
+        gap: 4px;
+    }
+
+    .weather-icon {
+        font-size: 19px;
+    }
+
+    .hint {
+        display: none;
+    }
+
+    .drop-area {
+        margin-top: 4%;
+
+        transform: translateY(14px);
+    }
+
+    .photo {
+        height: 70%;
+        flex-basis: 70%;
+    }
+
+    .photo img {
+        width: 100%;
+    }
+
+    .caption {
+        font-size: 8px;
+    }
+
+    .cards > .product:nth-child(n+3) {
+        margin-top: 0;
+    }
+
+}
+
+/* =========================================
+   화면 높이가 낮을 때
+========================================= */
+
+@media (max-height: 700px) and (min-width: 651px) {
+
+    .photo {
+        height: 69%;
+        flex-basis: 69%;
+    }
+
+}
+
+/* =========================================
+   애니메이션 최소화 설정
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .weather-icon {
+        animation: none;
+        will-change: auto;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="weather-layout">
+
+    <!-- 오른쪽 모델 이미지 -->
+    <div
+        class="editorial"
+        id="editorialDrop"
+        title="날씨 아이콘을 이 사진에 드래그하세요"
+    >
+        <img
+            src="../img/index_img/weather-editorial.jpg"
+            alt="날씨 아이콘 패치가 그려진 재킷을 입은 모델"
+        >
+    </div>
+
+    <!-- 왼쪽 상품 영역 -->
+    <section class="wardrobe">
+
+        <!-- 상단 타이틀 -->
+        <div class="head">
+
+            <div>
+
+                <h1>
+                    <span class="hero-line hero-line--main">
+                        WEATHER
+                    </span>
+
+                    <span class="hero-line hero-line--accent">
+                        IN STYLE
+                    </span>
+                </h1>
+
+                <p>
+                    날씨 아이콘을 재킷 위에 놓아
+                    새로운 스타일을 발견해 보세요.
+                </p>
+
+            </div>
+
+            <!-- 날씨 아이콘 -->
+            <div>
+
+                <div
+                    class="weather-icons"
+                    id="weatherIcons"
+                >
+
+                    <button
+                        type="button"
+                        class="weather-icon active"
+                        draggable="true"
+                        data-mode="sun"
+                        aria-label="맑은 날"
+                    >☀️</button>
+
+                    <button
+                        type="button"
+                        class="weather-icon"
+                        draggable="true"
+                        data-mode="rain"
+                        aria-label="비 오는 날"
+                    >🌧️</button>
+
+                    <button
+                        type="button"
+                        class="weather-icon"
+                        draggable="true"
+                        data-mode="cloud"
+                        aria-label="흐린 날"
+                    >☁️</button>
+
+                    <button
+                        type="button"
+                        class="weather-icon"
+                        draggable="true"
+                        data-mode="snow"
+                        aria-label="쌀쌀한 날"
+                    >❄️</button>
+
+                    <button
+                        type="button"
+                        class="weather-icon"
+                        draggable="true"
+                        data-mode="storm"
+                        aria-label="바람 부는 날"
+                    >🌩️</button>
+
+                </div>
+
+                <p class="hint">
+                    <mark>
+                        드래그해서 옷 위에 가져다 대세요
+                    </mark>
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- 상품 4개 -->
+        <div class="drop-area" id="dropArea">
+
+            <div class="cards" id="cards"></div>
+
+            <div
+                class="status"
+                aria-live="polite"
+                id="status"
+            ></div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- 기존 제이쿼리 -->
+<script src="../js/jquery.min.js"></script>
+
+<script>
+
+/* =========================================
+   날씨별 상품 데이터
+========================================= */
+
+$(function () {
+
+    const groups = {
+
+        sun: [1, 2, 3, 4],
+
+        rain: [9, 10, 11, 12],
+
+        cloud: [5, 6, 7, 8],
+
+        snow: [6, 7, 8, 10],
+
+        storm: [9, 11, 5, 12]
+
+    };
+
+    const title = {
+
+        sun: 'SUNNY DAY',
+
+        rain: 'RAINY DAY',
+
+        cloud: 'CLOUDY DAY',
+
+        snow: 'COOL DAY',
+
+        storm: 'WINDY DAY'
+
+    };
+
+    const labels = [
+
+        'Dancing Bears Work Jacket',
+        'Everyday Jacket',
+        'Light Wind Jacket',
+        'Spring Layered Outer'
+
+    ];
+
+    const colors = [
+
+        'Ivory',
+        'Olive',
+        'Light Khaki',
+        'Sky Blue'
+
+    ];
+
+    const names = {
+
+        1: 'Dancing Bears Work Jacket',
+        2: 'Everyday Jacket',
+        3: 'Light Wind Jacket',
+        4: 'Spring Layered Outer',
+
+        5: 'Stormproof Jacket',
+        6: 'Light Windbreaker',
+        7: 'Active Zip Jacket',
+        8: 'Blue Utility Jacket',
+
+        9: 'Sky Layered Jacket',
+        10: 'City Wind Jacket',
+        11: 'Sage Utility Jacket',
+        12: 'Lavender Hoodie'
+
+    };
+
+    const shades = {
+
+        1: 'Ivory',
+        2: 'Olive',
+        3: 'Light Khaki',
+        4: 'Sky Blue',
+
+        5: 'Storm Gray',
+        6: 'Ivory',
+        7: 'Soft Blue',
+        8: 'Navy',
+
+        9: 'White / Blue',
+        10: 'Sage',
+        11: 'Slate Blue',
+        12: 'Lavender'
+
+    };
+
+    let mode = 'sun';
+
+    /* 상품 이미지 경로 */
+    function file(n) {
+
+        return '../img/index_img/outer-' +
+            String(n).padStart(2, '0') +
+            '.png';
+
+    }
+
+    /* =====================================
+       날씨 선택 후 상품 변경
+    ===================================== */
+
+    function render(next) {
+
+        if (!groups[next]) return;
+
+        mode = next;
+
+        $('.weather-icon')
+            .removeClass('active')
+            .filter('[data-mode="' + mode + '"]')
+            .addClass('active');
+
+        const $cards = $('#cards');
+
+        $cards.stop(true).fadeTo(130, .15, function () {
+
+            $cards.empty();
+
+            groups[mode].forEach(function (n, i) {
+
+                const $product = $('<div>', {
+                    class: 'product'
+                });
+
+                const $photo = $('<div>', {
+                    class: 'photo'
+                });
+
+                const $image = $('<img>', {
+
+                    src: file(n),
+
+                    alt: 'ODDAY 봄 아우터 ' + n
+
+                });
+
+                $photo.append($image);
+
+                const $caption = $('<div>', {
+                    class: 'caption'
+                });
+
+                const $number = $('<b>').text(i + 1);
+
+                const $description = $('<div>')
+                    .text(names[n] || labels[i]);
+
+                const $color = $('<small>')
+                    .text(shades[n] || colors[i]);
+
+                $description.append($color);
+
+                $caption.append(
+                    $number,
+                    $description
+                );
+
+                $product.append(
+                    $photo,
+                    $caption
+                );
+
+                $cards.append($product);
+
+            });
+
+            $cards.fadeTo(190, 1);
+
+        });
+
+        $('#status').text(
+            title[mode] +
+            ' COLLECTION · Drag or click weather icons'
+        );
+
+    }
+
+    /* =====================================
+       날씨 아이콘 클릭 / 드래그
+    ===================================== */
+
+    $('.weather-icon')
+
+        .on('click', function () {
+
+            render($(this).data('mode'));
+
+        })
+
+        .on('dragstart', function (e) {
+
+            const selectedMode = $(this).data('mode');
+
+            e.originalEvent.dataTransfer.setData(
+                'text/plain',
+                selectedMode
+            );
+
+            e.originalEvent.dataTransfer.effectAllowed = 'copy';
+
+        });
+
+    /* =====================================
+       오른쪽 모델에 드롭
+    ===================================== */
+
+    $('#editorialDrop')
+
+        .on('dragover', function (e) {
+
+            e.preventDefault();
+
+            $(this).addClass('drag-over');
+
+        })
+
+        .on('dragleave', function (e) {
+
+            if (!$(e.relatedTarget).closest('#editorialDrop').length) {
+                $(this).removeClass('drag-over');
+            }
+
+        })
+
+        .on('drop', function (e) {
+
+            e.preventDefault();
+
+            $(this).removeClass('drag-over');
+
+            const selectedMode =
+                e.originalEvent.dataTransfer.getData('text/plain');
+
+            if (groups[selectedMode]) {
+                render(selectedMode);
+            }
+
+        });
+
+    /* =====================================
+       상품 영역에 드롭
+    ===================================== */
+
+    $('#dropArea')
+
+        .on('dragover', function (e) {
+
+            e.preventDefault();
+
+            $(this).addClass('drag-over');
+
+        })
+
+        .on('dragleave', function (e) {
+
+            if (!$(e.relatedTarget).closest('#dropArea').length) {
+                $(this).removeClass('drag-over');
+            }
+
+        })
+
+        .on('drop', function (e) {
+
+            e.preventDefault();
+
+            $(this).removeClass('drag-over');
+
+            const selectedMode =
+                e.originalEvent.dataTransfer.getData('text/plain');
+
+            if (groups[selectedMode]) {
+                render(selectedMode);
+            }
+
+        });
+
+    /* 처음 화면 */
+    render('sun');
+
+});
+
+/* =========================================
+   날씨 아이콘 자연스러운 움직임
+========================================= */
+
+$(function () {
+
+    $('.weather-icon').each(function (i) {
+
+        $(this).css('--weather-index', i);
+
+    })
+
+    .on('dragstart', function () {
+
+        $(this).addClass('is-dragging');
+
+    })
+
+    .on('dragend', function () {
+
+        $(this).removeClass('is-dragging');
+
+    });
+
+});
+
+/* =========================================
+   iframe 부모 페이지 마우스 연결
+
+   기존 홈페이지의 포인터 효과 유지
+========================================= */
+
+(function () {
+
+    var last = 0;
+
+    function forward(ev) {
+
+        if (
+            !window.parent ||
+            window.parent === window
+        ) {
+            return;
+        }
+
+        var now = Date.now();
+
+        if (now - last < 12) {
+            return;
+        }
+
+        last = now;
+
+        try {
+
+            window.parent.postMessage({
+
+                type: 'ODDAY_SECTION3_POINTER',
+
+                x: ev.clientX,
+
+                y: ev.clientY
+
+            }, '*');
+
+        } catch (err) {}
+
+    }
+
+    document.addEventListener(
+        'pointermove',
+        forward,
+        {
+            passive: true,
+            capture: true
+        }
+    );
+
+    document.addEventListener(
+        'mousemove',
+        forward,
+        {
+            passive: true,
+            capture: true
+        }
+    );
+
+    document.addEventListener(
+        'dragover',
+        forward,
+        {
+            passive: true,
+            capture: true
+        }
+    );
+
+    document.addEventListener(
+        'pointerleave',
+        function () {
+
+            try {
+
+                window.parent.postMessage({
+
+                    type: 'ODDAY_SECTION3_LEAVE'
+
+                }, '*');
+
+            } catch (err) {}
+
+        },
+        {
+            passive: true
+        }
+    );
+
+})();
+
+</script>
+
+</body>
+</html>

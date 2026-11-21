@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ODDAY</title>
+   <link rel="icon" href="assets/odday-favicon.svg"><link rel="stylesheet" href="css/common.css?v=unified1">
+  <link rel="stylesheet" href="css/sub1.css?v=product-lens1"><!-- 스토리 페이지 전용 폰트: 제목 / 본문 / 손글씨 포인트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style id="story-fonts">
+body, #footer, button, input, select, textarea {
+    font-family: 'Manrope', 'Noto Sans KR', sans-serif;
+}
+.hero-copy h1,
+.outfit-heading h2,
+.stylist-intro h2,
+.look-panel-heading h2,
+.story-menu h3,
+.editorial-copy h2,
+.dress-section h2 {
+    font-family: 'Anton', 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+}
+.story-page .editorial-photo-3 {
+    background-position: 40% center;
+}
+.hero-copy h1 { font-size:142px; line-height:1.02; letter-spacing:-1px; }
+.outfit-heading h2 { font-size:62px; letter-spacing:0; }
+.stylist-intro h2 { font-size:130px; line-height:1.02; letter-spacing:-1px; }
+.stylist-intro h2 span { padding-left:65px; }
+.look-panel-heading h2 { font-size:58px; }
+.story-menu h3 { font-size:47px; letter-spacing:0; }
+.editorial-copy h2 { font-size:28px; }
+.dress-section h2 { font-size:62px; letter-spacing:0; }
+.stylist-links span,
+.footer_select_box select { font-family:'Manrope','Noto Sans KR',sans-serif; }
+.stylist-links span { font-size:19px; }
+.stylist-description em,
+.seoul-caption,
+.look-footnote,
+.dress-section mark,
+.footer_phrase {
+    font-family:'Caveat','Noto Sans KR',cursive;
+    font-style:normal;
+    font-weight:400;
+}
+.stylist-description em { font-size:25px; line-height:1.3; }
+.seoul-caption { font-size:65px; letter-spacing:0; }
+.look-footnote { font-size:28px; }
+.dress-section mark { font-size:1.15em; }
+.footer_phrase { font-size:26px; }
+</style>
+<link rel="stylesheet" href="css/header.css?v=unified1">
+
+<link rel="stylesheet" href="css/footer.css?v=unified1">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Caveat:wght@400;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+</head>
+<body class="story-page">
+
+
+
+
+    <header id="header" class="od-shared-header">
+<div class="header_wrap odc-header_wrap">
+<nav aria-label="메인 메뉴" class="header_left_textbox odc-header_left_textbox">
+
+<a href="sub1.html">
+       스토리
+      </a>
+<a href="sub2.html">
+       남성
+      </a>
+<a href="sub3.html">
+       여성
+      </a>
+<a href="sub4.html">
+       악세서리
+      </a>
+<a href="sub5.html">
+       콜라보
+      </a>
+</nav>
+<div class="header_logo od-logo-with-eyes odc-header_logo odc-od-logo-with-eyes">
+<a href="index1.html">
+<img alt="ODDAY" src="assets/odday-header-bold-custom.png"/>
+</a>
+<span class="od-head-eyes odc-od-head-eyes" aria-hidden="true"><span class="od-eye odc-od-eye"><i class="od-pupil odc-od-pupil"></i></span><span class="od-eye odc-od-eye"><i class="od-pupil odc-od-pupil"></i></span></span>
+</div>
+<div class="header_right_textbox odc-header_right_textbox">
+<div class="header_sns_box odc-header_sns_box">
+<a href="https://www.youtube.com/" title="YouTube" target="_blank" rel="noopener noreferrer" aria-label="YouTube 새 창에서 열기">
+<img alt="YouTube" src="assets/header-youtube.png"/>
+</a>
+<a href="https://www.instagram.com/" title="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram 새 창에서 열기">
+<img alt="Instagram" src="assets/header-instagram.png"/>
+</a>
+<a href="https://www.facebook.com/" title="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook 새 창에서 열기">
+<img alt="Facebook" src="assets/header-facebook.png"/>
+</a>
+<a href="https://x.com/" title="X" target="_blank" rel="noopener noreferrer" aria-label="X 새 창에서 열기">
+<img alt="X" src="assets/header-x.png"/>
+</a>
+</div>
+<div class="header_search_box odc-header_search_box">
+<a href="#" title="검색">
+<img alt="검색" src="assets/header-search.png"/>
+</a>
+</div>
+<div class="header_member_box odc-header_member_box">
+<div>
+<a href="#">
+         로그인
+        </a>
+</div>
+<div>
+<a href="#">
+         회원가입
+        </a>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+
+
+
+<!-- 1단락: 헤더 80px + 히어로 1000px = 1080px -->
+<section id="section1" class="hero" aria-label="ODDAY의 세 가지 풍경">
+ <div class="hero-background bg-alpine"></div><div class="hero-background bg-spring"></div><div class="hero-background bg-autumn"></div>
+ <div class="hero-copy"><p class="eyebrow" id="hero-kicker">ODDAY SPRING</p><h1><span id="hero-title">ALPINE</span><br><em id="hero-word">SHIFT</em></h1><p id="hero-description">따스한 바람이 시작되는 봄의 레이어</p>
+  <span class="short-line"></span></div>
+ <img class="hero-model" src="img/sub1_img/sub1_1_man.png" alt="세이지 아우터와 데님을 입고 앉아 있는 ODDAY 모델">
+ <div class="polaroids">
+  <button class="polaroid pola-spring" data-scene="1" aria-label="봄 카페 배경 보기"><img src="img/sub1_img/03-spring-pola.png" alt="봄 카페 폴라로이드"></button>
+  <button class="polaroid pola-autumn" data-scene="2" aria-label="가을 골목 배경 보기"><img src="img/sub1_img/02-autumn-pola.png" alt="가을 골목 폴라로이드"></button>
+  <button class="polaroid pola-alpine" data-scene="0" aria-label="산 배경 보기"><img src="img/sub1_img/01-alpaine-pola.png" alt="산 풍경 폴라로이드"></button>
+ </div>
+ <div class="hero-control"><span id="scene-count">01 / 03</span></div>
+</section>
+<!-- 2단락: 모든 콘텐츠는 1600px 안 -->
+<section id="section2" class="section outfit-section"><div class="inner">
+ <div class="outfit-heading"><p class="eyebrow">A LITTLE DIFFERENT, EVERY DAY.</p><h2>PICK ONE, MAKE YOURS</h2><p>마음에 드는 아이템을 클릭해 어울리는 코디를 확인해보세요.</p></div>
+ <div class="outfit-stage">
+ <button class="outfit-item item-long" data-item="long" aria-label="긴팔 코디 보기" aria-pressed="false"><img class="outline-img" src="img/sub1_img/01-long-sleeve copy.png" alt="긴팔 실루엣">
+  <span class="item-label"><small>[01]</small>LONG SLEEVE</span><img class="product-img" src="img/sub1_img/sub1_2_mtm.png" alt="긴팔 실제 상품"></button>
+<button class="outfit-item item-tee" data-item="tee" aria-label="반팔 코디 보기" aria-pressed="false"><img class="outline-img" src="img/sub1_img/02-short-sleeve copy.png" alt="반팔 실루엣">
+  <span class="item-label"><small>[02]</small>GRAPHIC TEE</span><img class="product-img" src="img/sub1_img/sub1_2_tshirts.png" alt="반팔 실제 상품"></button>
+<button class="outfit-item item-shorts" data-item="shorts" aria-label="반바지 코디 보기" aria-pressed="false"><img class="outline-img" src="img/sub1_img/03-shorts copy.png" alt="반바지 실루엣">
+  <span class="item-label"><small>[03]</small>EASY SHORTS</span><img class="product-img" src="img/sub1_img/sub1_2_shorts.png" alt="반바지 실제 상품"></button>
+<button class="outfit-item item-jeans" data-item="jeans" aria-label="긴바지 코디 보기" aria-pressed="false"><img class="outline-img" src="img/sub1_img/04-jeans copy.png" alt="긴바지 실루엣">
+  <span class="item-label"><small>[04]</small>WIDE DENIM</span><img class="product-img" src="img/sub1_img/sub1_2_jean.png" alt="긴바지 실제 상품"></button>
+<button class="outfit-item item-outer" data-item="outer" aria-label="아우터 코디 보기" aria-pressed="false"><img class="outline-img" src="img/sub1_img/05-outer copy.png" alt="아우터 실루엣">
+  <span class="item-label"><small>[05]</small>LIGHT OUTER</span><img class="product-img" src="img/sub1_img/sub1_2_jumper.png" alt="아우터 실제 상품"></button>
+<button class="outfit-item item-shoes" data-item="shoes" aria-label="신발 코디 보기" aria-pressed="false"><img class="outline-img" src="img/sub1_img/06-sneakers copy.png" alt="신발 실루엣">
+  <span class="item-label"><small>[06]</small>EVERYDAY SHOES</span><img class="product-img" src="img/sub1_img/sub1_2_shoes.png" alt="신발 실제 상품"></button>
+ </div><div class="outfit-bottom"><span id="outfit-status" aria-live="polite">YOUR PICK, YOUR LOOK.</span></div>
+</div></section>
+<!-- 3단락 + 4단락 위 절반: 이어지는 에디토리얼 -->
+<section id="section3" class="section"><div class="inner stylist-top">
+ <div class="couple"><img src="img/sub1_img/sub1_3-1.png" alt="체크 셔츠를 입은 남자와 재킷을 입은 여자">
+  <button class="look-hotspot hotspot-his" data-look="his" aria-label="남자 코디 보기"><span>HIS LOOK +</span></button>
+  <button class="look-hotspot hotspot-her" data-look="her" aria-label="여자 코디 보기"><span>HER LOOK +</span></button>
+  
+
+ </div>
+ <div class="stylist-right">
+  <div class="stylist-intro"><h2>AI Stylist<br><span>For Your</span><br>Weather.</h2><div class="stylist-description">
+    <p>매일 달라지는 날씨, 매일 달라지는 당신의 스타일.<br>ODDAY는 AI가 오늘의 날씨와 기분을 분석해<br>당신에게 어울리는 아이템을 제안합니다.
+      <br>햇살 가득한 날에는 더 대담하게, 비가 오는 날에는
+      <br>어떤 날이든, 조금 다른 당신의 하루를 완성합니다.</p>
+      <em>Different Weather. Different Style. Same You.
+        <br>A Little Different, Every Day.</em></div></div>
+  <div class="look-panel panel-his"><div class="look-panel-heading"><p class="eyebrow">TODAY’S STYLE / 01</p><h2>HIS LOOK</h2></div><div class="look-products">
+    <figure class="look-product look-product-0"><img src="img/sub1_img/sub1_3_box2_bb_nobg.png" alt="01 / REVERSIBLE OUTER">
+      <figcaption>01 / REVERSIBLE OUTER</figcaption></figure><figure class="look-product look-product-1">
+        <img src="img/sub1_img/sub1_3s_mantop_nobg.png" alt="02 / CHECK SHIRT"><figcaption>02 / CHECK SHIRT</figcaption></figure>
+        <figure class="look-product look-product-2"><img src="img/sub1_img/sub1_3s_manpants_nobg.png" alt="03 / WIDE DENIM"><figcaption>03 / WIDE DENIM</figcaption></figure>
+        <figure class="look-product look-product-3"><img src="img/sub1_img/sub1_3s_mancap_nobg.png" alt="04 / DAILY CAP">
+          <figcaption>04 / DAILY CAP</figcaption></figure></div><p class="look-footnote">A little different, your way.</p></div>
+          <div class="look-panel panel-her"><div class="look-panel-heading"><p class="eyebrow">TODAY’S STYLE / 02</p><h2>HER LOOK</h2></div>
+          <div class="look-products"><figure class="look-product look-product-0"><img src="img/sub1_img/sub1_3s_womanouter_nobg.png" alt="01 / CHECK JACKET">
+            <figcaption>01 / CHECK JACKET</figcaption></figure><figure class="look-product look-product-1"><img src="img/sub1_img/sub1_3s_womantop_nobg.png" alt="02 / STRIPE SHIRT">
+              <figcaption>02 / STRIPE SHIRT</figcaption></figure><figure class="look-product look-product-2"><img src="img/sub1_img/sub1_3s_wompants_nobg.png" alt="03 / DENIM SHORTS">
+                <figcaption>03 / DENIM SHORTS</figcaption></figure><figure class="look-product look-product-3"><img src="img/sub1_img/sub1_3s_womanglass_nobg2.png" alt="04 / CLEAR GLASSES">
+                  <figcaption>04 / CLEAR GLASSES</figcaption></figure></div><p class="look-footnote">A little different, your way.</p></div>
+ </div><span class="seoul-caption">A Little Different.</span>
+</div></section>
+<section id="section4" class="section"><div class="inner section-four">
+ <div class="phone-photo">
+  <div class="phone-stage">
+    <img class="phone-base" src="img/sub1_img/image_3_2_phone.png" alt="날씨에 맞춘 코디를 제안하는 ODDAY AI 스타일링 화면">
+    <div class="phone-screen-plane">
+      <img class="phone-screen-slide" src="img/sub1_img/phone-photo-rain.png" alt="부산 18도, 비 오는 날 추천 코디">
+      <img class="phone-screen-slide" src="img/sub1_img/phone-photo-snow.png" alt="서울 영하 3도, 눈 오는 날 추천 코디">
+      <button type="button" class="phone-styling-tap" aria-label="다음 날씨 코디 보기"></button>
+    </div>
+    <img class="phone-finger" src="img/sub1_img/image_3_2_finger.png" alt="" aria-hidden="true">
+  </div>
+</div>
+ <div class="stylist-links stylist-message"><p class="stylist-message-label">A LITTLE DIFFERENT, EVERY DAY.</p><h3><span class="weather-line">NEW WEATHER.</span><span class="weather-line">NEW MOOD.</span><span class="weather-line"><em>SAME YOU.</em></span></h3><p class="stylist-message-copy">날씨가 바뀌면, 오늘의 코디도 새롭게.<br>어떤 날에도 나다운 스타일, ODDAY.</p></div>
+ <div class="magazine-placeholder story-images" aria-label="ODDAY 메뉴 이미지">
+  <img class="story-image" data-story-image="0" src="img/sub1_img/01-branding.png" alt="Branding — ODDAY 패키지와 브랜드 소품" aria-hidden="true" width="790" height="500">
+  <img class="story-image is-current" data-story-image="1" src="img/sub1_img/02-collection.png" alt="Collections — 패션 잡지와 룩북" aria-hidden="false" width="790" height="500">
+  <img class="story-image" data-story-image="2" src="img/sub1_img/03-ai-styling.png" alt="AI Styling — 날씨에 맞춘 코디" aria-hidden="true" width="790" height="500">
+  <img class="story-image" data-story-image="3" src="img/sub1_img/04-daily-looks.png" alt="Daily Looks — 일상 착장 사진" aria-hidden="true" width="790" height="500">
+  <img class="story-image" data-story-image="4" src="img/sub1_img/05-our-story-v3.png" alt="Our Story — 원단과 의상 스케치" aria-hidden="true" width="790" height="500"></div>
+ <div class="menu-carousel" aria-label="ODDAY 이야기 메뉴"><div class="menu-window">
+ <div class="story-menu" data-menu="0">
+  <h3>Branding<span class="menu-number">[01]</span></h3>
+  <p>매일의 작은 차이가 모여, 나만의 이야기가 됩니다.</p>
+</div>
+  <div class="story-menu" data-menu="1">
+  <h3>Collections<span class="menu-number">[02]</span></h3><p>오늘의 기분에 맞춰 만나는 새로운 옷과 색.</p>
+  </div>
+<div class="story-menu" data-menu="2">
+  <h3>AI Styling<span class="menu-number">[03]</span></h3>
+  <p>날씨와 취향을 연결하는 오늘의 스타일 제안.</p></div><div class="story-menu" data-menu="3"><h3>Daily Looks<span class="menu-number">[04]</span></h3>
+    <p>익숙한 옷도 조금 다르게, 매일의 코디 기록.</p></div>
+    <div class="story-menu" data-menu="4"><h3>Our Story<span class="menu-number">[05]</span></h3>
+      <p>옷과 일상 사이, 오드데이가 발견한 이야기.</p></div>
+ </div></div>
+</div></section>
+<!-- 5단락: 두 번째 사진을 기본 선택. 같은 사진의 크롭 위치는 서로 다름 -->
+<section id="section5" class="section editorial-section" aria-label="ODDAY 에디토리얼"><div class="editorial-strip">
+ <div class="editorial-item">
+  <button class="editorial-photo editorial-photo-0" aria-label="After Hours 이야기 보기" aria-expanded="false" style="background-image:url('img/sub1_img/sub1_5section_left 1th box.jpg')">
+    <span class="lime-overlay"></span>
+    <span class="story-number">01</span>
+  </button>
+  <div class="editorial-copy">
+    <div class="editorial-copy-inner">
+      <h2>AFTER THE SUN</h2>
+      <div class="editorial-band">After Hours</div>
+      <h3>해가 지면 시작되는 또 다른 하루.</h3>
+      <p>익숙한 골목의 불빛과 낯선 색의 조합. 평범한 저녁에도 나만의 리듬을 더해보세요.</p>
+      <span class="editorial-signature">ODDAY / EVERYDAY STORIES</span>
+    </div>
+  </div>
+</div>
+    <div class="editorial-item selected">
+      <button class="editorial-photo editorial-photo-1" aria-label="Everyday Editorial 이야기 보기" aria-expanded="true" style="background-image:url('img/sub1_img/sub1_5section_right 3th box.jpg')">
+        <span class="lime-overlay"></span><span class="story-number">02</span>
+      </button>
+        <div class="editorial-copy">
+          <div class="editorial-copy-inner">
+            <h2>A LITTLE DIFFERENT</h2>
+            <div class="editorial-band">Everyday Editorial</div>
+            <h3>A LITTLE DIFFERENT, EVERY DAY.</h3>
+            <p>평범한 하루 속에 스며드는 사소한 변화가 우리의 매일을 새롭게 만듭니다. 오늘 당신의 기분과 날씨에 가장 잘 어울리는 오드데이의 이야기를 만나보세요.</p>
+            <span class="editorial-signature">ODDAY / EVERYDAY STORIES</span></div></div></div><div class="editorial-item">
+              <button class="editorial-photo editorial-photo-2" aria-label="City Stroll 이야기 보기" aria-expanded="false" style="background-image:url('img/sub1_img/sub1_5section_right 1th box.jpg')">
+                <span class="lime-overlay"></span>
+                <span class="story-number">03</span>
+              </button>
+              <div class="editorial-copy">
+                <div class="editorial-copy-inner">
+                  <h2>ONE DAY IN SEOUL</h2><div class="editorial-band">City Stroll</div>
+                  <h3>같은 도시, 조금 다른 시선.</h3><p>늘 걷던 길에서도 새로운 장면을 발견해보세요. 도시의 색과 움직임이 오늘의 스타일이 됩니다.</p>
+                  <span class="editorial-signature">ODDAY / EVERYDAY STORIES</span></div></div></div><div class="editorial-item">
+                    <button class="editorial-photo editorial-photo-3" aria-label="A Quiet Moment 이야기 보기" aria-expanded="false" style="background-image:url('img/sub1_img/sub1_5section_right 2th box.jpg')">
+                      <span class="lime-overlay"></span>
+                      <span class="story-number">04</span></button><div class="editorial-copy">
+                        <div class="editorial-copy-inner"><h2>TAKE IT SLOW</h2><div class="editorial-band">A Quiet Moment</div>
+                        <h3>잠깐의 여유도 나다운 방식으로.</h3><p>좋아하는 책과 편안한 옷, 햇살이 닿는 자리. 서두르지 않는 하루를 위한 작은 선택들.</p>
+                        <span class="editorial-signature">ODDAY / EVERYDAY STORIES</span></div></div></div><div class="editorial-item">
+                          <button class="editorial-photo editorial-photo-4" aria-label="Little Things 이야기 보기" aria-expanded="false" style="background-image:url('img/sub1_img/sub1_5section_right 3th box.jpg')">
+                            <span class="lime-overlay"></span>
+                            <span class="story-number">05</span>
+                          </button><div class="editorial-copy">
+                            <div class="editorial-copy-inner">
+                              <h2>YOUR KIND OF COLOR</h2><div class="editorial-band">Little Things</div>
+                              <h3>작은 소품 하나로 달라지는 분위기.</h3>
+                              <p>가방의 색, 손끝에 닿는 질감, 마음에 드는 작은 물건. 당신의 취향으로 오늘을 채워보세요.</p>
+                              <span class="editorial-signature">ODDAY / EVERYDAY STORIES</span></div></div></div>
+</div></section>
+
+<!-- 6단락: 드래그·클릭으로 아이템을 조합하는 2D 착장 -->
+<section id="section6" class="section dress-section" aria-label="나만의 코디 만들기"><div class="inner">
+<h2>ODDAY crafted<br>to move with<br><mark class="dress-your"><span class="dress-your-bg" aria-hidden="true"></span><span class="dress-your-text">Your</span></mark> story</h2>
+<div class="dress-note" aria-live="polite" aria-atomic="true">
+  <p class="dress-note-label">YOUR PICK / YOUR STORY</p><h3 id="dress-note-name"></h3>
+  <p id="dress-note-description">Start with a piece you love. Mix colors, add unexpected details, and create a look that feels like you.
+
+Try something new or keep it simple. There are no rules — just your mood, your style, your ODDAY.</p></div>
+<div class="dress-model" id="dress-model" aria-label="아이템을 놓으면 착장되는 모델">
+
+<div class="dress-layers" aria-hidden="true">
+ <div class="dress-slot layer-bottom" data-dress-slot="bottom"></div>
+ <div class="dress-slot layer-top" data-dress-slot="top"></div>
+ <div class="dress-slot layer-hat" data-dress-slot="hat"></div>
+</div><span class="dress-sparkle" aria-hidden="true">✦</span>
+</div>
+<p class="dress-help">아이템을 모델에게 드래그해보세요.</p>
+<div class="dress-wardrobe" aria-label="착장 아이템">
+  <button type="button" class="dress-item dress-item-pants" data-dress-item="pants" aria-label="Cargo Pants 입히기" aria-pressed="false">
+    <img src="img/sub1_img/sub1_6_pants.png" alt="Cargo Pants" draggable="false">
+    <span>Cargo Pants</span>
+  </button>
+  <button type="button" class="dress-item dress-item-bag" data-dress-item="bag" aria-label="Navy Bag 입히기" aria-pressed="false">
+    <img src="img/sub1_img/sub1_6_bag.png" alt="Navy Bag" draggable="false">
+    <span>Navy Bag</span>
+  </button>
+  <button type="button" class="dress-item dress-item-cap" data-dress-item="cap" aria-label="Two-Tone Cap 입히기" aria-pressed="false">
+    <img src="img/sub1_img/sub1_6_cap.png" alt="Two-Tone Cap" draggable="false">
+    <span>Two-Tone Cap</span>
+  </button>
+  <button type="button" class="dress-item dress-item-mtm" data-dress-item="mtm" aria-label="Striped Rugby Shirt 입히기" aria-pressed="false">
+    <img src="img/sub1_img/sub1_6_mtm.png" alt="Striped Rugby Shirt" draggable="false">
+    <span>Striped Rugby Shirt</span>
+  </button>
+  <button type="button" class="dress-item dress-item-skirt" data-dress-item="skirt" aria-label="Denim Skirt 입히기" aria-pressed="false">
+    <img src="img/sub1_img/sub1_6_skirt.png" alt="Denim Skirt" draggable="false">
+    <span>Denim Skirt</span>
+  </button>
+  <button type="button" class="dress-item dress-item-knit" data-dress-item="knit" aria-label="Lime Knit 입히기" aria-pressed="false">
+    <img src="img/sub1_img/sub1_6_knit.png" alt="Lime Knit" draggable="false">
+    <span>Lime Knit</span>
+  </button>
+  <button type="button" class="dress-item dress-item-watch" data-dress-item="watch" aria-label="Leather Strap Watch 입히기" aria-pressed="false">
+    <img src="img/sub1_img/sub1_6_watch.png" alt="Leather Strap Watch" draggable="false"><span>Leather Strap Watch</span></button></div>
+<span id="dress-status" class="dress-sr-only" aria-live="polite"></span>
+</div></section>
+
+<!-- 7단락: ODDAY 추천 상품 10종 -->
+<section id="section7" class="section future-section" aria-labelledby="recommend-title">
+  <div class="recommend-layout">
+    <h2 id="recommend-title">YOU MAY<br>LIKE</h2>
+    <div class="recommend-card recommend-card-1" data-product="blue-pants" data-tag="#Wide Pants" aria-label="ODDAY Wide Pants">
+      <img src="img/sub1_img/odday-blue-pants.png" alt="ODDAY Wide Pants" decoding="async" draggable="false">
+      <span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-2" data-product="cap" data-tag="#Cap" aria-label="ODDAY Cap">
+      <img src="img/sub1_img/odday-cap.png" alt="ODDAY Cap" decoding="async" draggable="false"><span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-3" data-product="hoodie" data-tag="#Hoodie" aria-label="ODDAY Hoodie">
+      <img src="img/sub1_img/odday-hoodie.png" alt="ODDAY Hoodie" decoding="async" draggable="false">
+      <span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-4" data-product="tote" data-tag="#Bag" aria-label="ODDAY Tote Bag">
+      <img src="img/sub1_img/odday-tote.png" alt="ODDAY Tote Bag" decoding="async" draggable="false">
+      <span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-5" data-product="denim-shorts" data-tag="#Denim Shorts" aria-label="ODDAY Denim Shorts">
+      <img src="img/sub1_img/odday-denim-shorts.png" alt="ODDAY Denim Shorts" decoding="async" draggable="false">
+      <span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-6" data-product="green-jacket" data-tag="#Windbreaker" aria-label="ODDAY Windbreaker">
+      <img src="img/sub1_img/odday-green-jacket.png" alt="ODDAY Windbreaker" decoding="async" draggable="false"><span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-7" data-product="layered-tee" data-tag="#Layered Tee" aria-label="ODDAY Layered Tee">
+      <img src="img/sub1_img/odday-layered-tee.png" alt="ODDAY Layered Tee" decoding="async" draggable="false"><span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-8" data-product="beanie" data-tag="#Beanie" aria-label="ODDAY Beanie">
+      <img src="img/sub1_img/odday-beanie.png" alt="ODDAY Beanie" decoding="async" draggable="false"><span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-9" data-product="yellow-jacket" data-tag="#Zip Jacket" aria-label="ODDAY Zip Jacket">
+      <img src="img/sub1_img/odday-yellow-jacket.png" alt="ODDAY Zip Jacket" decoding="async" draggable="false"><span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <div class="recommend-card recommend-card-10" data-product="rugby" data-tag="#Rugby Shirt" aria-label="ODDAY Rugby Shirt">
+      <img src="img/sub1_img/odday-rugby.png" alt="ODDAY Rugby Shirt" decoding="async" draggable="false"><span class="recommend-heart" aria-hidden="true">♥</span></div>
+    <span class="recommend-tag">#Hoodie</span>
+  </div>
+</section>
+
+
+
+<!-- <footer id="footer">
+  <div class="footer_inner">
+    <div class="footer_top">
+      <div class="footer_left">
+        <p>주식회사 오드데이</p>
+        <p>대표자 홍길동　|　사업자등록번호 123-45-67890</p>
+        <p>통신판매업 신고번호 제2026-서울강남-0001호</p>
+        <p>사업장 주소 서울특별시 강남구 테헤란로 123, 4층</p>
+      </div>
+      <div class="footer_center">
+        <img class="footer_slogan" src="images/curved_slogan.png" alt="A Little Different, Every Day.">
+        <p class="footer_phrase">odday, oh, odday!</p>
+        <img class="footer_brand" src="images/odday_logo.png" alt="ODDAY">
+      </div>
+      <div class="footer_right">
+        <p>고객센터 02-1234-5678　|　이메일 contact@odday.co.kr</p>
+        <p>호스팅 서비스 제공자 (주)카페24　|　<a href="#" class="business_link">사업자정보확인 </a></p>
+        <p><a href="#">이용약관</a>　|　<a href="#">개인정보처리방침</a>　|　<a href="#">사이트맵</a></p>
+        <p><a href="#">배송안내</a>　|　<a href="#">교환·반품 안내</a>　|　<a href="#">FAQ</a></p>
+      </div>
+    </div>
+    <div class="footer_bottom">
+      <div class="footer_bottom_wrap">
+      <div class="footer_selects">
+        <div class="footer_select_box"><label for="footer_country">국가</label><select id="footer_country" name="country"><option value="Korea">Korea</option><option value="Japan">Japan</option><option value="United States">United States</option><option value="China">China</option></select></div>
+        <div class="footer_select_box"><label for="footer_language">언어</label><select id="footer_language" name="language"><option value="ko">KR</option><option value="en">EN</option><option value="ja">JP</option><option value="zh">CN</option></select></div>
+      </div>
+      <div class="footer_social">
+        <a href="https://www.instagram.com/" target="_blank" title="Instagram"><img src="images/instagram.png" alt="Instagram"></a>
+        <a href="https://www.youtube.com/" target="_blank" title="YouTube"><img src="images/youtube.png" alt="YouTube"></a>
+        <a href="https://www.tiktok.com/" target="_blank" title="TikTok"><img src="images/tiktok.png" alt="TikTok"></a>
+        <a href="https://www.pinterest.com/" target="_blank" title="Pinterest"><img src="images/pinterest.png" alt="Pinterest"></a>
+      </div>
+    </div>
+    </div>
+  </div>
+</footer> -->
+
+
+
+
+<footer id="footer">
+<div class="footer_inner">
+<div class="footer_top">
+<div class="footer_left">
+<p>
+        주식회사 오드데이
+       </p>
+<p>
+        대표자 홍길동　|　사업자등록번호 123-45-67890
+       </p>
+<p>
+        통신판매업 신고번호 제2026-서울강남-0001호
+       </p>
+<p>
+        사업장 주소 서울특별시 강남구 테헤란로 123, 4층
+       </p>
+</div>
+<div class="footer_center footer-center-original-art">
+<img class="footer-original-lockup" src="assets/footer-reference-lockup-hq.svg" alt="A Little Different, Every Day. odday, oh, odday! ODDAY"/>
+</div>
+<div class="footer_right">
+<p>
+        고객센터 02-1234-5678　|　이메일 contact@odday.co.kr
+       </p>
+<p>
+        호스팅 서비스 제공자 (주)카페24　|
+        <a class="business_link" href="#">
+         사업자정보확인
+        </a>
+</p>
+<p>
+<a href="#">
+         이용약관
+        </a>
+        |
+        <a href="#">
+         개인정보처리방침
+        </a>
+        |
+        <a href="#">
+         사이트맵
+        </a>
+</p>
+<p>
+<a href="#">
+         배송안내
+        </a>
+        |
+        <a href="#">
+         교환·반품 안내
+        </a>
+        |
+        <a href="#">
+         FAQ
+        </a>
+</p>
+</div>
+</div>
+<div class="od-footer-story" aria-label="ODDAY 브랜드 소개">
+ <div class="od-footer-story-inner">
+  <div class="od-footer-story-heading">
+   <span class="od-footer-story-eyebrow">A LITTLE DIFFERENT, EVERY DAY.</span>
+   <strong>EVERYDAY,<br>YOUR WAY.</strong>
+   <span class="od-footer-story-caption">YOUR DAILY MOOD, YOUR OWN STYLE.</span>
+  </div>
+  <div class="od-footer-story-middle">
+   <span class="od-footer-story-label">ABOUT ODDAY</span>
+   <p>평범한 하루에도 나만의 색을 더할 수 있도록.<br>ODDAY는 익숙한 일상 속 작은 변화와<br>자유로운 스타일링을 제안합니다.</p>
+   <span class="od-footer-story-sign">A little different. A little more you.</span>
+  </div>
+  <div class="od-footer-story-right">
+   <span class="od-footer-story-label">THE ODDAY EDIT</span>
+   <div class="od-footer-story-tags"><span>01 <b>DAILY STYLE</b></span><span>02 <b>COLOR &amp; MOOD</b></span><span>03 <b>EVERYDAY COMFORT</b></span></div>
+   <a href="index1.html#section07" class="od-footer-story-link">EXPLORE OUR MOOD <span aria-hidden="true">↗</span></a>
+  </div>
+ </div>
+</div>
+<div class="footer_bottom">
+<div class="footer_bottom_wrap">
+<div class="footer_selects">
+<div class="footer_select_box">
+<label for="footer_country">
+          국가
+         </label>
+<select id="footer_country" name="country">
+<option value="Korea">
+           Korea
+          </option>
+<option value="Japan">
+           Japan
+          </option>
+<option value="United States">
+           United States
+          </option>
+<option value="China">
+           China
+          </option>
+</select>
+</div>
+<div class="footer_select_box">
+<label for="footer_language">
+          언어
+         </label>
+<select id="footer_language" name="language">
+<option value="ko">
+           KR
+          </option>
+<option value="en">
+           EN
+          </option>
+<option value="ja">
+           JP
+          </option>
+<option value="zh">
+           CN
+          </option>
+</select>
+</div>
+</div>
+<div class="footer_social">
+<a href="https://www.instagram.com/" rel="noopener" target="_blank" title="Instagram">
+<img alt="Instagram" src="assets/instagram.png"/>
+</a>
+<a href="https://www.youtube.com/" rel="noopener" target="_blank" title="YouTube">
+<img alt="YouTube" src="assets/youtube.png"/>
+</a>
+<a href="https://www.tiktok.com/" rel="noopener" target="_blank" title="TikTok">
+<img alt="TikTok" src="assets/tiktok.png"/>
+</a>
+<a href="https://www.pinterest.com/" rel="noopener" target="_blank" title="Pinterest">
+<img alt="Pinterest" src="assets/pinterest.png"/>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+
+</footer>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="js/common.js?v=top83"></script>
+<script src="js/sub1.js?v=product-lens1"></script>
+<button class="od-top-button od-shared-top" type="button" aria-label="맨 위로 이동" title="Back to top"><span aria-hidden="true">↑</span><small aria-hidden="true">TOP</small></button>
+<script src="js/top-scroll.js?v=odtop-motion1"></script>
+</body></html>

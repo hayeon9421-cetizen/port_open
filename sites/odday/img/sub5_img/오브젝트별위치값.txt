@@ -1,0 +1,17 @@
+고정이미지 (1600 * 1080)는 sub5_6
+레이어 상단부터 아래로 내려가는 순으로 오브젝트별 위치값 x,y 그리고 w,h는 100%
+오브젝트1은 sub5_6-star / x:1214.05px , y:653.00px
+오브젝트2는 sub5_6-odday / x:1359px , y:348.5px
+오브젝트3은 sub5_6-tape02 / x:1245px , y:129px
+오브젝트4는 sub5_6-neck01 / x:1275.5px , y:239px
+오브젝트5는 sub5_6-cap / x:14055px , y:484.5px
+오브젝트6은 sub5_6-heart / x:472.5px , y:982px
+오브젝트7은 sub5_6-flower / x:1488.5px , y:173.5px
+오브젝트8은 sub5_6-tape03 / x:168px , y:618px
+오브젝트9는 sub5_6-model / x:301px , y:798px
+오브젝트10은 sub5_6-tape4 / x:1011.5px , y:506px
+오브젝트11은 sub5_6-ring / x:1059px , y:621.5px
+오브젝트12는 sub5_6-tape / x:1441px , y:649.5px
+오브젝트13은 sub5_6-neck02 / x:1413px , y:838px
+오브젝트14는 sub5_6-tape5 / x:1156.5px , y:775.5px
+오브젝트15는 sub5_6-bangle / x:1160.5px , y:900.5px

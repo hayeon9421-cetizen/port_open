@@ -1,0 +1,29 @@
+제출용 정리 기록 (2026-11-20)
+
+메인: index.html
+ODDAY: sites/odday/index1.html
+POPIN: sites/popin/index2.html
+CSS: 최신 안전 여백 정리본 적용
+반응형 기준: 1920px / 768px / 486px
+기존 모션·디자인 원칙 유지. 실제 브라우저 검증은 미완료.
+
+정적 HTML 상대경로 누락 후보:
+index.html -> img/section03_01.png
+index.html -> img/section03_02.png
+index.html -> img/section03_03.png
+index.html -> img/section03_04.png
+index.html -> img/section04_01_01.png
+index.html -> img/section04_02_01.png
+index.html -> img/section04_03_01.png
+index.html -> img/section05_02.png
+index.html -> img/section05_02.mp4
+index.html -> img/section05_03.png
+index.html -> img/section05_03.mp4
+index.html -> img/section05_04.png
+index.html -> img/section05_04.mp4
+sites/odday/sub1.html -> images/curved_slogan.png
+sites/odday/sub1.html -> images/odday_logo.png
+sites/odday/sub1.html -> images/instagram.png
+sites/odday/sub1.html -> images/youtube.png
+sites/odday/sub1.html -> images/tiktok.png
+sites/odday/sub1.html -> images/pinterest.png

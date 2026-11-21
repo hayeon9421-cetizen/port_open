@@ -1,0 +1,759 @@
+*{box-sizing:border-box}html,body{margin:0;padding:0}#sub4_1s{width:100%;height:1080px;position:relative;overflow:hidden;background:#f6f4ee}#sub4_1s img{display:block} .start-scene,.walk-scene,.final-scene{position:absolute;inset:0;overflow:hidden}.start-scene{z-index:3;opacity:1}.start-bg{position:absolute;width:100%;height:100%;object-fit:cover}.start-model{position:absolute;width:100%;height:100%;object-fit:contain;top:0;left:0;transform:translateY(125%)}.polaroid{position:absolute;width:200.333px;height:218px;object-fit:contain;left:4%;bottom:7%;transform:translateX(calc(-100vw - 300px)) rotate(-20deg);z-index:4}.walk-scene{z-index:2;opacity:0}.slide-bg{position:absolute;left:0;top:0;height:100%;width:6000px;transform:translateX(0)}.slide-bg img{width:6000px;height:100%;object-fit:fill}.gif-bg,.walking{position:absolute;left:30%;bottom:0;transform:translateX(-50%);height:91.2%;width:auto;object-fit:contain}.gif-bg{opacity:.30;z-index:2}.walking{z-index:3}.item{position:absolute;z-index:5;width:clamp(360px,48vw,880px);height:auto;left:110%;top:var(--target-y);object-fit:contain;opacity:0;transform:translate(-50%,-50%) rotate(20deg) scale(.7)}.bag{--target-y:45%;--target-x:46.538%}.cap{--target-y:13%;--target-x:48.846%}.necklace{--target-y:28%;--target-x:51.154%}.shoe{--target-y:83%;--target-x:53.462%}.final-scene{z-index:4;opacity:0;pointer-events:none;background:#fff}.final-scene img{width:100%;height:100%;object-fit:contain}.replay{position:absolute;right:25px;bottom:25px;z-index:10;border:1px solid #333;background:#fff;color:#111;padding:10px 18px;cursor:pointer;font-size:13px;letter-spacing:1px}
+#sub4_1s.play .start-model{animation:riseBounce 1.6s .2s forwards}#sub4_1s.play .polaroid{animation:polaroidIn 1.4s 1.8s forwards}#sub4_1s.play .start-scene{animation:fadeAway .8s 4s forwards}#sub4_1s.play .walk-scene{animation:fadeIn .8s 4s forwards,fadeAway .15s 7.95s forwards}#sub4_1s.play .slide-bg{animation:panStreet 3.357s 4.6s linear forwards}#sub4_1s.play .bag{animation:flyInVisible 1.45s 5.6s ease-out forwards}#sub4_1s.play .cap{animation:flyIn 1.15s 5.9s ease-out forwards}#sub4_1s.play .necklace{animation:flyIn 1.15s 6.2s ease-out forwards}#sub4_1s.play .shoe{animation:flyInVisible 1.45s 6.5s ease-out forwards}#sub4_1s.play .final-scene{animation:fadeIn .15s 7.95s forwards}
+@keyframes riseBounce{0%{transform:translateY(125%)}60%{transform:translateY(6px)}73%{transform:translateY(calc(-9% + 6px))}84%{transform:translateY(6px)}92%{transform:translateY(calc(-3% + 6px))}100%{transform:translateY(6px)}}@keyframes polaroidIn{0%{transform:translateX(calc(-100vw - 300px)) rotate(-20deg)}75%{transform:translateX(12px) rotate(7deg)}100%{transform:translateX(0) rotate(-8deg)}}@keyframes fadeAway{from{opacity:1}to{opacity:0;visibility:hidden}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes panStreet{from{transform:translateX(0)}to{transform:translateX(calc(100vw - 6000px))}}@keyframes flyIn{0%{left:110%;top:var(--target-y);opacity:0;transform:translate(-50%,-50%) rotate(20deg) scale(.7)}20%{opacity:1}45%{opacity:1}100%{left:var(--target-x);top:var(--target-y);opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.35)}}@media(max-width:768px){#sub4_1s{height:1080px}.gif-bg,.walking{height:72%}.item{width:520px}.polaroid{left:3%;bottom:8%}}
+
+/* version5: 모델은 왼쪽 30%에서 60%로 이동.
+   두 레이어가 같은 이동/상하 보행 리듬을 유지합니다. */
+#sub4_1s.play .walking,
+#sub4_1s.play .gif-bg {
+  animation: walkAcross 3.35s 4.6s linear forwards;
+}
+@keyframes walkAcross {
+  0%   {left:30%; transform:translate(-50%,0)}
+  10%  {transform:translate(-50%,-9px)}
+  20%  {transform:translate(-50%,0)}
+  30%  {transform:translate(-50%,-9px)}
+  40%  {transform:translate(-50%,0)}
+  50%  {transform:translate(-50%,-9px)}
+  60%  {transform:translate(-50%,0)}
+  70%  {transform:translate(-50%,-9px)}
+  80%  {transform:translate(-50%,0)}
+  90%  {transform:translate(-50%,-9px)}
+  100% {left:60%; transform:translate(-50%,0)}
+}
+
+/* version5: 아이템은 움직이는 모델의 각 도착 시점 좌표에서 완전히 투명해집니다. */
+
+/* Version 6: 가방과 신발을 비행 구간에서 확실히 표시하고, 모델과 만날 때 0으로 페이드 */
+@keyframes flyInVisible {
+  0% {left:110%;top:var(--target-y);opacity:1;transform:translate(-50%,-50%) rotate(20deg) scale(.7)}
+  15% {opacity:1}
+  72% {opacity:1}
+  100% {left:var(--target-x);top:var(--target-y);opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.35)}
+}
+
+/* Version 7: 연속 이미지 배경은 기존 30% 투명도와 모델의 동기 이동을 유지합니다. */
+#sub4_1s .gif-bg{opacity:.30;}
+
+/* ODDAY homepage shared settings */
+:root{--font-title:'Anton',sans-serif;--font-body:'Manrope',sans-serif;--font-hand:'Caveat',cursive}
+html{scroll-behavior:smooth}body{font-family:var(--font-body);overflow-x:hidden}
+.homepage-section{width:100%;height:1080px;position:relative;overflow:hidden}
+#sub4_2s{background:#fff}
+/* Keep nav above every animated layer. The original asset is 1920x60. */
+#sub4_1s .top-nav{position:absolute;top:0;left:0;z-index:30;width:100%;height:60px;background:#fff;overflow:hidden}
+#sub4_1s .top-nav img{display:block;width:100%;height:100%;object-fit:fill}
+#sub4_1s .replay{z-index:31;font-family:var(--font-body)}
+/* Preserve a 1920px design baseline; use fluid width on smaller viewports. */
+@media(max-width:768px){#sub4_1s .top-nav{height:60px}#sub4_1s .top-nav img{width:1920px;max-width:none;position:absolute;left:50%;transform:translateX(-50%)}}
+
+
+/* SECTION 03 — 1920×1080, horizontal 160px inner margins */
+#sub4_3s{position:relative;min-height:1080px;height:1080px;overflow:hidden;background:#d3e477 url("../img/sub4_img/sub4_3s_bg.png") center center/cover no-repeat;}
+#sub4_3s .s3-content{position:relative;width:calc(100% - 320px);max-width:1600px;height:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:45px;align-items:center;}
+#sub4_3s .s3-jewelry{height:610px;min-width:0;position:relative;overflow:hidden;}
+#sub4_3s .s3-track{position:relative;width:100%;height:100%;}
+#sub4_3s .s3-product{position:absolute;top:50%;left:50%;width:30%;height:76%;display:flex;align-items:center;justify-content:center;transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .5s,filter .5s;will-change:transform;}
+#sub4_3s .s3-product img{width:100%;height:100%;object-fit:contain;display:block;}
+#sub4_3s .s3-product[data-position="left"]{transform:translate(-165%,-50%) scale(.84);opacity:.92;z-index:1;}
+#sub4_3s .s3-product[data-position="center"]{transform:translate(-50%,-50%) scale(1.35);opacity:1;z-index:3;}
+#sub4_3s .s3-product[data-position="right"]{transform:translate(65%,-50%) scale(.84);opacity:.92;z-index:1;}
+#sub4_3s .s3-model-area{position:relative;min-width:0;display:flex;justify-content:center;align-items:center;}
+#sub4_3s .s3-model-frame{position:relative;width:min(100%,500px);aspect-ratio:988/1536;max-height:770px;overflow:hidden;}
+#sub4_3s .s3-model-image{display:block;width:100%;height:100%;object-fit:cover;transition:opacity .3s ease,transform .5s ease;opacity:1;}
+#sub4_3s .s3-model-image.is-changing{opacity:0;transform:scale(1.035);}
+#sub4_3s .s3-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.8);color:#202020;font:500 22px Manrope,sans-serif;cursor:pointer;transition:background .2s,scale .2s;}
+#sub4_3s .s3-arrow:hover{background:rgba(255,255,255,.9);scale:1.06;}
+#sub4_3s .s3-prev{left:0;}
+#sub4_3s .s3-next{right:0;}
+@media(max-width:1100px){#sub4_3s .s3-content{width:calc(100% - 80px);gap:15px;}#sub4_3s .s3-jewelry{height:520px;}#sub4_3s .s3-model-frame{max-height:680px;}}
+@media(max-width:700px){#sub4_3s{height:auto;min-height:850px;}#sub4_3s .s3-content{width:calc(100% - 36px);min-height:850px;padding:85px 0 55px;grid-template-columns:1fr;grid-template-rows:270px auto;gap:12px;}#sub4_3s .s3-jewelry{height:270px;}#sub4_3s .s3-model-frame{width:min(72%,320px);max-height:490px;}#sub4_3s .s3-arrow{width:36px;height:36px;}}
+
+/* Sections 04–05 */
+
+#sub4_4s,#sub4_5s{box-sizing:border-box;padding:100px 160px;min-height:650px}
+#sub4_4s{background:#cfdf76 url('../img/sub4_img/sub4_4s_bg.png') center/cover no-repeat}
+.s4-layout{max-width:1600px;margin:auto;display:grid;grid-template-columns:43% 57%;align-items:start;gap:30px}
+.s4-model{width:100%;max-width:530px;aspect-ratio:3/3.55;overflow:hidden;background:#f6f6f6}
+.s4-model img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.s4-model img.s4-fade{opacity:.25}
+.s4-right{min-width:0}.s4-hats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.s4-hat{border:2px solid transparent;background:#eee;cursor:pointer;padding:0;aspect-ratio:1/1.15;overflow:hidden;transition:transform .2s,border-color .2s}
+.s4-hat img{display:block;width:100%;height:100%;object-fit:cover}.s4-hat:hover{transform:translateY(-5px)}.s4-hat.is-selected{border-color:#171717}
+.s4-right h2{font:bold clamp(30px,4vw,70px)/.98 Arial,sans-serif;margin:30px 0 0;color:#080808;letter-spacing:-.05em}
+#sub4_5s{background:#f8f8f8}.s5-stage{position:relative;max-width:1400px;margin:auto;aspect-ratio:16/9;background:#e9e9e9;overflow:hidden}
+.s5-art{width:100%;height:100%;object-fit:contain}.s5-art.missing{display:none}.s5-stage:has(.missing):before{content:'img/sub4_5s.png 이미지를 img 폴더에 추가해 주세요';position:absolute;inset:0;display:grid;place-items:center;color:#666;font-size:18px}
+.s5-hotspot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:42px;height:42px;border:1px solid #222;border-radius:50%;background:rgba(255,255,255,.88);color:#111;font-size:26px;cursor:pointer;z-index:2}
+.s5-hotspot:hover,.s5-hotspot:focus-visible{background:#d0e275}.s5-info{margin:22px auto 0;max-width:1400px;background:rgba(255,255,255,.82);padding:24px;box-sizing:border-box}.s5-info[hidden]{display:none}.s5-info-inner{position:relative;min-height:180px;border:1px solid #ddd;padding:24px;background:#fff}.s5-close{position:absolute;right:16px;top:12px;border:0;background:transparent;font-size:30px;cursor:pointer}.s5-label{font-size:12px;letter-spacing:.12em}.s5-info h3{font-size:26px}.s5-placeholder{height:75px;background:#fafafa;border:1px solid #eee;display:grid;place-items:center;color:#aaa}
+@media(max-width:1100px){#sub4_4s,#sub4_5s{padding:100px 6vw}.s4-layout{grid-template-columns:42% 58%;gap:16px}.s4-hats{gap:8px}}
+@media(max-width:650px){.s4-layout{grid-template-columns:1fr}.s4-model{margin:auto;width:80%}.s4-right h2{font-size:36px}.s5-stage{aspect-ratio:3/4}.s5-hotspot{width:36px;height:36px}}
+
+#sub4_5s{height:auto;min-height:1080px}.s5-stage{aspect-ratio:1649/928}.s5-art{object-fit:cover}@media(max-width:650px){.s5-stage{aspect-ratio:1649/928}.s5-hotspot{width:30px;height:30px;font-size:20px}}
+
+/* SECTION 06 — full width campaign video with center-focused vertical filmstrip */
+#sub4_6s{box-sizing:border-box;height:auto;min-height:0;padding:100px 0;background:#fff;overflow:hidden}
+#sub4_6s .s6-stage{position:relative;width:100%;aspect-ratio:16/9;min-height:430px;overflow:hidden;background:#171717;color:#fff;font-family:Arial,sans-serif;isolation:isolate}
+#sub4_6s .s6-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+#sub4_6s .s6-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.23),transparent 35%,transparent 65%,rgba(0,0,0,.22)),linear-gradient(0deg,rgba(0,0,0,.22),transparent 28%)}
+#sub4_6s .s6-top{position:absolute;z-index:5;top:2.4%;left:2.1%;right:2.1%;display:flex;align-items:center;gap:4%;font-size:clamp(9px,.75vw,14px);letter-spacing:.05em}
+#sub4_6s .s6-top span:last-child{margin-left:auto}
+#sub4_6s .s6-title{position:absolute;z-index:4;top:32%;font-family:Georgia,'Times New Roman',serif;font-size:clamp(44px,6.8vw,132px);font-style:italic;line-height:.82;letter-spacing:-.065em;text-shadow:0 1px 8px rgba(0,0,0,.14);pointer-events:none}
+#sub4_6s .s6-title-left{left:4%;text-align:center}
+#sub4_6s .s6-title-right{right:3.6%;text-align:center}
+#sub4_6s .s6-filmstrip{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(100px,11.5%,220px);height:72%;overflow:hidden;pointer-events:none;opacity:.7;mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.18) 16%,#000 43%,#000 57%,rgba(0,0,0,.18) 84%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.18) 16%,#000 43%,#000 57%,rgba(0,0,0,.18) 84%,transparent 100%)}
+#sub4_6s .s6-filmtrack{height:200%;display:flex;flex-direction:column;animation:s6-film-scroll 23s linear infinite;will-change:transform}
+#sub4_6s .s6-filmtrack img{display:block;width:100%;height:50%;min-height:0;object-fit:fill;flex:0 0 50%}
+/* Each filmstrip image contains five frames; repeat the pair seamlessly. */
+#sub4_6s .s6-filmtrack{height:auto;display:block}
+#sub4_6s .s6-filmtrack img{height:auto;width:100%;display:block}
+@keyframes s6-film-scroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+#sub4_6s .s6-side-label{position:absolute;z-index:5;left:39%;top:35%;writing-mode:vertical-rl;font-size:clamp(8px,.6vw,12px);letter-spacing:.12em;opacity:.8}
+#sub4_6s .s6-bottom-left{position:absolute;z-index:5;bottom:5%;left:2.1%;font-size:clamp(9px,.8vw,15px);line-height:1.25;letter-spacing:.04em}
+#sub4_6s .s6-bottom-right{position:absolute;z-index:5;bottom:5%;right:2.2%;font-size:clamp(10px,.8vw,15px);letter-spacing:.08em}
+@media(max-width:700px){#sub4_6s .s6-stage{min-height:340px;aspect-ratio:4/3}#sub4_6s .s6-title{font-size:clamp(35px,8vw,58px)}#sub4_6s .s6-title-left{left:3%}#sub4_6s .s6-title-right{right:3%}#sub4_6s .s6-filmstrip{width:18%;height:66%}#sub4_6s .s6-side-label{display:none}#sub4_6s .s6-top span:last-child{font-size:8px}}
+@media(prefers-reduced-motion:reduce){#sub4_6s .s6-filmtrack{animation:none}}
+
+/* SECTION 07 — three equal interactive image cards */
+#sub4_7s{box-sizing:border-box;height:auto;min-height:0;padding:100px 160px;background:#f6f5f2;color:#171717;font-family:Arial,Helvetica,sans-serif}
+#sub4_7s .s7-inner{max-width:1600px;margin:0 auto}
+#sub4_7s .s7-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:32px}
+#sub4_7s .s7-eyebrow{font-size:12px;letter-spacing:.17em;margin:0 0 14px}
+#sub4_7s h2{font-size:clamp(28px,3.3vw,58px);font-weight:600;letter-spacing:-.055em;line-height:1;margin:0 0 12px}
+#sub4_7s h2 span{font-weight:300}
+#sub4_7s .s7-heading p:not(.s7-eyebrow){font-size:clamp(14px,1.3vw,20px);color:#777;margin:0}
+#sub4_7s .s7-caption{font-size:11px;letter-spacing:.1em;text-align:right;color:#888}
+#sub4_7s .s7-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+#sub4_7s .s7-card{position:relative;display:block;aspect-ratio:4/4.7;overflow:hidden;border:5px solid white;border-radius:12px;box-sizing:border-box;text-decoration:none;color:#fff;isolation:isolate;box-shadow:0 2px 12px rgba(0,0,0,.07);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+#sub4_7s .s7-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+#sub4_7s .s7-tint{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65),transparent 65%);opacity:0;transition:opacity .3s}
+#sub4_7s .s7-card-info{position:absolute;left:0;right:0;bottom:0;padding:24px 22px;display:grid;grid-template-columns:1fr auto;gap:5px 10px;align-items:end;transform:translateY(15px);opacity:0;transition:opacity .3s,transform .35s}
+#sub4_7s .s7-number{grid-column:1;font-size:15px;font-weight:800;letter-spacing:.025em}
+#sub4_7s .s7-card-info strong{grid-column:1;font-size:11px;letter-spacing:.12em;font-weight:500}
+#sub4_7s .s7-arrow{grid-column:2;grid-row:1/3;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;color:#3264b6;font-size:25px;font-weight:700;transition:background .2s,color .2s,transform .2s}
+#sub4_7s .s7-card:hover,#sub4_7s .s7-card:focus-visible{transform:scale(1.035);box-shadow:0 16px 36px rgba(0,0,0,.18);z-index:2;outline:none}
+#sub4_7s .s7-card:hover img,#sub4_7s .s7-card:focus-visible img{transform:scale(1.07)}
+#sub4_7s .s7-card:hover .s7-tint,#sub4_7s .s7-card:focus-visible .s7-tint{opacity:1}
+#sub4_7s .s7-card:hover .s7-card-info,#sub4_7s .s7-card:focus-visible .s7-card-info{opacity:1;transform:translateY(0)}
+#sub4_7s .s7-card:hover .s7-arrow,#sub4_7s .s7-card:focus-visible .s7-arrow{background:#3264b6;color:white;transform:translateX(3px)}
+#sub4_7s .s7-footer{display:flex;justify-content:flex-end;align-items:center;gap:16px;margin-top:25px;font-size:11px;letter-spacing:.09em}
+#sub4_7s .s7-footer a{display:inline-flex;gap:18px;align-items:center;border:1px solid #222;border-radius:30px;padding:12px 20px;color:#222;text-decoration:none;transition:background .2s,color .2s}
+#sub4_7s .s7-footer a:hover{background:#222;color:white}
+@media(max-width:1100px){#sub4_7s{padding:100px 6vw}#sub4_7s .s7-cards{gap:14px}}
+@media(max-width:650px){#sub4_7s{padding:100px 20px}#sub4_7s .s7-heading{align-items:start;flex-direction:column}#sub4_7s .s7-cards{grid-template-columns:1fr;gap:20px}#sub4_7s .s7-card{aspect-ratio:4/3.5}#sub4_7s .s7-card-info{opacity:1;transform:none}#sub4_7s .s7-tint{opacity:1}#sub4_7s .s7-footer span:first-child{display:none}}
+@media(prefers-reduced-motion:reduce){#sub4_7s .s7-card,#sub4_7s .s7-card img,#sub4_7s .s7-card-info{transition:none}}
+
+/* SECTION 07 revision: airy sky-blue overlay with original photo visible */
+#sub4_7s .s7-tint{background:rgba(132,195,241,.66);opacity:0;}
+#sub4_7s .s7-card-info{color:#102e54;}
+#sub4_7s .s7-arrow{background:#fff;color:#3264b6;}
+#sub4_7s .s7-card:hover .s7-arrow,#sub4_7s .s7-card:focus-visible .s7-arrow{background:#3264b6;color:#fff;}
+@media(max-width:650px){#sub4_7s .s7-tint{opacity:.45;}}
+
+/* Section 05 → 06 → 07: blend the 100px breathing spaces into adjacent section backgrounds. */
+#sub4_6s{background:linear-gradient(to bottom,#f8f8f8 0%,#f8f8f8 50%,#f6f5f2 50%,#f6f5f2 100%);}
+
+/* Section 05 — edge-to-edge collage, preserve 100px vertical spacing */
+#sub4_5s {padding:100px 0 !important;min-height:0 !important;width:100%;max-width:none;overflow:hidden;background:#f8f8f8;}
+#sub4_5s .s5-stage {width:100%;max-width:none;margin:0;aspect-ratio:1649 / 928;height:auto;background:transparent;}
+#sub4_5s .s5-art {display:block;width:100%;height:100%;object-fit:cover;}
+@media(max-width:650px){#sub4_5s{padding:100px 0 !important;}#sub4_5s .s5-stage{aspect-ratio:1649 / 928;}}
+
+/* Requested seam fixes only: match section 05 collage paper beige. */
+#sub4_5s {background-color:#f6eedf !important;}
+#sub4_6s {background:linear-gradient(to bottom,#f6eedf 0%,#f6eedf 50%,#f6f5f2 50%,#f6f5f2 100%);}
+
+/* SECTION 05 product strip: fixed 1080px composition (100 + 560 + 320 + 100). */
+#sub4_5s {box-sizing:border-box;height:1080px;min-height:1080px!important;padding:100px 0!important;background:#f6eedf!important;display:flex;flex-direction:column;overflow:hidden;}
+#sub4_5s .s5-stage {position:relative;flex:0 0 560px;height:560px!important;aspect-ratio:auto!important;width:100%;overflow:hidden;margin:0;}
+#sub4_5s .s5-canvas {position:relative;width:100%;aspect-ratio:1649 / 928;min-height:560px;}
+#sub4_5s .s5-art {width:100%;height:auto;display:block;object-fit:initial;}
+#sub4_5s .s5-hotspot {position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:clamp(54px,9vw,170px);height:clamp(48px,7vw,115px);padding:0;border:0;border-radius:0;background:transparent!important;color:#111;cursor:pointer;z-index:4;display:flex;align-items:flex-start;justify-content:center;}
+#sub4_5s .s5-hotspot span {font-family:Georgia,'Times New Roman',serif;font-size:clamp(13px,1.25vw,23px);font-style:italic;font-weight:400;transform:rotate(-18deg);text-shadow:0 1px 2px #fff;transition:transform .2s;}
+#sub4_5s .s5-hotspot:hover span,#sub4_5s .s5-hotspot:focus-visible span{transform:rotate(-18deg) scale(1.2);text-decoration:underline;}
+#sub4_5s .s5-hotspot:focus-visible{outline:2px dashed #111;outline-offset:2px;}
+#sub4_5s .s5-info {display:block!important;flex:0 0 320px;height:320px;width:100%;max-width:none;margin:0;padding:0;border:0;background:#fff;overflow:hidden;}
+#sub4_5s .s5-info img {display:block;width:100%;height:100%;object-fit:fill;}
+@media(max-width:700px){#sub4_5s .s5-hotspot{width:13vw;height:9vw;}#sub4_5s .s5-hotspot span{font-size:12px;}}
+
+/* Section 05 final adjustment: hidden initially; info ends at section bottom. */
+#sub4_5s .s5-stage {flex:1 1 auto;height:auto!important;min-height:0;transition:flex-basis .25s ease;}
+#sub4_5s .s5-canvas {width:100%;height:100%;min-height:0;aspect-ratio:auto;}
+#sub4_5s .s5-art {width:100%;height:100%;object-fit:contain;object-position:center center;}
+#sub4_5s .s5-info[hidden] {display:none!important;}
+#sub4_5s .s5-info:not([hidden]) {display:block!important;flex:0 0 320px;height:320px;}
+#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {flex:1 1 auto;}
+#sub4_5s {padding-bottom:0!important;}
+#sub4_5s .s5-info img {object-fit:fill;}
+
+/* SECTION 05 — full-bleed art, anchored click labels and flush-bottom product info.
+   Only section 05 is overridden; all other sections remain unchanged. */
+#sub4_5s {
+  position:relative; height:1080px!important; min-height:1080px!important;
+  padding:0!important; margin:0!important; display:block!important;
+  overflow:hidden; background:#f6eedf!important;
+}
+#sub4_5s .s5-stage {
+  position:absolute!important; inset:0!important; width:100%!important;
+  height:100%!important; min-height:0!important; margin:0!important;
+  aspect-ratio:auto!important; overflow:hidden!important;
+  transition:none!important;
+}
+#sub4_5s .s5-canvas {
+  position:absolute!important; inset:0!important; width:100%!important;
+  height:100%!important; min-height:0!important; aspect-ratio:auto!important;
+  transition:none!important;
+}
+#sub4_5s .s5-art {
+  display:block!important; width:100%!important; height:100%!important;
+  object-fit:cover!important; object-position:center top!important;
+}
+#sub4_5s .s5-hotspot {transition:none!important;}
+#sub4_5s .s5-hotspot span {transition:none!important;}
+#sub4_5s .s5-hotspot:hover span,
+#sub4_5s .s5-hotspot:focus-visible span {
+  transform:rotate(-18deg)!important; text-decoration:none!important;
+}
+#sub4_5s .s5-info:not([hidden]) {
+  position:absolute!important; bottom:0!important; left:0!important;
+  width:100%!important; height:320px!important; max-width:none!important;
+  margin:0!important; padding:0!important; display:block!important;
+  z-index:8; overflow:hidden; background:white;
+}
+#sub4_5s .s5-info[hidden] {display:none!important;}
+#sub4_5s .s5-info img {width:100%!important;height:100%!important;object-fit:fill!important;}
+
+/* Section 05: supplied transition artwork in upper/lower margins. */
+#sub4_5s::before,#sub4_5s::after {
+  content:"";position:absolute;left:0;width:100%;height:100px;
+  background-repeat:no-repeat;background-size:100% 100%;pointer-events:none;z-index:2;
+}
+#sub4_5s::before {top:0;background-image:url("../img/sub4_img/sub4_5s_bg_t.png");}
+#sub4_5s::after {bottom:0;background-image:url("../img/sub4_img/sub4_5s_bg_b.png");}
+#sub4_5s .s5-stage {top:100px!important;bottom:100px!important;height:auto!important;}
+#sub4_5s .s5-info:not([hidden]) {z-index:9;}
+#sub4_5s:has(.s5-info:not([hidden]))::after {display:none;}
+
+/* Section 5: fill each entire 100px margin with the beige paper texture, not the white margins embedded in the supplied source images. */
+#sub4_5s::before,#sub4_5s::after{height:100px!important;background-size:100% 100%!important;}
+
+/* Latest requested refinements: product strip below the collage, no beige gap. */
+#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {
+  top:0!important;
+  bottom:320px!important;
+  height:auto!important;
+}
+#sub4_5s:has(.s5-info:not([hidden])) .s5-art {
+  object-fit:fill!important;
+}
+#sub4_5s:has(.s5-info:not([hidden]))::before {display:none!important;}
+#sub4_5s .s5-info:not([hidden]) {bottom:0!important;height:320px!important;}
+/* Let the green section background show softly through both navigation buttons. */
+#sub4_3s .s3-arrow {background:rgba(255,255,255,.35)!important;}
+#sub4_3s .s3-arrow:hover,#sub4_3s .s3-arrow:focus-visible {background:rgba(255,255,255,.55)!important;}
+
+/* Remove only the extra 100px beige space before a product is selected. */
+#sub4_5s:not(:has(.s5-info:not([hidden]))) {height:980px!important;min-height:980px!important;}
+
+/* Remove the actual extra beige 100px: section 06 top padding, only before product selection. */
+#sub4_5s:not(:has(.s5-info:not([hidden]))) + #sub4_6s {padding-top:0!important;}
+
+/* SECTION 02: fixed full-width background, gently stepped editorial cards */
+#sub4_2s{position:relative;width:100%;height:1080px;min-height:680px;padding:0;overflow:hidden;isolation:isolate;background:#252321}
+#sub4_2s .s2-backdrop{position:absolute;inset:0;z-index:0;background-image:url('../img/sub4_img/sub4_2s_bg.png');background-size:cover;background-position:center center;background-repeat:no-repeat;background-attachment:fixed}
+#sub4_2s .s2-cards{position:relative;z-index:1;width:min(84%,1500px);height:100%;margin:auto;display:flex;align-items:center;justify-content:center;gap:0;padding:0}
+#sub4_2s .s2-card{display:block;position:relative;flex:0 0 32%;width:32%;height:auto;max-height:75%;object-fit:contain;opacity:0;filter:blur(4px);transform:translateY(calc(var(--step,0px) + 75px));transition:opacity 1.15s ease,transform 1.35s cubic-bezier(.22,.75,.2,1),filter 1.15s ease;will-change:opacity,transform;z-index:1}
+#sub4_2s .s2-card-first{--step:-36px;transition-delay:.12s}
+#sub4_2s .s2-card-second{--step:0px;transition-delay:.82s}
+#sub4_2s .s2-card-third{--step:36px;transition-delay:1.52s}
+#sub4_2s.s2-visible .s2-card{opacity:1;filter:blur(0);transform:translateY(var(--step,0px))}
+@media(max-width:700px){#sub4_2s{height:700px;min-height:0}#sub4_2s .s2-cards{width:98%}#sub4_2s .s2-card{flex-basis:32%;width:32%;max-height:65%}#sub4_2s .s2-card-first{--step:-16px}#sub4_2s .s2-card-third{--step:16px}#sub4_2s .s2-backdrop{background-attachment:scroll}}
+@media(prefers-reduced-motion:reduce){#sub4_2s .s2-card{transition:none;filter:none}}
+
+
+/* Section 07: static cards with image-only hover swap and rising caption */
+#sub4_7s .s7-card{cursor:default;transform:none!important;box-shadow:0 2px 12px rgba(0,0,0,.07)!important;z-index:auto!important;}
+#sub4_7s .s7-card img{transform:none!important;transition:opacity .3s ease!important;}
+#sub4_7s .s7-card .s7-hover-img{opacity:0;pointer-events:none;}
+#sub4_7s .s7-card:hover .s7-hover-img,#sub4_7s .s7-card:focus-visible .s7-hover-img{opacity:1;}
+#sub4_7s .s7-card:hover .s7-base-img,#sub4_7s .s7-card:focus-visible .s7-base-img{opacity:0;}
+#sub4_7s .s7-card .s7-tint{opacity:0!important;pointer-events:none;}
+#sub4_7s .s7-card .s7-card-info{opacity:1!important;transform:translateY(0)!important;transition:bottom .32s ease!important;bottom:0!important;z-index:3;}
+#sub4_7s .s7-card:hover .s7-card-info,#sub4_7s .s7-card:focus-visible .s7-card-info{bottom:35px!important;transform:none!important;}
+#sub4_7s .s7-arrow{display:none!important;}
+@media(prefers-reduced-motion:reduce){#sub4_7s .s7-card .s7-card-info,#sub4_7s .s7-card img{transition:none!important;}}
+
+/* SECTION 05 ONLY — restore consistent collage proportions and readable product art (2026-11-04). */
+#sub4_5s,
+#sub4_5s:not(:has(.s5-info:not([hidden]))) {
+  height:auto!important;
+  min-height:0!important;
+  padding:100px 0 0!important;
+  display:block!important;
+  overflow:hidden!important;
+}
+#sub4_5s .s5-stage,
+#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {
+  position:relative!important;
+  inset:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:1920 / 750!important;
+  min-height:0!important;
+  flex:none!important;
+  margin:0!important;
+}
+#sub4_5s .s5-canvas {
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  aspect-ratio:auto!important;
+}
+#sub4_5s .s5-art,
+#sub4_5s:has(.s5-info:not([hidden])) .s5-art {
+  width:100%!important;
+  height:100%!important;
+  object-fit:fill!important;
+  object-position:center!important;
+}
+#sub4_5s .s5-info:not([hidden]) {
+  position:relative!important;
+  inset:auto!important;
+  bottom:auto!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:2048 / 682!important;
+  margin:0!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+#sub4_5s .s5-info img,
+#sub4_5s .s5-info:not([hidden]) img {
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+}
+#sub4_5s::after {display:none!important;}
+#sub4_5s:has(.s5-info:not([hidden]))::before {display:block!important;}
+@media(max-width:700px){
+  #sub4_5s .s5-stage,#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {aspect-ratio:1920 / 750!important;}
+}
+
+/* SECTION 05 — product information image only: smaller, centered, original ratio. */
+#sub4_5s .s5-info:not([hidden]) {
+  width:100%!important;
+  max-width:none!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  flex:none!important;
+  padding:0!important;
+  margin:0 auto!important;
+  text-align:center;
+  overflow:visible!important;
+}
+#sub4_5s .s5-info img,
+#sub4_5s .s5-info:not([hidden]) img {
+  display:block!important;
+  width:82%!important;
+  max-width:1500px!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  margin:0 auto!important;
+}
+
+/* SECTION 05 final: no separate top/bottom strip images; natural collage proportions. */
+#sub4_5s,
+#sub4_5s:not(:has(.s5-info:not([hidden]))) {
+  box-sizing:border-box!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:100px 0!important;
+  background:#f6eedf!important;
+  display:block!important;
+}
+#sub4_5s::before,
+#sub4_5s::after,
+#sub4_5s:has(.s5-info:not([hidden]))::before,
+#sub4_5s:has(.s5-info:not([hidden]))::after {
+  content:none!important;
+  display:none!important;
+  background-image:none!important;
+}
+#sub4_5s .s5-stage,
+#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:1920 / 1080!important;
+  flex:none!important;
+  overflow:hidden!important;
+  position:relative!important;
+  inset:auto!important;
+}
+#sub4_5s .s5-canvas {position:absolute!important;inset:0!important;width:100%!important;height:100%!important;}
+#sub4_5s .s5-art,
+#sub4_5s:has(.s5-info:not([hidden])) .s5-art {
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+#sub4_5s .s5-info[hidden] {display:none!important;}
+#sub4_5s .s5-info:not([hidden]) {
+  position:relative!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  margin:0 auto!important;
+  flex:none!important;
+}
+#sub4_5s .s5-info img,
+#sub4_5s .s5-info:not([hidden]) img {
+  display:block!important;
+  width:82%!important;
+  max-width:1500px!important;
+  height:auto!important;
+  object-fit:contain!important;
+  aspect-ratio:auto!important;
+  margin:0 auto!important;
+}
+@media(max-width:700px){
+ #sub4_5s .s5-stage,#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {aspect-ratio:1920 / 1080!important;}
+}
+
+/* SECTION 05 — information overlays the collage, without resizing or moving it. */
+#sub4_5s {position:relative!important; padding:100px 0!important;}
+#sub4_5s .s5-stage,
+#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {
+  position:relative!important;
+  aspect-ratio:1920 / 1080!important;
+  height:auto!important;
+  overflow:hidden!important;
+}
+#sub4_5s .s5-art,
+#sub4_5s:has(.s5-info:not([hidden])) .s5-art {
+  width:100%!important;height:100%!important;object-fit:contain!important;
+}
+#sub4_5s .s5-info,
+#sub4_5s .s5-info:not([hidden]) {
+  position:absolute!important;
+  left:0!important;right:0!important;
+  bottom:100px!important;top:auto!important;
+  width:100%!important;max-width:none!important;
+  height:auto!important;aspect-ratio:auto!important;
+  padding:0!important;margin:0!important;
+  background:transparent!important;overflow:visible!important;
+  z-index:8!important;pointer-events:none!important;
+}
+#sub4_5s .s5-info[hidden] {display:none!important;}
+#sub4_5s .s5-info:not([hidden]) {display:flex!important;justify-content:center!important;align-items:flex-end!important;}
+#sub4_5s .s5-info img,
+#sub4_5s .s5-info:not([hidden]) img {
+  display:block!important;width:82%!important;max-width:1500px!important;
+  height:auto!important;aspect-ratio:auto!important;
+  object-fit:contain!important;margin:0 auto!important;
+}
+@media(max-width:700px){
+ #sub4_5s .s5-info:not([hidden]) img{width:94%!important;}
+}
+
+/* SECTION 05 — compact, non-distorting information panel below the model's feet. */
+#sub4_5s,#sub4_5s:not(:has(.s5-info:not([hidden]))) {padding:20px 0 24px!important;}
+#sub4_5s .s5-stage,#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {aspect-ratio:1920 / 1080!important;}
+#sub4_5s .s5-info,#sub4_5s .s5-info:not([hidden]) {
+ position:absolute!important;left:0!important;right:0!important;
+ top:70%!important;bottom:auto!important;width:100%!important;
+ height:auto!important;max-width:none!important;z-index:8!important;
+ display:flex!important;align-items:flex-start!important;justify-content:center!important;
+ padding:0!important;margin:0!important;background:transparent!important;
+ pointer-events:none!important;overflow:visible!important;
+}
+#sub4_5s .s5-info[hidden]{display:none!important;}
+#sub4_5s .s5-info img,#sub4_5s .s5-info:not([hidden]) img {
+ display:block!important;width:78%!important;max-width:1500px!important;
+ height:auto!important;max-height:none!important;aspect-ratio:2048 / 682!important;
+ object-fit:contain!important;margin:0 auto!important;transform:none!important;
+}
+@media(max-width:700px){#sub4_5s .s5-info img,#sub4_5s .s5-info:not([hidden]) img{width:90%!important;}}
+
+/* SECTION 05 — keep every product-information pixel inside the collage area. */
+#sub4_5s .s5-info,#sub4_5s .s5-info:not([hidden]) {
+  position:absolute!important; top:61%!important; bottom:auto!important;
+  left:0!important;right:0!important;width:100%!important;height:auto!important;
+  display:flex!important;justify-content:center!important;align-items:flex-start!important;
+  overflow:visible!important;pointer-events:none!important;z-index:8!important;
+}
+#sub4_5s .s5-info[hidden] {display:none!important;}
+#sub4_5s .s5-info img,#sub4_5s .s5-info:not([hidden]) img {
+  display:block!important;width:66%!important;max-width:none!important;
+  height:auto!important;max-height:none!important;aspect-ratio:auto!important;
+  object-fit:contain!important;transform:none!important;margin:0 auto!important;
+}
+@media(max-width:700px){
+ #sub4_5s .s5-info img,#sub4_5s .s5-info:not([hidden]) img {width:66%!important;}
+}
+
+/* Section 5: move info panel down 40px, preserve native aspect ratio */
+#sub4_5s .s5-info,#sub4_5s .s5-info:not([hidden]) {top:calc(61% + 40px)!important;}
+
+/* SECTION 05 FIX (2026-11-04): clicking an item must never change the
+   section height, collage geometry, or the beige gap before section 06. */
+#sub4_5s,
+#sub4_5s:not(:has(.s5-info:not([hidden]))),
+#sub4_5s:has(.s5-info:not([hidden])) {
+  height:auto!important;
+  min-height:0!important;
+  padding:20px 0 24px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+#sub4_5s .s5-stage,
+#sub4_5s:has(.s5-info:not([hidden])) .s5-stage {
+  position:relative!important;
+  inset:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  height:auto!important;
+  width:100%!important;
+  aspect-ratio:1920 / 1080!important;
+  flex:none!important;
+  margin:0!important;
+}
+#sub4_5s .s5-art,
+#sub4_5s:has(.s5-info:not([hidden])) .s5-art {
+  object-fit:contain!important;
+  width:100%!important;
+  height:100%!important;
+}
+#sub4_5s::before,
+#sub4_5s::after,
+#sub4_5s:has(.s5-info:not([hidden]))::before,
+#sub4_5s:has(.s5-info:not([hidden]))::after {display:none!important;}
+#sub4_5s + #sub4_6s,
+#sub4_5s:not(:has(.s5-info:not([hidden]))) + #sub4_6s,
+#sub4_5s:has(.s5-info:not([hidden])) + #sub4_6s {padding-top:0!important;}
+/* The information panel is an overlay and never participates in layout. */
+#sub4_5s .s5-info,
+#sub4_5s .s5-info:not([hidden]) {
+  position:absolute!important;
+  top:calc(61% + 40px)!important;
+  bottom:auto!important;
+  left:0!important;
+  right:0!important;
+  height:auto!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+  z-index:8!important;
+  pointer-events:none!important;
+}
+#sub4_5s .s5-info[hidden] {display:none!important;}
+#sub4_5s .s5-info img,
+#sub4_5s .s5-info:not([hidden]) img {
+  width:66%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  max-width:none!important;
+  transform:none!important;
+}
+
+
+/* Shared header / footer */
+/* ODDAY shared header/footer — scoped styles; no site-wide resets */
+.legacy-sub4-header,.od-shared-footer{box-sizing:border-box;font-family:Arial,'Noto Sans KR',sans-serif;color:#171717}
+.legacy-sub4-header *, .od-shared-footer * {box-sizing:border-box}
+.legacy-sub4-header{position:sticky;top:0;z-index:9999;background:#fff;border-top:1px solid #ededed;border-bottom:1px solid #e5e5e5;height:66px;width:100%;}
+.legacy-sub4-header .odc-header_wrap{position:relative;max-width:1700px;width:100%;height:100%;margin:0 auto;padding:0 3%;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.legacy-sub4-header a,.od-shared-footer a{text-decoration:none;color:inherit}
+.legacy-sub4-header a:hover,.od-shared-footer a:hover{opacity:.65}
+.legacy-sub4-header .odc-header_left_textbox{display:flex;align-items:center;gap:clamp(12px,2.1vw,35px);white-space:nowrap;font-size:13px}
+.legacy-sub4-header .odc-header_logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:142px;height:47px;display:flex;align-items:center;justify-content:center;z-index:2}
+.legacy-sub4-header .odc-header_logo>a,.legacy-sub4-header .odc-header_logo img{display:block;width:142px;height:47px;object-fit:contain}
+.legacy-sub4-header .odc-od-head-eyes{position:absolute;left:calc(100% + 11px);top:8px;display:flex;gap:4px;transform:rotate(-8deg);pointer-events:none}
+.legacy-sub4-header .odc-od-eye{width:19px;height:27px;border:2px solid #201e1c;border-radius:50%;background:#fff;position:relative;transform:rotate(5deg);overflow:hidden;display:block}
+.legacy-sub4-header .odc-od-pupil{position:absolute;left:5px;top:9px;width:8px;height:12px;background:#171717;border-radius:50%;display:block;will-change:transform}
+.legacy-sub4-header .odc-header_right_textbox{display:flex;align-items:center;gap:19px;margin-left:auto;white-space:nowrap}
+.legacy-sub4-header .odc-header_sns_box{display:flex;align-items:center;gap:11px}
+.legacy-sub4-header .odc-header_sns_box a,.legacy-sub4-header .odc-header_search_box a{display:flex;align-items:center;justify-content:center;width:24px;height:24px;padding:0;border:0;border-radius:0;background:transparent}
+.legacy-sub4-header .odc-header_sns_box img,.legacy-sub4-header .odc-header_search_box img{width:22px;height:22px;object-fit:contain;display:block}
+.legacy-sub4-header .odc-header_member_box{display:flex;align-items:center;gap:20px;font-size:13px}
+.od-shared-footer{background:white;width:100%;padding:0;margin:0}
+.od-shared-footer .odc-footer_top{display:grid;grid-template-columns:minmax(0,1fr) minmax(350px,1.25fr) minmax(0,1fr);align-items:center;gap:22px;min-height:420px;padding:68px max(25px,2.2vw) 48px}
+.od-shared-footer .odc-footer_left,.od-shared-footer .odc-footer_right{font-size:clamp(12px,1.12vw,17px);line-height:1.55;min-width:0}
+.od-shared-footer .odc-footer_left p,.od-shared-footer .odc-footer_right p{margin:0 0 12px}
+.od-shared-footer .odc-footer_right{text-align:right}
+.od-shared-footer .odc-footer_center{text-align:center;align-self:center}
+.od-shared-footer .odc-footer-original-lockup{display:block;max-width:100%;width:min(590px,100%);height:auto;margin:auto}
+.od-shared-footer .odc-od-footer-story{border-top:1px solid #e8e5e2;background:#fff}
+.od-shared-footer .odc-od-footer-story-inner{max-width:1600px;margin:auto;padding:40px 30px;display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:45px;min-height:245px}
+.od-shared-footer .odc-od-footer-story-heading,.od-shared-footer .odc-od-footer-story-right{display:flex;flex-direction:column;align-items:flex-start;gap:13px}
+.od-shared-footer .odc-od-footer-story-eyebrow,.od-shared-footer .odc-od-footer-story-label{font:700 10px/1.5 Arial,sans-serif;letter-spacing:.12em;color:#888}
+.od-shared-footer .odc-od-footer-story-heading strong{font:bold clamp(27px,2.6vw,43px)/1 Arial,sans-serif;letter-spacing:-.05em}
+.od-shared-footer .odc-od-footer-story-caption{font-size:10px;letter-spacing:.08em;color:#777}
+.od-shared-footer .odc-od-footer-story-middle p{font-size:13px;line-height:1.9;color:#555;margin:20px 0}
+.od-shared-footer .odc-od-footer-story-sign{font:italic 16px Georgia,serif;color:#777}
+.od-shared-footer .odc-od-footer-story-tags{width:100%}
+.od-shared-footer .odc-od-footer-story-tags span{display:block;border-bottom:1px solid #e5e2df;padding:11px 0;font-size:12px;color:#777}
+.od-shared-footer .odc-od-footer-story-tags b{color:#333;margin-left:15px}
+.od-shared-footer .odc-od-footer-story-link{font-weight:700;font-size:11px;letter-spacing:.06em}
+.od-shared-footer .odc-footer_bottom{border-top:1px solid #333}
+.od-shared-footer .odc-footer_bottom_wrap{max-width:1700px;min-height:96px;margin:auto;padding:24px 30px;display:flex;justify-content:space-between;align-items:flex-start}
+.od-shared-footer .odc-footer_selects,.od-shared-footer .odc-footer_social{display:flex;align-items:center;gap:30px}
+.od-shared-footer .odc-footer_select_box label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.od-shared-footer select{background:white;border:0;color:#111;font:21px Georgia,serif;cursor:pointer;padding:2px;min-width:90px}
+.od-shared-footer .odc-footer_social a,.od-shared-footer .odc-footer_social img{display:block;width:26px;height:26px;object-fit:contain}
+.od-shared-top{position:fixed;right:25px;bottom:25px;z-index:9998;width:52px;height:52px;border:1px solid #222;border-radius:50%;background:white;color:#222;display:flex;align-items:center;justify-content:center;font-size:23px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.od-shared-top.is-visible{opacity:1;visibility:visible}
+@media(max-width:1050px){.legacy-sub4-header .odc-header_left_textbox{gap:11px;font-size:11px}.legacy-sub4-header .odc-header_member_box{gap:9px;font-size:11px}.legacy-sub4-header .odc-header_right_textbox{gap:9px}.od-shared-footer .odc-footer_top{grid-template-columns:1fr 1.2fr 1fr;gap:12px}}
+@media(max-width:760px){.legacy-sub4-header .odc-header_left_textbox{display:none}.legacy-sub4-header .odc-header_right_textbox{margin-left:auto}.legacy-sub4-header .odc-header_sns_box{display:none}.legacy-sub4-header .odc-header_logo,.legacy-sub4-header .odc-header_logo>a,.legacy-sub4-header .odc-header_logo img{width:105px;height:38px}.legacy-sub4-header .odc-od-head-eyes{transform:scale(.8) rotate(-8deg);transform-origin:top left;top:6px}.od-shared-footer .odc-footer_top{display:flex;flex-direction:column;gap:30px;padding:45px 20px}.od-shared-footer .odc-footer_center{order:-1;width:100%}.od-shared-footer .odc-footer_right,.od-shared-footer .odc-footer_left{text-align:left;width:100%;font-size:12px}.od-shared-footer .odc-od-footer-story-inner{grid-template-columns:1fr;padding:35px 24px;gap:26px}.od-shared-footer .odc-footer_bottom_wrap{padding:20px;flex-wrap:wrap;gap:22px}.od-shared-footer .odc-footer_social{gap:16px}}
+
+/* TOP button: section 7 onwards */
+.od-shared-top{width:53px;height:53px;right:24px;bottom:24px;background:#111;color:#fff;border:0;border-radius:11px;flex-direction:column;gap:0;box-shadow:none;font-family:Arial,sans-serif;line-height:1;padding:6px 0 5px}
+.od-shared-top .od-top-arrow{font-size:24px;line-height:25px;font-weight:400}
+.od-shared-top .od-top-label{font-size:10px;line-height:12px;font-weight:700;letter-spacing:.01em}
+.od-shared-top:hover{background:#292929}
+
+/* 5단락 미니 토트백 클릭 범위 확대 */
+#sub4_5s .s5-hotspot[data-item="에코백"] {
+    width: 220px;
+    height: 260px;
+    top: 20%;
+    z-index: 6;
+}
+
+/* 5단락 백팩 클릭 범위 확대 */
+#sub4_5s .s5-hotspot[data-item="백팩"] {
+    width: 240px;
+    height: 300px;
+    top: 48%;
+    z-index: 6;
+}
+
+/* 3단락 여자 모델만 살짝 아래로 */
+@media (min-width: 701px) {
+    #sub4_3s .s3-model-area {
+        transform: translateY(25px);
+    }
+}
+
+/* SECTION 02 - 흰 여백 없이 배경 확장 */
+#sub4_2s {
+    margin-top: 0 !important;
+    height: 1260px;
+    background-color: #252321;
+}
+
+#sub4_2s .s2-backdrop {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+/* Section spacing aligned to section 02 (200px at desktop; section 07 bottom stays 250px). */
+:root{--sub4-content-space:200px;}
+#sub4_3s{height:1100px;min-height:1100px;padding-top:20px;}
+#sub4_3s .s3-content{height:1080px;}
+#sub4_4s{height:auto;min-height:0;padding-bottom:var(--sub4-content-space);}
+#sub4_7s{padding-top:100px;padding-bottom:250px;}
+#sub4_5s,#sub4_5s:not(:has(.s5-info:not([hidden]))),#sub4_5s:has(.s5-info:not([hidden])){
+ padding:0!important;
+ background:none!important;
+}
+@media(max-width:700px){
+ :root{--sub4-content-space:120px;}
+ #sub4_3s{height:auto;min-height:0;padding-top:35px;}
+ #sub4_3s .s3-content{height:auto;}
+}
+
+/* Combined artwork includes its own top and bottom paper margins. */
+#sub4_5s .s5-stage,#sub4_5s:has(.s5-info:not([hidden])) .s5-stage{aspect-ratio:1920 / 1480!important;}
+#sub4_5s .s5-art{position:absolute!important;inset:0!important;}
+#sub4_5s .s5-canvas{inset:13.5135135% 0 auto!important;height:72.972973%!important;}
+#sub4_5s .s5-info,#sub4_5s .s5-info:not([hidden]){top:calc(58.027027% + 40px)!important;}
+
+
+/* ============================================================
+   SUB4 ONLY | Match index first-section top spacing
+   index.css: --space-01-top: 0px; --od-gap-01-top: 0px
+   Shared header.css: #header height: 80px
+   Scope strictly to sub4's first section.
+   ============================================================ */
+body > main > #sub4_1s {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+
+/* SUB4 section spacing refinement — section backgrounds fill the spacing.
+   Screenshot reference: reduce section 03 top gap; keep 03 top and 04 bottom equal. */
+@media (min-width: 701px) {
+  #sub4_3s {
+    box-sizing: border-box;
+    padding-top: 90px;
+    height: 1170px;
+    min-height: 1170px;
+  }
+  #sub4_3s .s3-content { height: 1080px; }
+  #sub4_4s { padding-bottom: 90px; }
+  #sub4_7s { padding-top: 130px; padding-bottom: 190px; }
+}
+@media (max-width: 700px) {
+  #sub4_3s { padding-top: 55px; }
+  #sub4_4s { padding-bottom: 55px; }
+  #sub4_7s { padding-top: 90px; padding-bottom: 120px; }
+}
+
+/* SUB4 final spacing tune — preserve each section's own background. */
+@media (min-width: 701px) {
+  #sub4_3s { padding-top: 70px; height: 1150px; min-height: 1150px; }
+  #sub4_3s .s3-content { height: 1080px; }
+  /* Extra room after section 04 artwork, inside the green section itself. */
+  #sub4_4s { padding-bottom: 160px; }
+  #sub4_7s { padding-top: 105px; padding-bottom: 280px; }
+}
+@media (max-width: 700px) {
+  #sub4_3s { padding-top: 42px; }
+  #sub4_4s { padding-bottom: 100px; }
+  #sub4_7s { padding-top: 70px; padding-bottom: 180px; }
+}
+
+/* SUB4 screenshot follow-up: retain section 03 top; extend section 04 green
+   breathing room and balance section 07 without exposing page background. */
+@media (min-width: 701px) {
+  #sub4_4s { padding-bottom: 240px; }
+  #sub4_7s { padding-top: 90px; padding-bottom: 330px; }
+}
+@media (max-width: 700px) {
+  #sub4_4s { padding-bottom: 150px; }
+  #sub4_7s { padding-top: 60px; padding-bottom: 220px; }
+}
+
+/* SUB4 section 07 only — screenshot-based final breathing-room adjustment.
+   Keep section 03/04 unchanged; padding stays inside section 07 background. */
+@media (min-width: 701px) {
+  #sub4_7s { padding-top: 135px; padding-bottom: 285px; }
+}
+@media (max-width: 700px) {
+  #sub4_7s { padding-top: 90px; padding-bottom: 190px; }
+}
+
+/* SUB4 section 05: shift only the product-info image overlay down 15px. */
+#sub4_5s .s5-info,
+#sub4_5s .s5-info:not([hidden]) {
+  top: calc(58.027027% + 55px) !important;
+}
+
+/* Requested minor spacing update — desktop only; all other rules unchanged.
+   Section 03: +18px above content, preserving 1080px content area.
+   Section 04: +18px below content, inside its existing background.
+   Section 07: +10px above content; bottom remains unchanged. */
+@media (min-width: 701px) {
+  #sub4_3s { padding-top: 88px; height: 1168px; min-height: 1168px; }
+  #sub4_4s { padding-bottom: 258px; }
+  #sub4_7s { padding-top: 145px; }
+}

@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>POPIN | 팝업 스토어 플랫폼</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-4.0.0.js"></script>
+    <script>
+      $(function () {
+        // 메인2: 이미지에 마우스를 올리면 해당 이미지가 10% 커짐 
+        // (.zoom 스타일은 style.css)
+        $(".about-grid img").on("mouseenter mouseleave", function (e) {
+          $(this).toggleClass("zoom", e.type === "mouseenter");
+        });
+
+        // 메인2: 스크롤하면 a2 → a3 → a4 → a5 이미지가 순서대로 나타남
+        // (scrollTop 값 기준으로 페이드인, 위로 스크롤하면 페이드아웃)
+        var $aboutImgs = $(".about-grid .a2, .about-grid .a3, .about-grid .a4, .about-grid .a5").css("opacity", 0);
+        var aboutShown = [false, false, false, false];
+        function checkAbout() {
+          var sc = $(window).scrollTop();
+          // 섹션 시작 위치 기준: 화면 아래쪽에서 올라오기 시작할 때부터 200px 간격으로 차례로 표시
+          var start = $(".about").offset().top - $(window).height() * 0.6;
+          $aboutImgs.each(function (i) {
+            var on = sc >= start + i * 200;
+            if (on === aboutShown[i]) return;
+            aboutShown[i] = on;
+            $(this).stop(true).animate({ opacity: on ? 0.65 : 0 }, 500, function () {
+              // 표시 상태에서는 인라인 opacity를 지워 hover(.zoom) 스타일이 적용되게 함
+              if (on) $(this).css("opacity", "");
+            });
+          });
+        }
+        $(window).on("scroll resize", checkAbout);
+        checkAbout();
+
+        // 메인4: 스크롤하면 small → 제목 → 설명 → 버튼 순서대로 페이드인, 위로 스크롤하면 페이드아웃
+        // (scrollTop 값 기준)
+        var $connectTxt = $(".connect small, .connect h2, .connect p, .connect .btn").css("opacity", 0);
+        var connectShown = [false, false, false, false];
+        function checkConnect() {
+          var sc = $(window).scrollTop();
+          var start = $(".connect").offset().top - $(window).height() * 0.5;
+          $connectTxt.each(function (i) {
+            var on = sc >= start + i * 150;
+            if (on === connectShown[i]) return;
+            connectShown[i] = on;
+            $(this).stop(true).animate({ opacity: on ? 1 : 0 }, 500, function () {
+              if (on) $(this).css("opacity", "");
+            });
+          });
+        }
+        $(window).on("scroll resize", checkConnect);
+        checkConnect();
+
+        // 맨 위로 버튼: 400px 이상 스크롤하면 표시, 클릭하면 부드럽게 맨 위로 이동
+
+        $(document).ready(function(){
+          $(window).scroll(function(){
+            if($(this).scrollTop() > 400){
+            $('.to-top').addClass('show');
+          } else {
+            $('.to-top').removeClass('show');
+          }
+        });
+
+    $('.to-top').click(function(){
+        $('html, body').animate({scrollTop: 0}, 500);
+    });
+});
+
+$(document).ready(function(){
+    // 메인2: 마우스를 올리면 이미지 확대 + 선명해짐
+    $(".about-grid img").hover(
+        function(){
+            $(this).addClass("zoom");
+        },
+        function(){
+            $(this).removeClass("zoom");
+        }
+    );
+});
+
+        // 메인3: 섹션이 화면에 보이는 상태에서 스크롤하는 동안 폰 이미지가 진동, 
+        // 스크롤이 멈추면 정지
+        var $phones = $(".dual .ph");
+        var shakeTimer = null;
+        $(window).on("scroll", function () {
+          var r = $(".dual")[0].getBoundingClientRect();
+          if (r.bottom > 0 && r.top < $(window).height()) {
+            $phones.addClass("shake");
+            clearTimeout(shakeTimer);
+            shakeTimer = setTimeout(function () {
+              $phones.removeClass("shake");
+            }, 150);
+          }
+        });
+
+        // 메인5: 제목이 화면에 보이면 글자 전체가 왼쪽에서 오른쪽으로 흘러 들어옴, 
+        // 많이 벗어나면 초기화되어 스크롤할 때마다 반복
+        var $bp = $(".bp");
+        var $bpTitle = $bp.find("h3").addClass("pre");
+        function checkBp() {
+          var r = $bp[0].getBoundingClientRect();
+          var vh = $(window).height();
+          var visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+          var hidden = $bpTitle.hasClass("pre");
+          if (hidden && visible >= r.height * 0.5) {
+            $bpTitle.removeClass("pre");
+          } else if (!hidden && visible < r.height * 0.2) {
+            $bpTitle.addClass("pre");
+          }
+        }
+        $(window).on("scroll resize", checkBp);
+        checkBp();
+
+        // 메인6: 이미지는 위에서 내려오고 텍스트 박스는 페이드인, 
+        // 많이 벗어나면 초기화되어 스크롤할 때마다 반복
+        var $cust = $(".cust");
+        var $custItems = $cust.find(".cust-in > img, .cbox").addClass("pre");
+        function checkCust() {
+          var r = $cust[0].getBoundingClientRect();
+          var vh = $(window).height();
+          var visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+          var full = Math.min(r.height, vh);
+          var hidden = $custItems.first().hasClass("pre");
+          if (hidden && visible >= full * 0.6) {
+            $custItems.removeClass("pre");
+          } else if (!hidden && visible < full * 0.2) {
+            $custItems.addClass("pre");
+          }
+        }
+        $(window).on("scroll resize", checkCust);
+        checkCust();
+
+        // 메인7: 카드가 1.5초마다 자동으로 오른쪽으로 한 칸씩 스크롤
+        // (화살표·카드에 마우스가 있으면 중지), 07까지 표시되면 01로 
+        // 빠르게 되감은 뒤 다시 오른쪽으로 스크롤, 화살표로도 이동 가능 (3장 표시)
+        var $track = $(".cards-grid");
+        var STEP = 425; // 카드 폭 377 + 간격 48
+        var VISIBLE = 3;
+        var INTERVAL = 1500;
+        var maxIndex = $track.children().length - VISIBLE; // 마지막 위치(05~07이 보이는 상태)
+        var cardIndex = 0;
+        var cardTimer = null;
+        var overArrow = false; // 화살표나 카드 위에 마우스가 있으면 자동 스크롤 중지
+
+        function moveCards(duration) {
+          $track.css({
+            transition: "transform " + duration + "s ease-in-out",
+            transform: "translateX(" + -cardIndex * STEP + "px)"
+          });
+        }
+        function forwardCards() {
+          if (cardIndex >= maxIndex) {
+            cardIndex = 0;
+            moveCards(0.6); // 07까지 보인 뒤 01로 빠르게 되감기
+          } else {
+            cardIndex++;
+            moveCards(0.5);
+          }
+        }
+        function backCards() {
+          cardIndex = cardIndex > 0 ? cardIndex - 1 : maxIndex;
+          moveCards(0.5);
+        }
+        function restartCards() {
+          clearInterval(cardTimer);
+          cardTimer = setInterval(function () {
+            if (!overArrow) forwardCards();
+          }, INTERVAL);
+        }
+        $(".cards-arrow, .cards-view").hover(
+          function () {
+            overArrow = true;
+          },
+          function () {
+            overArrow = false;
+            restartCards();
+          }
+        );
+        $(".cards-arrow.l").on("click", function () {
+          backCards();
+          restartCards();
+        });
+        $(".cards-arrow.r").on("click", function () {
+          forwardCards();
+          restartCards();
+        });
+        restartCards();
+      });
+    </script>
+  </head>
+
+  <body class="main-font">
+    <div class="page">
+
+      <header class="nav over">
+        <div class="nav-bar">
+          <a class="logo" href="index2.html" aria-label="POPIN 메인으로">
+            <img src="assets/main3_logo.png" alt="POPIN"></a>
+          <div class="item">
+            <a class="link" href="sub.html">DISCOVER</a>
+            <div class="drop">
+              <a href="sub.html">팝업 찾기</a>
+              <a href="#p2">지역별 팝업</a>
+              <a href="#p2">브랜드 팝업</a>
+              <a href="#p2">신규 팝업</a>
+              <a href="#p2">에디터 추천</a>
+            </div>
+          </div>
+          <div class="item">
+            <a class="link" href="sub.html">SPACE</a>
+            <div class="drop">
+              <a href="#p3">공간 찾기</a>
+              <a href="#p3">공간 등록</a>
+              <a href="#p3">공간 매칭</a>
+              <a href="#p3">공간 파트너</a>
+              <a href="#p3">추천 공간</a>
+            </div>
+          </div>
+          <div class="item">
+            <a class="link" href="#p4">BRANDS &amp; SELLERS</a>
+            <div class="drop">
+              <a href="#p4">브랜드 등록</a>
+              <a href="#p4">셀러 찾기</a>
+              <a href="#p5">팝업 기획</a>
+              <a href="#p5">팝업 참여</a>
+              <a href="#p5">공동 팝업</a>
+            </div>
+          </div>
+          <div class="item">
+            <a class="link" href="#p5">MATCH</a>
+            <div class="drop">
+              <a href="#p5">맞춤 매칭</a>
+              <a href="#p5">공간 추천</a>
+              <a href="#p5">협상·견적</a>
+              <a href="#p5">계약 관리</a>
+              <a href="#p5">매칭 현황</a>
+            </div>
+          </div>
+          <span class="sp"></span>
+          <span class="dots"></span>
+          <span class="user"></span>
+          <form onsubmit="return false;">
+            <input type="search" aria-label="검색">
+            <button aria-label="검색"><span class="mag"></span></button>
+          </form>
+        </div>
+      </header>
+
+      <section class="hero">
+        <h1 hidden>POPIN</h1>
+        <a class="cut c1" href="sub.html"><span>P</span></a>
+        <a class="cut c2" href="sub.html"><span>O</span></a>
+        <a class="cut c3" href="sub.html"><span>P</span></a>
+        <a class="cut c4" href="sub.html"><span>IN</span></a>
+      </section>
+
+      <section class="about" id="about">
+        <h2>ABOUT US</h2>
+        <div class="about-grid">
+          <img class="a1" src="assets/main2_1.png" alt="Are you ready?">
+          <img class="a2" src="assets/main2_2.png" alt="팝업 스토어">
+          <img class="a3" src="assets/main2_3.png" alt="Good things ahead">
+          <img class="a4" src="assets/main2_4.png" alt="추천공간">
+          <img class="a5" src="assets/main2_5.png" alt="팝업참여">
+        </div>
+      </section>
+
+      <section class="dual" id="match">
+        <img class="bg" src="assets/main3_box.png" alt="FOR VISITORS - Find your next experience 
+        / FOR BUSINESS - Build your next pop-up">
+        <img class="ph l" src="assets/main3_left.png" alt="방문객용 앱 화면">
+        <img class="ph r" src="assets/main3_right.png" alt="비즈니스용 앱 화면">
+      </section>
+
+      <section class="connect">
+        <div class="wrap">
+            <small>GLOBAL POP - UP STORE PLATFORM</small>
+            <h2>Connect <br> Every Pop-up</h2>
+            <p>브랜드와 공간, 그리고 사람을 연결하는<br>
+              글로벌 팝업 플랫폼
+            </p>
+            <a class="btn" href="sub.html">
+              Get Started <span class="go">→</span>
+            </a>
+            <div class="frame">
+              <video
+                src="assets/main4_vod.mp4"
+                poster="assets/connect.jpg"
+                autoplay
+                muted
+                loop
+                playsinline
+                aria-label="POPIN Discover Pop-Up Stores Near You">
+              </video>
+            </div>
+        </div>
+      </section>
+
+      <section class="world">
+        <div class="wrap">
+          <div class="bp">
+            <h3>New places. New experiences. Around the world.</h3>
+            <img src="assets/main5_1.jpg" alt="BLACKPINK Born Pink 팝업">
+          </div>
+          <div class="brands">
+            <div><img src="assets/main5_2.png" alt="Chanel"></div>
+            <div><img src="assets/main5_3.png" alt="Dior"></div>
+            <div><img src="assets/main5_4.png" alt="Prada"></div>
+            <div><img src="assets/main5_5.png" alt="Hunter"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cust">
+        <div class="cust-in">
+          <img src="assets/main6.png" alt="For Customers - Find. Visit. Enjoy.">
+          <div class="cbox">
+            <h4>FIND YOUR<br>NEXT FAVORITE</h4>
+            <p>다양한 팝업을 한곳에서<br>찾아보세요.</p>
+          </div>
+          <div class="cbox">
+            <h4>YOUR POP_UP<br>GUIDE,ANYWHERE</h4>
+            <p>다국어 지원으로 해외에서도<br>
+              편리하게 팝업을 만나보세요.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cards">
+        <h2>팝업의 시작부터, 다음 성장까지.</h2>
+        <p class="sub">검색부터 계약, 운영, 리뷰까지. 팝업스토어의 모든 과정을 
+          <b>POPIN</b>과 함께.</p>
+        <div class="cards-view">
+          <div class="cards-grid">
+            <div><span class="n">01</span>
+              <span class="t">검색<small>DISCOVER</small></span>
+              <p>원하는 팝업 공간을 찾아보세요.</p></div>
+            <div><span class="n">02</span>
+              <span class="t">매칭<small>MATCH</small></span>
+              <p>브랜드와 공간을 연결해요.</p></div>
+            <div><span class="n">03</span>
+              <span class="t">협상<small>DISCUSS</small></span>
+              <p>조건과 일정을 조율해요.</p></div>
+            <div><span class="n">04</span>
+              <span class="t">계약<small>CONTRACT</small></span>
+              <p>합의한 내용을 계약으로 확정해요.</p></div>
+            <div><span class="n">05</span>
+              <span class="t">운영<small>OPERATE</small></span>
+              <p>팝업의 시작부터 운영까지 함께해요.</p></div>
+            <div><span class="n">06</span>
+              <span class="t">리뷰<small>REVIEW</small></span>
+              <p>운영 경험과 방문 후기를 나눠요.</p></div>
+            <div><span class="n">07</span>
+              <span class="t">성장<small>GROW</small></span>
+              <p>쌓인 경험을 다음 기회로 이어가요.</p></div>
+          </div>
+        </div>
+        <button class="cards-arrow l" type="button" aria-label="이전">&lt;</button>
+        <button class="cards-arrow r" type="button" aria-label="다음">&gt;</button>
+      </section>
+
+      <footer class="ft">
+        <div class="ft-in">
+          <div class="ft-why">
+            <small>WHY POPIN?</small>
+            <h2>팝업 스토어의<br>모든 것을 한곳에서</h2>
+          </div>
+          <ul class="ft-feat">
+            <li><span class="ico target"></span>
+              <h3>브랜드를 위한</h3>
+              <p>더 넓은 타겟, 더 강한 경험<br>지금 팝업스토어로</p>
+            </li>
+            <li><span class="ico store"></span>
+              <h3>공간을 위한</h3>
+              <p>유휴 공간의 새로운 가치<br>팝업으로 채워보세요</p>
+            </li>
+            <li><span class="ico users"></span>
+              <h3>셀러를 위한</h3>
+              <p>더 많은 기회와 새로운 시장<br>지금 팝업에 도전하세요</p>
+            </li>
+            <li><span class="ico star"></span>
+              <h3>방문객을 위한</h3>
+              <p>다양한 브랜드와 공간을<br>가장 가까이에서</p>
+            </li>
+          </ul>
+          <nav class="ft-links">
+            <div>
+              <b>POPIN</b>
+              <span>About POPIN</span>
+              <span>How it works</span>
+              <span>Contact</span>
+            </div>
+            <div>
+              <b>FOR VISITORS</b>
+              <span>Discover</span>
+              <span>Search</span>
+              <span>Save</span>
+              <span>Schedule</span>
+            </div>
+            <div>
+              <b>FOR BUSINESS</b>
+              <span>Find a Space</span>
+              <span>List a Space</span>
+              <span>Find a Brand</span>
+              <span>Manage Pop-up</span>
+            </div>
+            <div>
+              <b>COMPANY</b>
+              <span>About Us</span>
+              <span>Careers</span>
+              <span>News</span>
+            </div>
+            <div>
+              <b>SUPPORT</b>
+              <span>FAQ</span>
+              <span>Contact</span>
+              <span>Terms</span>
+              <span>Privacy</span>
+            </div>
+          </nav>
+          <p class="ft-copy">
+            <span>&copy; POPIN ALL RIGHTS RESERVED</span>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <button class="to-top" type="button" aria-label="맨 위로"></button>
+  </body>
+</html>

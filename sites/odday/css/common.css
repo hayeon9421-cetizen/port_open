@@ -1,0 +1,133 @@
+/* ODDAY: 헤더 CSS는 header.css에서만 관리합니다. */
+.od-shared-footer{box-sizing:border-box;font-family:Arial,"Noto Sans KR",sans-serif;color:#171717}
+ .od-shared-footer *{box-sizing:border-box}
+.od-shared-footer a{text-decoration:none;color:inherit}
+.od-shared-footer a:hover{opacity:.65}
+.od-shared-footer{background:white;width:100%;padding:0;margin:0}
+.od-shared-footer .odc-footer_top{display:grid;grid-template-columns:minmax(0,1fr) minmax(350px,1.25fr) minmax(0,1fr);align-items:center;gap:22px;min-height:420px;padding:68px max(25px,2.2vw) 48px}
+.od-shared-footer .odc-footer_left,.od-shared-footer .odc-footer_right{font-size:clamp(12px,1.12vw,17px);line-height:1.55;min-width:0}
+.od-shared-footer .odc-footer_left p,.od-shared-footer .odc-footer_right p{margin:0 0 12px}
+.od-shared-footer .odc-footer_right{text-align:right}
+.od-shared-footer .odc-footer_center{text-align:center;align-self:center}
+.od-shared-footer .odc-footer-original-lockup{display:block;max-width:100%;width:min(590px,100%);height:auto;margin:auto}
+.od-shared-footer .odc-od-footer-story{border-top:1px solid #e8e5e2;background:#fff}
+.od-shared-footer .odc-od-footer-story-inner{max-width:1600px;margin:auto;padding:40px 30px;display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:45px;min-height:245px}
+.od-shared-footer .odc-od-footer-story-heading,.od-shared-footer .odc-od-footer-story-right{display:flex;flex-direction:column;align-items:flex-start;gap:13px}
+.od-shared-footer .odc-od-footer-story-eyebrow,.od-shared-footer .odc-od-footer-story-label{font:700 10px/1.5 Arial,sans-serif;letter-spacing:.12em;color:#888}
+.od-shared-footer .odc-od-footer-story-heading strong{font:bold clamp(27px,2.6vw,43px)/1 Arial,sans-serif;letter-spacing:-.05em}
+.od-shared-footer .odc-od-footer-story-caption{font-size:10px;letter-spacing:.08em;color:#777}
+.od-shared-footer .odc-od-footer-story-middle p{font-size:13px;line-height:1.9;color:#555;margin:20px 0}
+.od-shared-footer .odc-od-footer-story-sign{font:italic 16px Georgia,serif;color:#777}
+.od-shared-footer .odc-od-footer-story-tags{width:100%}
+.od-shared-footer .odc-od-footer-story-tags span{display:block;border-bottom:1px solid #e5e2df;padding:11px 0;font-size:12px;color:#777}
+.od-shared-footer .odc-od-footer-story-tags b{color:#333;margin-left:15px}
+.od-shared-footer .odc-od-footer-story-link{font-weight:700;font-size:11px;letter-spacing:.06em}
+.od-shared-footer .odc-footer_bottom{border-top:1px solid #333}
+.od-shared-footer .odc-footer_bottom_wrap{max-width:1700px;min-height:96px;margin:auto;padding:24px 30px;display:flex;justify-content:space-between;align-items:flex-start}
+.od-shared-footer .odc-footer_selects,.od-shared-footer .odc-footer_social{display:flex;align-items:center;gap:30px}
+.od-shared-footer .odc-footer_select_box label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.od-shared-footer select{background:white;border:0;color:#111;font:21px Georgia,serif;cursor:pointer;padding:2px;min-width:90px}
+.od-shared-footer .odc-footer_social a,.od-shared-footer .odc-footer_social img{display:block;width:26px;height:26px;object-fit:contain}
+.od-shared-top{position:fixed;right:25px;bottom:25px;z-index:9998;width:52px;height:52px;border:1px solid #222;border-radius:50%;background:white;color:#222;display:flex;align-items:center;justify-content:center;font-size:23px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.od-shared-top.is-visible{opacity:1;visibility:visible}
+@media (max-width:1050px){.od-shared-footer .odc-footer_top{grid-template-columns:1fr 1.2fr 1fr;gap:12px}
+}
+@media (max-width:760px){.od-shared-footer .odc-footer_top{display:flex;flex-direction:column;gap:30px;padding:45px 20px}
+.od-shared-footer .odc-footer_center{order:-1;width:100%}
+.od-shared-footer .odc-footer_right,.od-shared-footer .odc-footer_left{text-align:left;width:100%;font-size:12px}
+.od-shared-footer .odc-od-footer-story-inner{grid-template-columns:1fr;padding:35px 24px;gap:26px}
+.od-shared-footer .odc-footer_bottom_wrap{padding:20px;flex-wrap:wrap;gap:22px}
+.od-shared-footer .odc-footer_social{gap:16px}
+}
+.od-shared-top{right:24px;bottom:24px;z-index:99999;width:52px;height:52px;border:0;border-radius:8px;background:#111;color:#fff;flex-direction:column;gap:1px;padding:0;box-shadow:none;transform:translateY(14px);transition:opacity .3s,transform .3s,visibility .3s,background .2s;cursor:pointer;}
+.od-shared-top.is-visible{transform:translateY(0);}
+.od-shared-top:hover{background:#222;}
+.od-shared-top span{display:block;font:400 21px/1 Arial,sans-serif;color:#fff;}
+.od-shared-top small{display:block;color:#fff;font:700 9px/1.2 Arial,sans-serif;letter-spacing:.09em;}
+@media (max-width:700px){.od-shared-top{right:16px;bottom:16px;width:46px;height:46px;border-radius:7px;}
+.od-shared-top span{font-size:19px;}
+.od-shared-top small{font-size:8px;}
+}
+@media (prefers-reduced-motion:reduce){.od-shared-top{transition:none;}
+}
+
+/* index 헤더와 같은 규칙: 페이지 전용 스타일과 분리 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* index에서 상속되는 헤더 자간을 동일하게 적용 */
+
+

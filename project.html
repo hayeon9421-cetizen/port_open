@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>작품 상세 | ALWAYS A ROOKIE</title>
+<style>
+/* ========================================
+   공통 상세페이지 : SECTION 02~06
+======================================== */
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Pretendard","Noto Sans KR",sans-serif;color:#253651;background:linear-gradient(145deg,#d6e9f6,#f6e6d7)}
+main{max-width:1100px;margin:0 auto;padding:65px 24px}
+a{color:inherit}
+.back{display:inline-block;margin-bottom:50px;text-decoration:none;border:1px solid #8b9ab4;border-radius:9px;padding:12px 20px;background:#ffffffa8}
+h1{font-size:clamp(32px,5vw,60px);margin:10px 0 12px}
+.tag{font-weight:700;letter-spacing:.13em;color:#647d9f}
+.placeholder{margin-top:40px;min-height:330px;border:1px dashed #8d9bb2;border-radius:18px;display:grid;place-items:center;text-align:center;background:#ffffff75;padding:30px}
+p{line-height:1.8}
+body.section-3-detail{background:#F8F5ED url("img/section3_bg.png") center top / cover no-repeat}
+body.section-4-detail{background:#F8F5ED url("img/section4_bg.png") center top / cover no-repeat}
+body.section-5-detail{background:#F8F5ED url("img/section5_bg.png") center top / cover no-repeat}
+body.section-6-detail{background:#273B80 url("img/section6_bg.png") center top / cover no-repeat}
+/* ========================================
+   SECTION 02 : GRAPHIC 작품 상세
+======================================== */
+.section2-gallery{display:none}
+body.section-2-detail{background:#F8F5ED url("img/section2_bg.png") center top / cover fixed no-repeat;color:#392C2A}
+body.section-2-detail main{max-width:1720px;padding:24px 20px 24px}
+body.section-2-detail .generic-detail{display:none}
+body.section-2-detail .section2-gallery{display:block}
+/* SECTION 02 : 이전·다음 버튼 없이 작품 패널 중앙 정렬 */
+.gallery-stage{display:grid;grid-template-columns:minmax(0,1fr);gap:0;align-items:center;width:min(100%,var(--frame-width,1148px));margin:0 auto}
+/* 좌우 버튼이 숨겨져도 전시 패널은 항상 중앙 열에 고정 */
+.gallery-prev{grid-column:1;grid-row:1}
+.gallery-frame{grid-column:1;grid-row:1}
+.gallery-next{grid-column:3;grid-row:1}
+.gallery-frame{width:100%;max-width:1148px;margin:0 auto;position:relative;min-width:0}
+.gallery-panel{background:rgba(255,248,233,.50);padding:18px 34px 26px;border-radius:5px;max-width:100%}
+.gallery-title{font-size:clamp(18px,2vw,26px);font-weight:700;line-height:1.35;margin:0 0 12px;text-align:left;letter-spacing:-.025em}
+.gallery-art{display:flex;justify-content:center;align-items:flex-start}
+.gallery-image{display:block;width:100%;height:auto;max-height:none;object-fit:contain;box-shadow:0 10px 30px rgba(57,44,42,.12)}
+.gallery-unavailable{width:100%;min-height:350px;display:grid;place-items:center;text-align:center;border:1px solid rgba(57,44,42,.22)}
+/* 닫기 버튼 : 전시 패널 오른쪽 상단 모서리 안쪽 */
+.gallery-close{position:absolute;right:0;top:0;width:32px;height:32px;z-index:2;display:grid;place-items:center;color:#392C2A;text-decoration:none;transition:color .2s,transform .2s}
+.gallery-close svg{width:18px;height:18px;stroke:currentColor;stroke-width:3.8;stroke-linecap:round}
+.gallery-close:hover,.gallery-close:focus-visible{color:#0047AB;transform:rotate(90deg)}
+/* 이전/다음 : 에스프레소 브라운 기본, 코발트 호버, 버터옐로우 클릭 */
+.gallery-link{display:flex;flex-direction:column;align-items:center;gap:7px;justify-self:center;text-decoration:none;min-width:48px}
+.gallery-arrow{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:#392C2A;color:#FFF8E9;transition:background-color .2s,color .2s,transform .2s}
+.gallery-arrow svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.gallery-caption{font-size:11px;font-weight:700;letter-spacing:.08em;color:#0047AB;opacity:0;transform:translateY(-4px);transition:opacity .2s,transform .2s}
+.gallery-link:hover .gallery-arrow,.gallery-link:focus-visible .gallery-arrow{background:#0047AB;color:#FFF8E9}
+.gallery-link:hover .gallery-caption,.gallery-link:focus-visible .gallery-caption{opacity:1;transform:translateY(0)}
+.gallery-link:active .gallery-arrow{background:#F9E27D;color:#392C2A;transform:scale(.94)}
+.gallery-link[hidden]{display:none}
+/* 태블릿/모바일 : 이미지 우선, 탐색 버튼은 이미지 아래 */
+@media(max-width:800px){
+ body.section-2-detail main{padding:44px 16px 50px}
+ .gallery-stage{grid-template-columns:1fr;gap:0;width:100%}
+ .gallery-frame{grid-column:1;grid-row:1}
+ .gallery-panel{padding:14px 18px 20px}
+ .gallery-prev{grid-column:1;grid-row:2}.gallery-next{grid-column:2;grid-row:2}
+ .gallery-close{right:8px;top:8px;transform:none}
+ .gallery-caption{opacity:1;transform:none}
+}
+
+/* 공통 상세페이지 : 콘텐츠 안쪽은 유지, 바깥 여백은 클릭하여 닫기 */
+main{min-height:100vh;}
+.generic-detail{position:relative;min-height:calc(100vh - 130px);background:rgba(255,255,255,.30);border-radius:10px;padding:36px;}
+.detail-close{position:absolute;right:22px;top:14px;z-index:3;font-size:34px;line-height:1;text-decoration:none;color:inherit;}
+.detail-empty{min-height:65vh;}
+body.section-2-detail .gallery-stage{margin-top:10px;}
+body.section-2-detail .gallery-unavailable{background:rgba(255,255,255,.15);border:0;}
+</style>
+</head>
+<body>
+<main>
+<!-- SECTION 03~06 : 기존 임시 상세페이지 유지 -->
+<div class="generic-detail detail-surface" aria-label="작품 콘텐츠 영역">
+ <a class="detail-close" href="index.html" aria-label="상세페이지 닫기">×</a>
+ <div class="detail-empty" id="detail-placeholder" aria-label="추후 콘텐츠 배치 공간"></div>
+</div>
+<!-- SECTION 02 : 작품 이미지와 전시 패널은 한 번만 생성 -->
+<section class="section2-gallery" aria-label="GRAPHIC 작품 상세">
+ <div class="gallery-stage">
+  <div class="gallery-frame detail-surface" id="gallery-frame">
+   <a class="gallery-close" href="index.html#section2" aria-label="SECTION 02로 돌아가기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></a>
+   <div class="gallery-panel"><h2 class="gallery-title" id="gallery-title">제목 영역</h2><div class="gallery-art" id="gallery-art"></div></div>
+  </div>
+ </div>
+</section>
+</main>
+<script>
+/* SECTION 02~06 : 상세페이지 공통 데이터 */
+const projects={
+ 2:['웹 메인 디자인','스케이트보드 광고','한달음 광고','한달음 포스터'],
+ 3:['카드뉴스 01','카드뉴스 02','이벤트 프로모션 01','이벤트 프로모션 02'],
+ 4:['상세페이지 01','상세페이지 02','상세페이지 03'],
+ 5:['영상 프로젝트 01','모션그래픽 01','모션그래픽 02','숏폼 영상'],
+ 6:['ODDAY','POPIN','개인 포트폴리오']
+};
+const labels={2:'GRAPHIC & BRANDING',3:'CONTENT DESIGN',4:'DETAIL PAGE',5:'MOTION & VIDEO',6:'WEB DESIGN'};
+const params=new URLSearchParams(location.search);
+const section=Number(params.get('section'));
+const item=Number(params.get('item'));
+const name=projects[section]?.[item-1]||'작품 정보 없음';
+if(section>=2&&section<=6){document.body.classList.add('section-'+section+'-detail')}
+/* SECTION 02 : 이미지 크기를 원본 비율에 맞춰 산출하고 패널 좌우 여백을 동일하게 유지 */
+if(section===2){
+ const files={1:'section2_1_desk2.png',2:'section2_2_skate2.png',3:'section2_3_heart2.png'};
+ const current=Math.max(1,Math.min(4,item||1));
+ const art=document.querySelector('#gallery-art');
+ if(files[current]){
+  const image=document.createElement('img');
+  image.className='gallery-image';image.src='img/'+files[current];image.alt=name+' 상세 작업물';
+  /* 가로형 카드 01은 화면 너비를 넓게 활용하고, 세로형 카드는 높이를 우선해 패널 전체를 첫 화면에 표시 */
+  function fitArtwork(){
+   if(!image.naturalWidth||!image.naturalHeight)return;
+   const narrow=window.innerWidth<=800;
+   const panel=document.querySelector('.gallery-panel');
+   const frame=document.querySelector('#gallery-frame');
+   const stage=document.querySelector('.gallery-stage');
+   const panelSide=narrow?18:34;
+   const frameExtra=0;
+   const sideReserve=narrow?32:80;
+   const widthLimit=Math.max(200,Math.min(narrow?window.innerWidth-32:window.innerWidth-sideReserve-frameExtra,current===1?1500:1160));
+   const titleHeight=document.querySelector('#gallery-title').getBoundingClientRect().height;
+   const verticalExtras=(narrow?34:44)+titleHeight+12;
+   const heightLimit=Math.max(240,window.innerHeight-(narrow?100:72)-verticalExtras);
+   const ratio=image.naturalWidth/image.naturalHeight;
+   const imageWidth=Math.max(1,Math.min(widthLimit-panelSide*2,heightLimit*ratio));
+   const frameWidth=imageWidth+panelSide*2;
+   frame.style.maxWidth=frameWidth+'px';
+   stage.style.setProperty('--frame-width',frameWidth+'px');
+   image.style.width=imageWidth+'px';
+   image.style.maxWidth='100%';
+   image.style.height='auto';
+  }
+  image.addEventListener('load',fitArtwork);
+  window.addEventListener('resize',fitArtwork,{passive:true});
+  art.appendChild(image);
+ }else{
+  const notice=document.createElement('div');notice.className='gallery-unavailable';notice.textContent='';art.appendChild(notice);
+ }
+}
+/* 상세 콘텐츠 외부 여백을 클릭하면 원래 단락으로 복귀 */
+const returnUrl='index.html#section'+(section>=2&&section<=6?section:2);
+document.querySelectorAll('.gallery-close,.detail-close').forEach(link=>link.href=returnUrl);
+document.addEventListener('click',event=>{
+ if(event.target.closest('.detail-surface'))return;
+ window.location.href=returnUrl;
+});
+document.title=name+' | ALWAYS A ROOKIE';
+</script>
+</body>
+</html>

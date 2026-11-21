@@ -1,0 +1,1477 @@
+@charset "utf-8";
+/* 포트폴리오 공통 스타일 · 1920×1080 기준 6개 단락 */
+
+/* ========== 00. 공통 색상 및 기본 설정 ========== */
+:root {
+    --ink: #392c2a;
+    --ivory: #f8f5ed;
+    --purple: #315bc6;
+    --yellow: #f5cf68;
+    --blue: #315bc6;
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: auto;
+}
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: Arial,"Noto Sans KR",sans-serif;
+    color: var(--ink);
+}
+button {
+    font: inherit;
+    cursor: pointer;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+button:focus-visible,a:focus-visible {
+    outline: 3px solid var(--purple);
+    outline-offset: 4px;
+}
+/* 공통: 하나의 1920px 좌표계에서 정확히 1080px씩 배치 */
+
+/* ========== 00-1. 전체 화면 좌표계 ========== */
+.portfolio-scale-wrapper {
+    position: relative;
+    margin: 0 auto;
+}
+.container {
+    position: relative;
+    width: 1920px;
+    height: 6480px;
+    transform-origin: top left;
+    isolation: isolate;
+}
+.contentbox {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    margin: 0;
+    overflow: visible;
+    background-position: 0 0;
+    background-size: 1920px 1080px;
+    background-repeat: no-repeat;
+}
+
+/* ========== 00-2. 단락별 배경 ========== */
+#section1 {
+    background-image: url("img/section1_bg.png");
+}
+#section2 {
+    background-image: url("img/section2_bg.png");
+}
+#section3 {
+    background-image: url("img/section3_bg.png");
+}
+#section4 {
+    background-image: url("img/section4_bg.png");
+}
+#section5 {
+    background-image: url("img/section5_bg.png");
+}
+
+/* SECTION 06 배경은 단락별 배경 정의에 함께 배치 */
+#section6 {
+    background-image: url("img/section6_bg.png");
+    isolation: isolate;
+    overflow: hidden;
+}
+.content,.intro-inner {
+    position: relative;
+    width: 1600px;
+    height: 100%;
+    margin: 0 auto;
+    z-index: 20;
+}
+/* SECTION 01: 해바라기 원본은 변경하지 않고 원래의 가로 1920 기준 배치 */
+
+/* ========== 01. SECTION 01 · 레이아웃 ========== */
+.intro-inner {
+    display: flex;
+    align-items: center;
+}
+.intro-art-space {
+    width: 51%;
+    flex: none;
+}
+/* SECTION 01 타이틀 전체: 기존 대비 오른쪽 50px, 위쪽 50px, 크기 94% */
+/* 슬로건 Canvas·구분선·작은 글자를 함께 변형해 정렬과 잉크 모션을 유지합니다. */
+.intro-copy {
+    flex: 1;
+    transform: translate(60px, -50px) scale(.94);
+    transform-origin: left center;
+    position: relative;
+    z-index: 30;
+}
+.intro-copy h1 {
+    font-size: 108px;
+    line-height: 1.12;
+    letter-spacing: -.042em;
+    font-weight: 600;
+    margin: 0 0 19px;
+    font-family: "Fredoka","Arial Rounded MT Bold",sans-serif;
+}
+.eyebrow {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .20em;
+    margin-top: 24px;
+}
+.intro-divider {
+    display: block;
+    width: 370px;
+    height: 4px;
+    background: var(--yellow);
+}
+/* 구분선 잉크 효과는 SECTION 01 전용 규칙에서 제어 */
+
+/* ========== 01-1. 해바라기 위치 및 모션 ========== */
+.sunflower-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 2160px;
+    z-index: 5;
+    pointer-events: none;
+}
+.sunflower-layer img {
+    display: block;
+    width: 1069px;
+    height: 1432px;
+    object-fit: contain;
+    position: absolute;
+    left: -180px;
+    top: 250px;
+    transform-origin: 48% 87%;
+    animation: sun-sway 8s ease-in-out infinite;
+}
+/* SECTION 01 해바라기: 줄기 하단을 기준으로 부드럽게 좌우 흔들림 확대 */
+@keyframes sun-sway {
+    0%, 100% {
+        transform: rotate(-0.7deg);
+    }
+    50% {
+        transform: rotate(0.8deg);
+    }
+}
+/* 해바라기 이미지 비율과 위치는 현재 확정된 배치를 유지 */
+/* 꽃잎은 해바라기 뒤, 카드/타이틀 아래. 시간 기반으로 독립적으로 흩날림 */
+
+/* ========== 01-2. 꽃잎 모션: 독립 생성 · 이동 · 종료 ========== */
+/* 기존 SECTION 좌표에 고정된 레이어. 꽃잎은 해바라기(z-index:5) 뒤쪽,
+   타이틀과 프로젝트 카드 아래에 있으며 스크롤 화면을 따라다니지 않습니다. */
+.petal-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 6480px;
+    pointer-events: none;
+    z-index: 4;
+    overflow: hidden;
+}
+.floating-petal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: auto;
+    opacity: 0;
+    transform-origin: 50% 50%;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+/* 공통 프로젝트 타이틀 및 카드: 독립된 콘텐츠 레이어 */
+.content {
+    padding-top: 160px;
+}
+.section-heading {
+    position: relative;
+    top: 0; /* 공통 타이틀 위치 */
+    margin: 0 0 60px;
+}
+.section-heading h2 {
+    font-family: "DM Sans","Noto Sans KR",sans-serif;
+    font-size: 60px;
+    line-height: 1.1;
+    letter-spacing: -.035em;
+    margin: 0;
+    font-weight: 700;
+}
+#section5,#section6 {
+    color: var(--ivory);
+}
+.project-grid {
+    display: flex;
+    align-items: stretch;
+    gap: 28px;
+    width: 100%;
+    position: relative;
+    z-index: 21;
+}
+.project-card {
+    position: relative;
+    min-width: 0;
+    flex: 1;
+    transition: flex .45s ease,transform .35s ease;
+}
+.project-preview {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    border: 1px solid rgba(57,44,42,.28);
+    background: rgba(255,255,255,.20);
+    color: inherit;
+    overflow: hidden;
+    transition: background .3s,transform .3s;
+}
+.project-preview:hover {
+    background: rgba(255,255,255,.32);
+}
+.project-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+}
+.placeholder-mark {
+    font-size: 35px;
+    font-weight: 800;
+    opacity: .3;
+}
+.placeholder-caption {
+    font-size: 14px;
+    opacity: .7;
+}
+.project-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+.project-action {
+    border: 1px solid currentColor;
+    background: rgba(255,255,255,.10);
+    color: inherit;
+    min-height: 45px;
+    padding: 12px 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+.project-action:hover {
+    background: var(--purple);
+    color: white;
+}
+.project-action-detail {
+    flex: 1;
+}
+/* ========================================== 
+   SECTION 02 : GRAPHIC 시작
+   기존 HTML/JS를 유지하고 전시 패널과 카드의 스타일만 수정
+========================================== */
+/* 01. 타이틀 + 패널 전체를 1080px 단락의 세로 중앙에 정렬 */
+#section2 .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    transform: translateY(-70px); /* SECTION 02: 이전 위치에서 타이틀+패널 전체 30px 아래로 이동 */
+}
+#section2 .section-heading {
+    margin: 0 0 40px;
+    flex: 0 0 auto;
+    isolation: isolate; /* 타이틀 뒤의 그라데이션을 이 영역 안에서만 표시 */
+}
+/* SECTION 02 - 해바라기 줄기와 겹치는 GRAPHIC 타이틀의 가독성 개선
+   네모 배경 대신 가장자리가 자연스럽게 사라지는 웜아이보리 빛 번짐 */
+#section2 .section-heading::before {
+    content: "";
+    position: absolute;
+    left: -54px;
+    top: -32px;
+    width: 355px;
+    height: 128px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center,
+        rgba(248,245,237,.65) 0%,
+        rgba(248,245,237,.28) 38%,
+        rgba(248,245,237,.055) 64%,
+        rgba(248,245,237,0) 88%,
+        rgba(248,245,237,0) 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+#section2 .section-heading h2 {
+    position: relative;
+    z-index: 1;
+}
+/* 02. 전시 패널: 4개의 카드와 VIEW 버튼을 하나로 묶음 */
+#section2 .project-grid {
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 0;
+    padding: 26px 28px 74px; /* 패널 상단은 유지하고 하단만 50px 확장 */
+    gap: 30px;
+    border: 0;
+    border-radius: 0;
+    background: rgba(248,245,237,.38);
+    box-shadow: 0 10px 30px rgba(57,44,42,.07); /* 전시 패널에만 은은한 확산 그림자 */
+    overflow: visible;
+}
+/* 03. 개별 카드: 패널과 구별되는 밝은 면, 이미지 선명도 유지 */
+#section2 .project-card {
+    transform: none;
+    min-width: 0;
+    top: 24px; /* SECTION 02: 반투명 전시 패널과 카드의 세로 중심을 맞추기 위해 16px 위로 이동 */
+}
+#section2 .project-preview {
+    height: 465px;
+    border: 0;
+    border-radius: 6px;
+    background: rgba(255,255,255,.78);
+    box-shadow: none;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+/* 04. 카드 호버: 장치 조건에 가리지 않고 카드 및 작품 버튼에 적용.
+   키보드 포커스에서도 동일한 입체 효과를 제공합니다. */
+#section2 .project-card:hover .project-preview,
+#section2 .project-preview:hover,
+#section2 .project-card:focus-within .project-preview {
+    transform: translateY(-8px); /* 호버 상승폭 확대: 4px → 8px */
+    background-color: rgba(255,255,255,.94);
+    box-shadow: 9px 9px 0 rgba(57,44,42,.55); /* VIEW 호버와 동일한 반투명 브라운 */
+}
+/* 05. VIEW: 작품별 작은 프레임형 버튼, 카드 모션과 별개로 색상만 변경 */
+#section2 .project-actions {
+    justify-content: center;
+    margin-top: 14px;
+}
+#section2 .project-action-detail {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    padding: 7px 14px;
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: .045em;
+    transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+#section2 .project-action-detail::after { content: none; }
+#section2 .project-action-detail:hover,
+#section2 .project-action-detail:focus-visible {
+    background: rgba(57,44,42,.55); /* 카드 하드 섀도와 같은 투명도 */
+    border-color: rgba(57,44,42,.55);
+    color: #fff;
+}
+/* ========================================== 
+   SECTION 02 : GRAPHIC 끝
+========================================== */
+/* SECTION 02·03: 카드 내부에 실제 작품 이미지를 넣는 공간 (기존 카드 크기와 버튼 동작 유지) */
+#section2 .project-preview .card-artwork,
+#section3 .project-preview .card-artwork {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 작업물 원본 비율 유지, 잘림 방지 */
+    opacity: 1;
+    pointer-events: none;
+}
+#section2 .project-preview .card-artwork[hidden],
+#section3 .project-preview .card-artwork[hidden] { display: none; }
+#section2 .project-preview.has-artwork .placeholder-mark,
+#section2 .project-preview.has-artwork .placeholder-caption,
+#section3 .project-preview.has-artwork .placeholder-mark,
+#section3 .project-preview.has-artwork .placeholder-caption { visibility: hidden; }
+/* SECTION 02: 새 세로형 썸네일 4개를 카드 전체에 채워 표시.
+   카드의 기존 크기와 호버/클릭 동작은 유지합니다. */
+#section2 .project-preview .card-artwork {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    object-fit: fill; /* 424×565 썸네일 전체 노출: 카드 외곽 크기는 유지 */
+    object-position: center;
+}
+/* SECTION 02 카드 03·04: 흰색 바탕을 채우고 로고만 중앙에 표시 (기존 대비 약 20% 확대) */
+#section2 .project-preview[data-index="3"],
+#section2 .project-preview[data-index="4"] { background: #fff; }
+#section2 .project-preview[data-index="3"] .card-artwork,
+#section2 .project-preview[data-index="4"] .card-artwork {
+    inset: 0;
+    margin: auto;
+    width: 72.6%;
+    height: 72.6%;
+    object-fit: contain;
+}
+/* SECTION 03: 확대된 카드의 하단은 기존 투명 버튼 영역으로 유지 */
+#section3 .project-card:hover .card-artwork,
+#section3 .project-card:focus-within .card-artwork { height: calc(100% - 50px); }
+
+/* ========== 03. SECTION 03 ========== */
+#section3 .content {
+    padding-top: 140px;
+}
+#section3 .project-grid {
+    margin-top: 100px;
+    gap: 20px;
+}
+/* SECTION 03: 기존 카드 배치는 고정하고 선택 카드만 겹쳐 확대 */
+#section3 .project-card {
+    flex: 1 1 0;
+    height: 425px; /* 이미지 360px + VIEW PROJECT 버튼 영역 확보 */
+    z-index: 1;
+}
+#section3 .project-grid:hover .project-card,
+#section3 .project-grid .project-card:hover {
+    flex: 1 1 0; /* 주변 카드가 밀려나지 않도록 고정 */
+}
+#section3 .project-card:hover,
+#section3 .project-card:focus-within {
+    z-index: 30; /* 선택한 카드만 주변 카드 위에 표시 */
+}
+#section3 .project-preview {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 360px;
+    transform: translateX(-50%);
+    box-shadow: inset 0 0 0 0 rgba(57,44,42,.95); /* 기본 상태: 강조 테두리 없음 */
+    transition: width .4s cubic-bezier(.22,1,.36,1), height .4s cubic-bezier(.22,1,.36,1), top .4s cubic-bezier(.22,1,.36,1), background .3s ease, box-shadow .3s ease;
+}
+#section3 .project-card:hover .project-preview,
+#section3 .project-card:focus-within .project-preview {
+    width: 480px;
+    height: 500px; /* SECTION 03: 호버 시 위아래 각각 10px 확장 */
+    top: -70px; /* 기존 중심을 유지하면서 위쪽 10px 추가 */
+    box-shadow: inset 0 0 0 4px rgba(57,44,42,.95); /* 확대 시 안쪽 4px 테두리: 크기 변화 없음 */
+}
+#section3 .project-card:first-child .project-preview {
+    left: 0;
+    transform: none; /* 첫 카드는 오른쪽으로 확장 */
+}
+#section3 .project-card:last-child .project-preview {
+    left: auto;
+    right: 0;
+    transform: none; /* 마지막 카드는 왼쪽으로 확장 */
+}
+#section3 .project-actions {
+    position: relative;
+    margin-top: 374px; /* 기존 버튼 위치 유지 */
+    justify-content: center;
+    /* SECTION 03: 첫째/넷째 VIEW 버튼만 확대 카드 중앙으로 부드럽게 이동 */
+    transition: width .4s cubic-bezier(.22,1,.36,1), margin-left .4s cubic-bezier(.22,1,.36,1);
+}
+/* 첫 번째: 오른쪽으로 펼쳐지는 480px 카드의 중앙에 버튼 정렬 */
+#section3 .project-card:first-child:hover .project-actions,
+#section3 .project-card:first-child:focus-within .project-actions {
+    width: 480px;
+    margin-left: 0;
+}
+/* 네 번째: 왼쪽으로 펼쳐지는 480px 카드의 중앙에 버튼 정렬 */
+#section3 .project-card:last-child:hover .project-actions,
+#section3 .project-card:last-child:focus-within .project-actions {
+    width: 480px;
+    margin-left: calc(100% - 480px);
+}
+/* SECTION 03 VIEW: SECTION 02와 동일한 버튼 디자인 */
+#section3 .project-action-detail {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    padding: 7px 14px;
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: .045em;
+    transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+#section3 .project-action-detail::after { content: none; }
+#section3 .project-action-detail:hover,
+#section3 .project-action-detail:focus-visible {
+    background: #392C2A; /* SECTION 03 VIEW 호버: 액자 테두리와 맞춘 불투명 브라운 */
+    border-color: #392C2A;
+    color: #fff;
+}
+/* 모바일에서는 기존 그리드와 카드 크기를 유지해 화면 밖 겹침 방지 */
+@media (max-width: 1279px) {
+    #section3 .project-card { height: auto; }
+    #section3 .project-preview {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        width: 100%;
+        height: auto;
+        transform: none;
+    }
+    #section3 .project-card:hover .project-preview,
+    #section3 .project-card:focus-within .project-preview {
+        width: 100%;
+        height: auto;
+        top: auto;
+    }
+    #section3 .project-actions { margin-top: 14px; }
+    /* 모바일에서는 버튼 이동 없이 기존 중앙 정렬 유지 */
+    #section3 .project-card:first-child:hover .project-actions,
+    #section3 .project-card:first-child:focus-within .project-actions,
+    #section3 .project-card:last-child:hover .project-actions,
+    #section3 .project-card:last-child:focus-within .project-actions {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+/* ========== 04. SECTION 04 · DETAIL PAGE 시작 ========== */
+/* SECTION 04 전용: 타이틀과 카드 그룹을 함께 40px 위로 이동 (공통 단락 불변) */
+#section4 .content { padding-top: 120px; }
+/* 카드와 막대는 독립적으로 움직여 CLICK!이 겹치지 않게 표시 */
+#section4 .project-card { transition: none; }
+#section4 .project-preview {
+    height: 515px;
+    overflow: hidden;
+    transition: transform .4s cubic-bezier(.22,1,.36,1), background .3s ease;
+}
+#section4 .project-card:hover .project-preview,
+#section4 .project-card:focus-within .project-preview { transform: translateY(-20px); }
+/* 각 카드에 실제 작품 대표 이미지 한 장씩 삽입 */
+#section4 .project-preview .detail-preview-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 1;
+    transition: transform .45s ease;
+    pointer-events: none;
+}
+#section4 .project-preview .detail-preview-image[hidden] { display: none; }
+#section4 .project-card:hover .detail-preview-image,
+#section4 .project-card:focus-within .detail-preview-image { transform: scale(1.05); }
+#section4 .project-preview.has-artwork .placeholder-mark,
+#section4 .project-preview.has-artwork .placeholder-caption { visibility: hidden; }
+/* 하단 굵은 선: 카드와 함께 상승하지 않고 아래로 25px 이동 */
+#section4 .project-actions { margin-top: 14px; }
+#section4 .project-action-detail {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 8px;
+    min-height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 2px;
+    background: #392C2A;
+    color: #392C2A;
+    cursor: pointer;
+    transition: transform .4s cubic-bezier(.22,1,.36,1), background-color .18s ease, color .18s ease;
+}
+#section4 .project-card:hover .project-action-detail,
+#section4 .project-card:focus-within .project-action-detail { transform: translateY(25px); }
+/* CLICK!은 막대 위 6px 간격에 배치하고, 선과 글자를 같은 링크로 클릭 */
+#section4 .section4-line-label {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 6px);
+    transform: translate(-50%, 8px);
+    opacity: 0;
+    white-space: nowrap;
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    pointer-events: auto;
+    transition: opacity .25s ease .08s, transform .35s ease;
+}
+#section4 .project-card:hover .section4-line-label,
+#section4 .project-card:focus-within .section4-line-label {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+/* 클릭 순간 코발트 블루 반응: 이동 전 0.2초 유지 */
+#section4 .project-action-detail.is-clicked {
+    background: #0047AB;
+    color: #0047AB;
+}
+/* ========== 04. SECTION 04 끝 ========== */
+/* ========== 05. SECTION 05 · 모션/영상 카드 ========== */
+/* SECTION 05 타이틀: 웜 아이보리 */
+#section5 .section-heading h2 {
+    color: #FFF8E9;
+}
+/* 네 카드의 작품 영역을 동일한 정사각형으로 통일.
+   flex 4열의 기존 너비와 간격을 유지하며, 마지막 카드도 같은 높이로 표시. */
+#section5 .project-preview,
+#section5 .project-card:last-child .project-preview {
+    height: auto;
+    aspect-ratio: 1 / 1;
+}
+#section5 .project-card:hover {
+    transform: translateY(-10px);
+}
+/* SECTION 05: 작품 화면과 재생 컨트롤을 하나의 카드로 묶음 */
+#section5 .motion-player {
+    border: 1px solid rgba(57,44,42,.28);
+    background: rgba(255,255,255,.12);
+    overflow: hidden;
+}
+#section5 .motion-screen,
+#section5 .project-card:last-child .motion-screen {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    border: 0;
+    background: rgba(255,255,255,.12);
+    overflow: hidden;
+}
+#section5 .motion-screen .motion-thumbnail,
+#section5 .motion-screen .motion-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+/* SECTION 05 카드 01: 원본 비율 유지, 상단 중앙 정렬 */
+#section5 .motion-card:first-child .motion-thumbnail {
+    height: auto;
+    object-fit: contain;
+    object-position: center top;
+}
+/* SECTION 05 카드 01: 카드 자체 너비를 기준으로 글자 크기를 반응형 조절 */
+#section5 .motion-card:first-child .motion-screen { container-type: inline-size; }
+/* SECTION 05 카드 01: 달력 위쪽 여백에 HOLIDAY 텍스트를 중앙 정렬 (이미지 변경 없음) */
+#section5 .motion-card:first-child .holiday-card-title {
+    position: absolute;
+    z-index: 2;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: clamp(22px, 12cqw, 48px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: #49372F;
+    white-space: nowrap;
+    pointer-events: none;
+}
+#section5 .motion-screen .motion-thumbnail[hidden] { display: none; }
+#section5 .motion-screen .motion-video { display: none; background: #211b25; }
+#section5 .motion-screen.is-playing .motion-video { display: block; }
+#section5 .motion-screen.has-thumbnail .placeholder-mark,
+#section5 .motion-screen.has-thumbnail .placeholder-caption,
+#section5 .motion-screen.is-playing .placeholder-mark,
+#section5 .motion-screen.is-playing .placeholder-caption { visibility: hidden; }
+#section5 .motion-controls {
+    display: flex;
+    position: relative;
+    overflow: visible;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    min-height: 48px;
+    border-top: 1px solid rgba(57,44,42,.28);
+}
+#section5 .motion-control,
+#section5 .motion-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    min-height: 48px;
+    padding: 0 12px;
+    border: 0;
+    border-right: 1px solid rgba(57,44,42,.28);
+    background: transparent;
+    color: #392C2A;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color .2s ease, color .2s ease;
+}
+#section5 .motion-detail { flex:0 0 auto; width:auto; margin-left:0; min-width:112px; border-right:0; border-left:1px solid rgba(57,44,42,.28); font:600 12px "DM Sans",sans-serif; letter-spacing:.045em; }
+#section5 .motion-control:hover,
+#section5 .motion-control:focus-visible { background: #0047AB; color: #FFFFFF; }
+/* SECTION 05: VIEW 버튼만 코발트 블루로 강조 */
+#section5 .motion-detail:hover,
+#section5 .motion-detail:focus-visible { background: rgba(255,248,233,.80); color: #0047AB; }
+#section5 .pause-icon { width: 13px; height: 16px; border-left: 4px solid currentColor; border-right: 4px solid currentColor; }
+#section5 .play-icon { width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 15px solid currentColor; margin-left: 3px; }
+#section5 .motion-control.is-active { background: rgba(57,44,42,.16); }
+@media (max-width: 1279px) {
+    #section5 .motion-screen,
+    #section5 .project-card:last-child .motion-screen { aspect-ratio: 1 / 1; }
+    #section5 .motion-control { min-width: 38px; min-height: 40px; padding: 0 8px; }
+    #section5 .motion-detail { min-width: 58px; min-height: 40px; padding: 0 8px; }
+}
+/* ========== 06. SECTION 06 · 배경 → 가로선 → 수풀 → 반딧불이 → 타이틀·카드 ========== */
+#section6 .section6-grass-wrap {
+    position: absolute;
+    left: -18px;
+    bottom: -26px;
+    width: 662px;
+    height: 353px;
+    z-index: 1;
+    pointer-events: none;
+    transform-origin: 22% 100%;
+    animation: section6-grass-breeze 5.2s ease-in-out infinite alternate;
+}
+@keyframes section6-grass-breeze {
+    0% { transform: rotate(-3deg) translateX(-4px); }
+    50% { transform: rotate(1.5deg) translateX(2px); }
+    100% { transform: rotate(3deg) translateX(4px); }
+}
+#section6 .section6-grass {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+#section6 .section6-effects {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+.firefly {
+    position: absolute;
+    left: var(--fx,1250px);
+    top: var(--fy,760px);
+    animation: glow 5s ease-in-out infinite alternate;
+}
+.firefly img {
+    display: block;
+    max-width: 316px;
+}
+/* 왼쪽 수풀 반딧불이 약 10% 축소, 카드 1·2 사이 반딧불이는 기존 축소 크기 유지 */
+#section6 .firefly-1 img { width: 285px; }
+#section6 .firefly-2 img { width: 80.8px; }
+/* 우측 상단 반딧불이: 원본 표시 너비 148px의 40% */
+#section6 .firefly-3 img { width: 59.2px; }
+.firefly-2 {
+    animation-delay: -1.2s;
+}
+.firefly-3 {
+    animation-delay: -2.6s;
+}
+.firefly-4 {
+    animation-delay: -3.4s;
+}
+@keyframes glow {
+    from {
+        opacity: .3;
+        transform: translateY(0) scale(.92);
+    }
+    to {
+        opacity: .85;
+        transform: translateY(-8px) scale(1.08);
+    }
+}
+#section6>.content {
+    z-index: 10;
+}
+#section6 .project-preview {
+    height: 430px;
+    cursor: default;
+}
+/* SECTION 06 카드 01·02: 로고 이미지가 카드 영역 전체를 빈틈없이 채움 */
+#section6 .project-preview .section6-card-artwork {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+}
+#section6 .project-card:hover {
+    transform: translateY(-10px);
+}
+/* 메뉴: 화면 우측 고정, SECTION 이동은 JS에서 정확한 1080px 단위 */
+
+/* ========== 07. 우측 내비게이션 ========== */
+.sidebar {
+    position: fixed;
+    z-index: 100;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* 우측 단락 이동: 28px 정사각형, 숫자 크기는 기존 10px 유지 */
+.square {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: var(--ink);
+    color: var(--ivory);
+    width: 28px;
+    height: 28px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: 700;
+    transition: background-color .2s ease, color .2s ease;
+}
+/* 현재 단락은 기본 색상을 유지하고, 마우스를 올린 버튼만 색상 전환 */
+/* 호버: 웜아이보리 배경과 코발트 블루 글자 */
+@media (hover: hover) {
+    .square:hover {
+        background: var(--ivory);
+        color: var(--blue);
+    }
+}
+/* 현재 단락: 코발트 블루로 표시 */
+.square.active { background: var(--blue); color: var(--ivory); }
+/* 클릭 또는 터치하는 순간에만 버터옐로 */
+.square:active, .square.active:active {
+    background: var(--yellow);
+    color: var(--ink);
+}
+/* 좌측 단락명: 반투명 웜아이보리 라운드 배경으로 가독성 확보 */
+.nav-hover-label {
+    display: none;
+    position: absolute;
+    right: 38px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    padding: 5px 9px;
+    border: 0;
+    border-radius: 5px;
+    background: rgba(248,245,237,.48);
+    color: var(--blue);
+    box-shadow: none;
+    font-family: "DM Sans", sans-serif;
+    font-size: 9px; /* 우측 화면 이동 버튼 호버 단락명만 축소 */
+    line-height: 1.2;
+    font-weight: 600;
+    pointer-events: none;
+}
+.square:hover .nav-hover-label,
+.square:focus-visible .nav-hover-label {
+    display: block;
+}
+/* 공통 팝업: 이미지 및 동영상 */
+
+/* ========== 08. 팝업 ========== */
+.popup,.video-popup {
+    display: none;
+    position: fixed;
+    z-index: 500;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16,16,27,.82);
+    padding: 50px;
+}
+.popup.open,.video-popup.open {
+    display: flex;
+}
+.popup-content,.video-popup-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 88vh;
+}
+.popup-image-container img {
+    display: block;
+    max-width: 88vw;
+    max-height: 82vh;
+    object-fit: contain;
+}
+/* SECTION 05 HOLIDAY: 메인 화면 위에 독립적으로 떠 있는 영상 감상 패널 */
+body.video-modal-open { overflow: hidden; }
+.video-popup { background: rgba(16,12,15,.76); padding: 20px; }
+.video-popup-content {
+    box-sizing: border-box;
+    width: min(1280px,94vw);
+    max-width: 94vw;
+    max-height: 94dvh;
+    padding: 34px 40px 36px;
+    background: #392C2A;
+    border-radius: 6px;
+    box-shadow: 0 22px 90px rgba(0,0,0,.4);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.video-popup-title { color:#FFF8E9; font:600 15px "DM Sans",sans-serif; letter-spacing:.07em; }
+.video-popup-content video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: calc(94dvh - 145px);
+    object-fit: contain;
+    background: #171313;
+}
+.close-popup,.close-video {
+    position: absolute;
+    right: 12px;
+    top: 7px;
+    background: none;
+    color: #FFF8E9;
+    border: 0;
+    font-size: 32px;
+    cursor: pointer;
+}
+@media (max-width: 1279px) {
+    .video-popup { padding: 12px; }
+    .video-popup-content { width: 100%; max-width: 100%; padding: 30px 14px 18px; gap: 12px; }
+    .video-popup-title { font-size: 12px; }
+    .video-popup-content video { max-height: calc(94dvh - 110px); }
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+}
+@media(prefers-reduced-motion:reduce) {
+    .floating-petal,.sunflower-layer img,.firefly,#section6 .section6-grass-wrap {
+        animation: none;
+    }
+    .floating-petal {
+        opacity: 0;
+    }
+}
+/* ================= SECTION 01 · 잉크 모션 ================= */
+/* 기존 타이틀 위치를 유지하고 Canvas를 글자 위에 겹쳐 표현 */
+
+/* ========== 01-3. 타이틀 잉크 모션 ========== */
+#section1 .ink-wrap {
+    position: relative;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    cursor: pointer;
+    isolation: isolate;
+    align-self: flex-start;
+}
+#section1 .ink-wrap:focus-visible {
+    outline: 2px dashed #315bc6;
+    outline-offset: 8px;
+}
+#section1 .ink-wrap .ink-base {
+    color: #392c2a;
+}
+#section1 .ink-wrap .ink-canvas {
+    position: absolute;
+    display: block;
+    z-index: 3;
+    pointer-events: none;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+}
+/* Canvas 잉크 완성 후 원본 글자가 겹쳐 보이지 않도록 처리 */
+#section1 .ink-wrap.ink-rendering .ink-base,
+#section1 .ink-wrap.ink-complete .ink-base {
+    visibility: hidden;
+}
+/* 모션 줄이기 환경에서는 Canvas를 그리지 않으므로 원본 글자를 표시 */
+@media(prefers-reduced-motion:reduce) {
+    #section1 .ink-wrap .ink-base {
+        visibility: visible !important;
+    }
+    #section1 .ink-wrap .ink-canvas {
+        display: none !important;
+    }
+}
+/* 글자 영역과 아래 구분선·보조 문구의 시작점을 일치시킵니다. */
+#section1 .intro-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* ========== 01-4. 타이틀 아래 구분선 ========== */
+#section1 .intro-copy .ink-divider {
+    display: block;
+    position: relative;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    width: 560px;
+    height: 7px;
+    margin: 0 0 17px;
+    background: transparent;
+    opacity: 1;
+    overflow: visible;
+    isolation: isolate;
+}
+#section1 .intro-copy .ink-divider-fill {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    background: #315bc6;
+    transform-origin: left center;
+    transform: scaleX(0);
+    opacity: 0;
+    will-change: transform;
+}
+#section1 .intro-copy .ink-divider-front {
+    display: block;
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 43px;
+    height: 26px;
+    opacity: 0;
+    background: radial-gradient(ellipse at 40% 50%,rgba(49,91,198,.92) 0%,rgba(49,91,198,.50) 37%,rgba(49,91,198,.08) 72%,transparent 100%);
+    filter: blur(3px);
+    pointer-events: none;
+}
+#section1 .intro-copy .ink-divider.ink-line-playing .ink-divider-fill {
+    animation: inkLineSmoothGrow 1.48s cubic-bezier(.42,0,.58,1) both;
+}
+#section1 .intro-copy .ink-divider.ink-line-playing .ink-divider-front {
+    animation: inkLineSmoothEdge 1.48s cubic-bezier(.42,0,.58,1) both;
+}
+@keyframes inkLineSmoothGrow {
+    0% {
+        transform: scaleX(0);
+        opacity: 0;
+        background: #392c2a;
+    }
+    5% {
+        opacity: 1;
+    }
+    42% {
+        background: #315bc6;
+    }
+    100% {
+        transform: scaleX(1);
+        opacity: 1;
+        background: #315bc6;
+    }
+}
+@keyframes inkLineSmoothEdge {
+    0% {
+        transform: translateX(0) scale(.45,.7);
+        opacity: 0;
+    }
+    8% {
+        opacity: .65;
+    }
+    60% {
+        opacity: .7;
+    }
+    88% {
+        opacity: .35;
+    }
+    100% {
+        transform: translateX(var(--ink-travel,500px)) scale(.6,.75);
+        opacity: 0;
+    }
+}
+
+/* ========== SECTION 01 · 작은 글자 위 사각형: 원본 타이틀 잉크 번짐 ========== */
+#section1 .intro-copy .eyebrow-stage {
+    display:block; align-self:flex-start; position:relative; width:max-content;
+}
+#section1 .intro-copy .eyebrow {
+    display:block; margin:0; padding:0;
+    font:700 21px/1.4 "Nunito Sans",sans-serif;
+    letter-spacing:.19em; white-space:nowrap;
+    position:relative; width:max-content;
+    clip-path:inset(0 100% 0 0);
+}
+/* 글자가 아닌 사각형 영역에 메인 타이틀 잉크 번짐 적용 */
+#section1 .intro-copy .eyebrow-ink-canvas {
+    position:absolute; z-index:2; left:0; top:0;
+    pointer-events:none; opacity:0;
+}
+#section1 .intro-copy .eyebrow-stage.eyebrow-playing .eyebrow-ink-canvas {
+    clip-path:none;
+}
+#section1 .intro-copy .eyebrow-stage.eyebrow-playing .eyebrow {
+    animation:eyebrowRevealText 1.12s linear both;
+}
+#section1 .intro-copy .eyebrow-stage.eyebrow-complete .eyebrow {clip-path:none;}
+@keyframes eyebrowRevealText {
+    0%,31% {clip-path:inset(0 100% 0 0);}
+    86%,100% {clip-path:inset(0 0 0 0);}
+}
+@media(prefers-reduced-motion:reduce) {
+    #section1 .intro-copy .eyebrow,
+    #section1 .intro-copy .eyebrow-stage.eyebrow-playing .eyebrow {clip-path:none;animation:none;}
+    #section1 .intro-copy .eyebrow-ink-canvas {display:none;}
+    #section1 .intro-copy .ink-divider-fill {
+        transform: scaleX(1) !important;
+        opacity: 1 !important;
+        animation: none !important;
+    }
+    #section1 .intro-copy .ink-divider-front {
+        display: none !important;
+    }
+}
+/* ================= SECTION 01 끝 · 다른 SECTION의 위치·레이어 규칙 변경 없음 ================= */
+
+
+/* ========== 09. 반응형 공통 레이아웃 · 1279px 이하 ========== */
+/* 데스크톱의 1920px 좌표계와 애니메이션 규칙은 수정하지 않습니다. */
+@media (max-width: 1279px) {
+    html { scroll-behavior: auto; }
+    body { overflow-x: hidden; }
+    .portfolio-scale-wrapper, .container { width: 100% !important; height: auto !important; }
+    .container { transform: none !important; }
+    .contentbox {
+        width: 100%; height: auto; min-height: 0;
+        padding: 0 20px 64px;
+        background-size: cover; background-position: center top;
+        overflow: hidden;
+    }
+    .content, .intro-inner { width: 100%; height: auto; margin: 0; }
+    .content { padding-top: 72px !important; }
+    .section-heading { margin-bottom: 28px; }
+    .section-heading h2 { font-size: clamp(28px, 7vw, 40px); overflow-wrap: anywhere; }
+    /* SECTION 02 모바일: 기존 반응형 그리드를 유지하며 패널 여백만 조절 */
+    #section2 .content { display: block; padding-top: 72px !important; transform: none; }
+    #section2 .section-heading { margin-bottom: 28px; }
+    #section2 .project-grid {
+        width: 100%; margin-left: 0; padding: 16px;
+        border-radius: 0;
+    }
+    #section2 .project-card { top: 0; /* 모바일 기존 카드 정렬 유지 */ }
+    #section2 .project-preview { height: auto; aspect-ratio: 4 / 5; }
+    #section3 .project-grid { margin-top: 0; }
+    .project-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px !important; }
+    .project-card { width: 100%; min-width: 0; flex: initial; transform: none !important; }
+    .project-preview, #section2 .project-preview, #section3 .project-preview,
+    #section4 .project-preview, #section6 .project-preview { height: auto; aspect-ratio: 4 / 5; }
+    #section5 .project-preview, #section5 .project-card:last-child .project-preview { height: auto; aspect-ratio: 1 / 1; }
+    #section3 .project-preview, #section6 .project-preview { aspect-ratio: 4 / 3; }
+    .project-actions { margin-top: 8px; gap: 6px; }
+    .project-action { min-height: 40px; padding: 8px 5px; font-size: 11px; text-align: center; }
+    .placeholder-mark { font-size: 20px; }
+    .placeholder-caption { font-size: 10px; text-align: center; }
+    /* SECTION 01 태블릿·모바일(1279px 이하): 타이틀 상단, 해바라기는 그 아래 배치 */
+    #section1 {
+        min-height: 100svh;
+        display: block;
+        padding-top: 0;
+        padding-bottom: 90px;
+    }
+    #section1 .intro-inner { display: block; }
+    #section1 .intro-art-space { display: none; }
+    /* 타이틀·구분선·보조 문구의 시작점을 동일하게 유지 */
+    #section1 .intro-copy {
+        transform: none;
+        position: relative;
+        z-index: 30;
+        width: 100%;
+        margin-top: 0;
+        padding-top: clamp(56px, calc(11svh - 20px), 80px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    #section1 .ink-wrap { max-width: 100%; }
+    #section1 .intro-copy h1 {
+        font-size: clamp(39px, 9.9vw, 67px);
+        text-align: left;
+        margin-bottom: 14px; /* 모바일: 구분선을 기존보다 5px 위로 */
+    }
+    #section1 .intro-copy .ink-divider {
+        width: min(75%, 370px);
+        height: 3px;
+        margin-bottom: 6px; /* 모바일: 보조 문구를 추가로 3px 당겨 총 8px 위로 */
+        align-self: flex-start;
+    }
+    #section1 .intro-copy .ink-divider-fill { height: 3px; }
+    #section1 .intro-copy .ink-divider-front { top: -11px; }
+    #section1 .intro-copy .eyebrow {
+        font-size: 12px;
+        text-align: left;
+        align-self: flex-start;
+    }
+    /* 원본 꽃·캐릭터는 선명하게, 아래쪽 줄기·잎만 점차 흐려지게 처리 */
+    .sunflower-layer {
+        display: block;
+        position: absolute;
+        top: clamp(250px, calc(30svh + 15px), 305px); /* 모바일 해바라기 25px 위로 */
+        left: 0;
+        width: 100%;
+        height: min(105svh, 920px);
+        z-index: 5;
+        overflow: visible;
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 35%, rgba(0,0,0,.60) 53%, rgba(0,0,0,.08) 76%, transparent 90%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 35%, rgba(0,0,0,.60) 53%, rgba(0,0,0,.08) 76%, transparent 90%);
+        pointer-events: none;
+    }
+    .sunflower-layer img {
+        position: absolute;
+        left: -85px;
+        top: 0;
+        width: min(120vw, 480px);
+        height: auto;
+        max-width: none;
+        object-fit: contain;
+        transform-origin: 48% 24%;
+        animation: mobile-sun-sway 8s ease-in-out infinite;
+    }
+    @keyframes mobile-sun-sway {
+        0%, 100% { transform: rotate(-0.7deg); }
+        50% { transform: rotate(0.8deg); }
+    }
+    /* 1279px 이하에서는 꽃잎만 생략하며 데스크톱 꽃잎 모션은 변경하지 않음 */
+    .petal-layer { display: none; }
+    /* 1279px 이하에서는 마우스 호버 대신 터치 가능한 하단 내비게이션을 사용합니다. */
+    .sidebar { left: 50%; right: auto; top: auto; bottom: 12px;
+        transform: translateX(-50%); flex-direction: row; gap: 9px;
+        padding: 10px 12px; border-radius: 18px;
+        background: rgba(248,245,237,.94); box-shadow: 0 3px 16px rgba(57,44,42,.12);
+    }
+    .square { width: 38px; height: 38px; font-size: 12px; }
+    .square.active { background: var(--blue); color: var(--ivory); }
+    .nav-hover-label { display: none !important; }
+    .popup,.video-popup { padding: 20px; }
+    .popup-content,.video-popup-content { max-width: 95vw; }
+}
+@media (max-width: 600px) {
+    .contentbox { padding-left: 18px; padding-right: 18px; padding-bottom: 80px; }
+    .project-grid { grid-template-columns: minmax(0,1fr); gap: 24px !important; }
+    .project-preview, #section2 .project-preview, #section4 .project-preview { aspect-ratio: 4 / 3; }
+    .project-action { font-size: 12px; }
+}
+
+/* 높이가 낮은 휴대폰에서는 꽃의 시작점과 타이틀 여백을 함께 조절 */
+@media (max-width: 480px) and (max-height: 700px) {
+    #section1 .intro-copy { padding-top: 38px; }
+    .sunflower-layer { top: 230px; height: 105svh; } /* 낮은 화면도 25px 위로 */
+    .sunflower-layer img { width: min(112vw, 430px); left: -70px; }
+}
+
+/* ========== SECTION 06 · 버튼 50:50 / 반투명 배경 / 호버·클릭 ========== */
+/* 기존 카드 호버와 링크는 유지하고 버튼 배경에만 투명도를 적용합니다. */
+#section6 .section6-actions {
+    display: flex;
+    gap: 0;
+    margin-top: 14px;
+    width: 100%;
+    background: rgba(0,71,171,.58);
+}
+#section6 .section6-actions .project-action {
+    box-sizing: border-box;
+    flex: 0 0 50%;
+    min-width: 0;
+    min-height: 45px;
+    padding: 10px 8px;
+    border-radius: 0;
+    text-decoration: none;
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+#section6 .section6-more {
+    background: rgba(0,71,171,.58);
+    border: 1px solid #FFF8E9;
+    color: #FFF8E9;
+}
+#section6 .section6-more:hover,
+#section6 .section6-more:focus-visible {
+    background: #FFF8E9;
+    border-color: #FFF8E9;
+    color: #392C2A;
+}
+#section6 .section6-more:active {
+    background: #F9E27D;
+    border-color: #F9E27D;
+    color: #392C2A;
+}
+#section6 .section6-visit {
+    background: rgba(249,226,125,.68);
+    border: 1px solid #F9E27D;
+    color: #392C2A;
+    gap: 5px;
+}
+#section6 .section6-visit:hover,
+#section6 .section6-visit:focus-visible {
+    background: #FFF8E9;
+    border-color: #FFF8E9;
+    color: #392C2A;
+}
+#section6 .section6-visit:active {
+    background: #0047AB;
+    border-color: #FFF8E9;
+    color: #FFF8E9;
+}
+
+
+
+/* SECTION 06 타이틀: 밤하늘 배경에 어울리는 웜 아이보리 */
+#section6 .section-heading h2 { color: #FFF8E9; }
+
+/* ========== v171 요청 수정: 기존 호버·등장 모션 유지 ========== */
+/* SECTION 01: 가로선 두께와 위치는 기존 값을 유지 */
+#section1 .intro-copy .ink-divider, #section1 .intro-copy .ink-divider-fill {height:3px;}
+
+/* SECTION 02~04: 별도 버튼 제거, 카드 이미지 전체 클릭 */
+#section2 .project-preview,#section3 .project-preview,#section4 .project-preview {cursor:pointer;}
+/* SECTION 04: 기존 CLICK! 선은 시각 효과로만 유지하며 링크가 아님 */
+#section4 .section4-decorative {pointer-events:none;}
+/* SECTION 05: 기존 컨트롤 바 복원. 왼쪽 재생 / 가운데 빈 공간 / 오른쪽 STORYBOARD */
+#section5 .motion-play {flex:0 0 52px;width:52px;min-width:52px;position:relative;overflow:visible;}
+#section5 .motion-controls-spacer {flex:1 1 auto;pointer-events:none;}
+/* 우측 화면 이동 메뉴의 왼쪽 안내문처럼 PLAY가 버튼 바깥 왼쪽에 표시됨 */
+#section5 .motion-play-label {position:absolute;right:calc(100% + 10px);top:50%;transform:translate(9px,-50%);opacity:0;pointer-events:none;white-space:nowrap;font:600 12px "DM Sans",sans-serif;letter-spacing:.045em;color:#392C2A;transition:opacity .2s ease,transform .2s ease;}
+#section5 .motion-play:hover .motion-play-label,#section5 .motion-play:focus-visible .motion-play-label {opacity:1;transform:translate(0,-50%);}
+/* SECTION 06: 기존 버튼 색상/호버를 유지하고 순서 및 문구만 교체 */
+#section6 .section6-site {background:rgba(0,71,171,.58);color:#FFF8E9;border:1px solid #FFF8E9;}
+#section6 .section6-site:hover,#section6 .section6-site:focus-visible {background:#FFF8E9;color:#392C2A;}
+#section6 .section6-storyboard {background:rgba(249,226,125,.80);color:#392C2A;border:1px solid rgba(249,226,125,.80);}
+#section6 .section6-storyboard:hover,#section6 .section6-storyboard:focus-visible {background:#FFF8E9;color:#392C2A;}
+
+/* 공통 내비게이션: 기존 고정 좌표를 보존한 채 진입 모션만 추가 */
+.sidebar.sidebar-enter {animation:sidebarSlideIn .65s cubic-bezier(.22,.7,.2,1) both;}
+@keyframes sidebarSlideIn {from{opacity:0;transform:translate(110px,-50%);}to{opacity:1;transform:translate(0,-50%);}}
+@media(max-width:900px){@keyframes sidebarSlideIn{from{opacity:0;transform:translate(calc(-50% + 110px),0);}to{opacity:1;transform:translate(-50%,0);}}}
+@media(prefers-reduced-motion:reduce){.sidebar.sidebar-enter{animation:none;}}
+
+
+/* ========== 공통 배경 경계 보정 (데스크톱) ========== */
+/* 각 섹션을 별도 배경으로 합성하면 소수점 비율 축소 시 경계가 밝게 보일 수 있음.
+   원본 이미지의 크기·좌표를 변경하지 않고 6장 모두 하나의 컨테이너 배경으로 렌더링. */
+@media (min-width: 1280px) {
+    .container {
+        background-image:
+            url("img/section6_bg.png"),
+            url("img/section5_bg.png"),
+            url("img/section4_bg.png"),
+            url("img/section3_bg.png"),
+            url("img/section2_bg.png"),
+            url("img/section1_bg.png");
+        background-position:
+            0 5400px,
+            0 4320px,
+            0 3240px,
+            0 2160px,
+            0 1080px,
+            0 0;
+        background-size: 1920px 1080px;
+        background-repeat: no-repeat;
+    }
+    .contentbox { background-image: none; }
+}
+
+/* ========== v176 · SECTION 05/06 경계의 픽셀 렌더링 보정 ========== */
+/* 1920×1080 원본 배경을 늘리거나 위치를 변경하지 않음.
+   두 배경이 만나는 지점에 SECTION 06의 첫 2px만 중복 그려
+   특정 화면 배율에서 드러나는 미세한 틈을 가림. */
+@media (min-width: 1280px) {
+    .container::before {
+        content: "";
+        position: absolute;
+        top: 5399px;
+        left: 0;
+        width: 1920px;
+        height: 2px;
+        background-image: url("img/section6_bg.png");
+        background-position: 0 0;
+        background-size: 1920px 1080px;
+        background-repeat: no-repeat;
+        z-index: 30;
+        pointer-events: none;
+    }
+}
+
+/* ========== 우측 섹션 이동 안내문 · 가독성 개선 ========== */
+@media (min-width:1280px) {
+    .nav-hover-label {font-size:14px;font-weight:700;padding:7px 11px;background:rgba(248,245,237,.80);}
+}
+
+/* ========== 반응형 보완 · 태블릿 601~1279px / 소형 화면 600px 이하 ========== */
+/* 1920px 데스크톱 좌표와 SECTION 01의 원화·모션은 변경하지 않습니다. */
+@media (min-width: 601px) and (max-width: 1279px) {
+    .contentbox { padding-left: clamp(22px, 4vw, 36px); padding-right: clamp(22px, 4vw, 36px); }
+    .content, #section2 .content { padding-top: clamp(64px, 8vw, 84px) !important; }
+    .section-heading { margin-bottom: clamp(22px, 3.2vw, 30px); }
+    .project-grid { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(18px, 2.2vw, 28px) !important; }
+
+    #section2 .project-grid { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); padding: clamp(18px, 2.5vw, 24px); }
+    #section2 .project-preview { aspect-ratio: 4 / 5; }
+    #section3 .project-preview, #section6 .project-preview { aspect-ratio: 4 / 3; }
+    #section5 .motion-controls { min-height: 44px; }
+    #section6 .section6-actions .project-action { padding-left: 5px; padding-right: 5px; }
+}
+@media (min-width: 481px) and (max-width: 600px) {
+    /* 모바일 1열 배치에서 카드 버튼·이미지 간격을 보완 */
+    .project-grid { gap: 16px !important; }
+    #section2 .project-grid { padding: 14px; }
+    .project-actions { flex-wrap: wrap; }
+    .project-action { min-width: 0; }
+    #section5 .motion-controls { min-height: 42px; }
+}
+
+/* ========== 태블릿 → 데스크톱 전환 보완 · 1100~1279px ========== */
+/* SECTION 02~06: 1280px에서 1920×1080 축소형으로 전환될 때
+   카드나 버튼 위치를 변경하지 않고 단락 높이만 데스크톱 비율에 가깝게 맞춥니다.
+   SECTION 01은 해바라기·타이틀 배치 보호를 위해 기존 높이를 유지합니다. */
+@media (min-width: 1100px) and (max-width: 1279px) {
+    #section2, #section3, #section4, #section5, #section6 {
+        min-height: 56.25vw;
+    }
+}
+
+
+/* ========== 반응형 검증 보완 · 768px / 486px 기준 ========== */
+/* 기존 1920px 원본 좌표, SECTION 01~06 모션 및 카드 기능은 변경하지 않습니다. */
+/* 768px: 기존 601~1279px 2열 카드 규칙을 유지하면서 가로 넘침만 방지 */
+/* 900px 이하 공통: 동일 선언을 태블릿·모바일에 중복 작성하지 않도록 통합 */
+@media (max-width: 900px) {
+    .contentbox, .content, .project-grid, .project-card { min-width: 0; }
+    .project-grid { max-width: 100%; }
+    .project-card img, .project-preview img { max-width: 100%; }
+}
+/* 486px 기준 모바일: 600px 이하에서만 필요한 버튼·팝업 보완 */
+@media (max-width: 600px) {
+    .project-actions { max-width: 100%; }
+    .project-action { overflow-wrap: anywhere; }
+    .popup-content, .video-popup-content { max-width: min(95vw, 100%); }
+}

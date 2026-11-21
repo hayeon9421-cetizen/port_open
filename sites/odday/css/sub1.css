@@ -1,0 +1,667 @@
+/* ODDAY: 헤더 CSS는 header.css에서만 관리합니다. */
+/* 1920px 고정 시안 / Grid, Flexbox, @media 없이 작성 */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { min-width:1920px; color:#1f1f1d; background:#fff; font-family:Arial,"Noto Sans KR",sans-serif; }
+a { color:inherit; text-decoration:none; }
+button { font-family:inherit; color:inherit; cursor:pointer; border:0; background:transparent; }
+img { display:block; }
+.section { width:100%; height:1080px; position:relative; }
+.inner { width:1600px; height:100%; margin:0 auto; position:relative; }
+.eyebrow { font-size:14px; letter-spacing:7px; font-weight:400; }
+/* 제공된 공통 헤더: 모양은 유지하고 float / absolute로 배치 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 1단락 */
+.hero { height:1000px; width:100%; margin:0 auto; position:relative; overflow:hidden; background:#b3cdda; }
+.hero-background { position:absolute; width:100%; height:100%; top:0; left:0; background-size:cover; background-position:center; display:none; }
+.bg-alpine { display:block; background-image:url("../img/sub1_img/01-alpine.png"); }
+.bg-spring { background-image:url("../img/sub1_img/03-spring-seat.png"); }
+.bg-autumn { background-image:url("../img/sub1_img/02-autumn.png"); }
+.hero-copy { position:absolute; left:160px; top:190px; z-index:3; }
+.hero-copy h1 { font-family:Georgia,"Times New Roman",serif; font-size:142px; font-weight:400; line-height:.88; margin-top:36px; letter-spacing:-7px; }
+.hero-copy h1 em { font-style:normal; color:#6c9fbe; }
+#hero-description { margin-top:34px; font-size:25px; letter-spacing:-1px; }
+.short-line { display:block; width:68px; height:2px; background:#555; margin-top:34px; }
+.hero-model { position:absolute; width:720px; height:1080px; object-fit:contain; right:130px; top:-10px; z-index:2; }
+.polaroids { position:absolute; left:0; top:0; width:650px; height:100%; z-index:4; }
+.polaroid { position:absolute; width:220px; left:-350px; bottom:65px; opacity:0; transition:transform .8s; }
+.polaroid img { width:100%; }
+.pola-spring { transform:rotate(-12deg); }
+.pola-autumn { transform:rotate(8deg); }
+.pola-alpine { transform:rotate(-5deg); }
+.hero-control { position:absolute; bottom:38px; right:160px; z-index:5; font-size:12px; letter-spacing:2px; }
+.hero-control button { margin-left:25px; font-size:11px; padding:10px; background:rgba(255,255,255,.65); }
+/* 2단락: 실루엣 자리는 고정, 사진만 전환 */
+.outfit-heading { text-align:center; padding-top:90px; }
+.outfit-heading h2 { font-family:Impact,"Arial Narrow",sans-serif; font-size:62px; font-weight:400; letter-spacing:-1px; margin:18px 0 12px; }
+.outfit-heading>p:last-child { font-size:17px; }
+.outfit-stage { position:absolute; width:1500px; height:720px; left:50px; top:280px; }
+.outfit-item { position:absolute; transition:transform .4s; }
+.outfit-item:focus { outline:none; }
+.outfit-item img { width:100%; height:100%; object-fit:contain; }
+.item-long { width:500px; height:470px; left:100px; top:0; z-index:1; transform:rotate(-9deg); }
+.item-tee { width:400px; height:365px; left:0; top:285px; z-index:5; transform:rotate(-7deg); }
+.item-shorts { width:400px; height:370px; left:380px; top:300px; z-index:4; transform:rotate(6deg); }
+.item-outer { width:480px; height:480px; left:670px; top:0; z-index:2; }
+.item-jeans { width:360px; height:670px; left:1120px; top:0; z-index:1; transform:rotate(3deg); }
+.item-shoes { width:380px; height:260px; left:840px; top:430px; z-index:6; transform:rotate(-6deg); }
+.product-img { position:absolute; left:0; top:0; opacity:0; transform:scale(.96); transition:opacity .45s,transform .45s; }
+.outline-img,.item-label { transition:opacity .35s; }
+.outfit-item.active .product-img { opacity:1; transform:scale(1.05); }
+.outfit-item.active .outline-img,.outfit-item.active .item-label { opacity:0; }
+.item-label { position:absolute; left:15%; width:70%; top:48%; font-size:13px; letter-spacing:1px; }
+.item-label small { display:block; font-size:16px; font-weight:bold; margin-bottom:9px; }
+.outfit-bottom { position:absolute; bottom:25px; left:0; width:100%; text-align:center; font-size:12px; letter-spacing:2px; }
+#outfit-reset { position:absolute; right:0; top:-10px; padding:10px; font-size:13px; border-bottom:1px solid #999; }
+/* 3단락 */
+.couple { position:absolute; top:0; left:0; width:800px; height:1080px; overflow:hidden; }
+.couple>img { width:800px; height:1080px; object-fit:cover; }
+.look-hotspot { position:absolute; top:285px; height:700px; width:380px; z-index:2; }
+.hotspot-his { left:0; }.hotspot-her { right:0; }
+.look-hotspot:focus { outline:none; }
+.look-hotspot span { position:absolute; bottom:30px; left:75px; background:rgba(255,255,255,.94); padding:15px 25px; font-size:12px; letter-spacing:2px; opacity:0; transition:opacity .3s; }
+.look-hotspot:hover span,.look-hotspot:focus span { opacity:1; }
+.photo-hint { position:absolute; bottom:18px; left:24px; font-size:12px; padding:8px 12px; background:rgba(255,255,255,.85); }
+.stylist-right { position:absolute; left:850px; top:0; width:750px; height:1000px; }
+.stylist-intro h2 { font-family:Georgia,"Times New Roman",serif; font-size:145px; line-height:.88; letter-spacing:-10px; color:#79acd0; font-weight:400; }
+.stylist-intro h2 span { padding-left:110px; }
+.stylist-description { margin:75px 0 0 135px; }
+.stylist-description p { font-size:16px; line-height:1.8; letter-spacing:-.6px; }
+.stylist-description em { display:block; font-family:Georgia,serif; font-size:19px; color:#79acd0; line-height:1.5; margin-top:20px; }
+.seoul-caption { position:absolute; bottom:0; left:810px; font-family:Georgia,serif; font-size:65px; color:#ed7eab; letter-spacing:-4px; z-index:3; }
+.look-panel { display:none; width:100%; height:100%; position:absolute; left:0; top:0; background:#fff; }
+.look-panel-heading { height:130px; border-bottom:1px solid #ddd; position:relative; padding-top:20px; }
+.look-panel-heading h2 { font-family:Impact,sans-serif; font-size:65px; font-weight:400; margin-top:15px; }
+.back-description { position:absolute; right:0; top:85px; border-bottom:1px solid #444; padding-bottom:6px; }
+.look-products { position:relative; height:760px; margin-top:20px; }
+.look-product { position:absolute; width:340px; height:360px; }
+.look-product-0 { left:0; top:0; }.look-product-1 { right:0; top:0; }.look-product-2 { left:0; top:390px; }.look-product-3 { right:0; top:390px; }
+.look-product img { width:100%; height:315px; object-fit:contain; }
+.look-product figcaption { margin-top:20px; font-size:11px; letter-spacing:1px; text-align:center; }
+.look-footnote { font-family:Georgia,serif; font-style:italic; font-size:22px; color:#79acd0; margin-top:25px; }
+/* 4단락: 위 540px는 3단락의 휴대폰 에디토리얼 */
+.phone-photo { width:800px; height:540px; position:absolute; top:0; right:0; overflow:hidden; }
+.phone-photo img { width:100%; height:100%; object-fit:cover; }
+.stylist-links { position:absolute; left:985px; top:240px; width:580px; }
+.stylist-links span { display:block; width:440px; font-family:Georgia,serif; font-size:21px; padding-bottom:12px; border-bottom:1px solid #555; margin-bottom:50px; }
+.magazine-placeholder { position:absolute; top:540px; left:0; width:800px; height:500px; background:#f6f4f2; }
+.menu-carousel { position:absolute; top:570px; left:850px; width:750px; height:500px; }
+.menu-window { height:470px; position:relative; overflow:hidden; }
+.story-menu { position:absolute; top:470px; left:30px; width:690px; height:134px; padding:20px 28px; border-radius:6px; background:#fcecf0; color:#eda8ba; opacity:0; transform:scale(.94); transition:top .65s,transform .65s,opacity .5s,background-color .5s,color .5s; }
+.story-menu.slot-top { top:0; opacity:.7; }
+.story-menu.slot-center { top:155px; opacity:1; transform:scale(1.045); background:#e7f2b6; color:#242920; z-index:2; }
+.story-menu.slot-bottom { top:310px; opacity:.7; }
+.story-menu.slot-before { top:-160px; opacity:0; }
+.story-menu h3 { font-size:47px; line-height:1; letter-spacing:-2px; }
+.story-menu .menu-number { font-size:11px; letter-spacing:0; vertical-align:top; padding-left:7px; }
+.story-menu p { font-size:12px; margin-top:14px; }
+
+/* 5단락: 가로 아코디언, 사진에는 반투명 연두 오버레이 */
+.editorial-strip { width:1920px; height:1080px; margin:0 auto; overflow:hidden; }
+.editorial-item { float:left; position:relative; width:200px; height:1080px; overflow:hidden; }
+.editorial-item.selected { width:1120px; }
+.editorial-photo { position:absolute; width:200px; height:1080px; top:0; left:0; background-size:cover; background-position:center; }
+.editorial-item.selected .editorial-photo { width:280px; }
+.editorial-photo-1 { background-position:39% top; }.editorial-photo-4 { background-position:87% bottom; }
+.lime-overlay { position:absolute; left:0; top:0; width:100%; height:100%; background:#d0dd73; opacity:.76; transition:opacity .55s; }
+.selected .lime-overlay { opacity:0; }
+.story-number { position:absolute; bottom:30px; left:25px; font-size:12px; color:#fff; letter-spacing:3px; }
+.editorial-copy { position:absolute; top:0; left:280px; width:840px; height:1080px; background:#fffefa; opacity:0; transition:opacity .5s; }
+.selected .editorial-copy { opacity:1; }
+.editorial-copy-inner { padding:190px 65px 0; }
+.editorial-copy h2 { font-family:Impact,"Arial Narrow",sans-serif; font-size:28px; font-weight:400; }
+.editorial-band { margin-top:75px; width:710px; padding:35px; font-size:25px; color:#fff; background:#f1e8e3; }
+.editorial-copy h3 { margin-top:85px; font-size:14px; }
+.editorial-copy p { font-size:18px; line-height:1.6; max-width:650px; margin-top:12px; word-break:keep-all; }
+.editorial-signature { display:block; margin-top:230px; font-size:11px; letter-spacing:3px; color:#777; }
+/* 6·7단락은 요청대로 공간만 준비 */
+.dress-section { 
+  /* background:#ed9eb3;  */
+  background-image:url("../img/sub1_img/sub1_6_bg.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.dress-section h2 { position:absolute; left:0; top:130px; font-size:62px; line-height:1.1; letter-spacing:-2px; text-shadow:2px 2px #fff,-2px -2px #fff,2px -2px #fff,-2px 2px #fff; }
+.dress-section mark { display:inline-block; font-family:Georgia,serif; font-style:italic; font-weight:400; background:#d0dd73; padding:0 18px 8px; text-shadow:none; }
+.dress-note { position:absolute; left:-55px; top:665px; width:590px; height:415px; padding:70px 30px; background:#f1e8e3; font-size:30px; line-height:1.3; }
+.future-section { background:#fff; }
+/* 공통 푸터 */
+#footer { width:100%; height:400px; background:#fff; font-family:Arial,"Noto Sans KR",sans-serif; }
+.footer_inner { height:400px; }.footer_top { width:1600px; height:325px; margin:0 auto; position:relative; }
+.footer_left,.footer_right { position:absolute; top:140px; width:510px; font-size:14px; line-height:1.3; }
+.footer_left { left:0; }.footer_right { right:0; text-align:right; }.footer_left p,.footer_right p { margin-bottom:13px; }
+.footer_right a:hover { text-decoration:underline; }
+.footer_center { position:absolute; left:500px; top:10px; width:600px; height:270px; text-align:center; }
+.footer_slogan { width:600px; height:auto; margin-left:15px; }.footer_phrase { font-family:Georgia,serif; font-size:22px; margin-top:-33px; margin-left:-22px; }.footer_brand { width:250px; margin:32px auto 0; }
+.footer_bottom { height:75px; border-top:1px solid #111; }.footer_bottom_wrap { position:relative; width:1600px; height:75px; margin:0 auto; }
+.footer_selects { position:absolute; left:0; top:20px; }.footer_select_box { display:inline-block; margin-right:60px; }.footer_select_box label { display:none; }.footer_select_box select { font-family:Georgia,serif; font-size:24px; border:0; background:transparent; padding:4px 12px 4px 0; cursor:pointer; }
+.footer_social { position:absolute; right:0; top:22px; }.footer_social a { display:inline-block; margin-left:33px; }.footer_social img { width:31px; height:31px; object-fit:contain; opacity:.5; }
+
+/* 푸터의 원래 공간은 유지하고 내용만 아래에서 위로 등장 */
+#footer { overflow:hidden; }
+#footer.footer-waiting .footer_inner { opacity:0; transform:translateY(100px); transition:transform .8s ease-out,opacity .8s ease-out; }
+#footer.footer-visible .footer_inner { opacity:1; transform:translateY(0); }
+
+/* sub1.html: 데스크톱 화면 너비와 단락 여백 */
+body.story-page { min-width:1600px; }
+.story-page .editorial-strip { width:100%; }
+.story-page .outfit-section { height:auto; padding:180px 0; }
+.story-page .outfit-section .inner { height:auto; }
+.story-page .outfit-heading { padding-top:0; }
+/* 이미지 크기와 배치 좌표를 원본의 60%로 축소, 위아래 180px 여백 유지 */
+.story-page .outfit-stage { position:relative; width:900px; height:432px; left:auto; top:auto; margin:50px auto 0; }
+.story-page .item-long { width:300px; height:282px; left:60px; top:0; }
+.story-page .item-tee { width:240px; height:219px; left:0; top:171px; }
+.story-page .item-shorts { width:240px; height:222px; left:228px; top:180px; }
+.story-page .item-outer { width:288px; height:288px; left:402px; top:0; }
+.story-page .item-jeans { width:216px; height:402px; left:672px; top:0; }
+.story-page .item-shoes { width:228px; height:156px; left:504px; top:258px; }
+.story-page .outfit-bottom { position:relative; left:auto; bottom:auto; margin-top:24px; }
+.story-page .stylist-intro { padding-top:180px; }
+.story-page .dress-section h2 { top:180px; }
+
+/* 4단락 콘텐츠 끝(540 + 500)에 5단락을 바로 연결 */
+.story-page #section4 { height:1040px; }
+
+/* 5단락: 칸, 사진, 설명을 같은 비율 기준으로 연결 */
+.story-page .editorial-item { width:calc(100% * 200 / 1920); transition:width .65s; }
+.story-page .editorial-item.selected { width:calc(100% * 1120 / 1920); }
+.story-page .editorial-photo { width:100%; transition:width .65s; }
+.story-page .editorial-item.selected .editorial-photo { width:25%; }
+.story-page .editorial-copy { left:25%; width:75%; }
+.story-page .editorial-copy-inner { padding-left:7.738095%; padding-right:7.738095%; }
+.story-page .editorial-band { width:100%; }
+
+/* 4단락 메뉴와 같은 순서로 사진을 부드럽게 전환 */
+.story-images { overflow:hidden; }
+.story-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .55s ease; }
+.story-image.is-current { opacity:1; }
+.story-menu[role="button"] { cursor:pointer; }
+.story-menu:focus-visible { outline:3px solid #222; outline-offset:-4px; }
+/* 6단락: 원본 PNG를 사용하는 스티커형 착장 */
+.story-page .dress-section { height:1080px; overflow:hidden; }
+.story-page .dress-section h2 { top:180px; font-size:62px; z-index:2; }
+.story-page .dress-note { left:0; top:650px; width:480px; height:330px; padding:55px 32px; font-size:26px; }
+.dress-model { position:absolute; left:530px; top:115px; width:330px; height:864px; border-radius:44%; transition:box-shadow .2s; }
+.dress-model-base { width:100%; height:100%; object-fit:contain; user-select:none; pointer-events:none; }
+.dress-model.is-drop-target { box-shadow:0 0 0 4px #e4f2a5,0 0 35px #e4f2a5; }
+.dress-help { position:absolute; left:505px; top:985px; width:390px; text-align:center; font-size:13px; }
+.dress-layers { position:absolute; inset:0; pointer-events:none; }
+.dress-wardrobe { position:absolute; left:925px; top:110px; width:650px; height:840px; }
+.dress-item { position:absolute; touch-action:none; user-select:none; cursor:grab; border-radius:16px; transition:filter .2s,background .2s; }
+.dress-item img { width:100%; height:100%; object-fit:contain; pointer-events:none; }
+.dress-item span { position:absolute; bottom:-14px; left:0; width:100%; font-size:12px; opacity:0; transition:opacity .2s; }
+.dress-item:hover span,.dress-item:focus-visible span,.dress-item[aria-pressed="true"] span { opacity:1; }
+.dress-item[aria-pressed="true"] { background:rgba(255,255,255,.22); }
+.dress-item:hover { filter:drop-shadow(0 8px 8px #76495b33); }
+.dress-item:focus-visible { outline:3px solid #222; }
+.dress-item-pants { width:255px; height:330px; left:0; top:0; }
+.dress-item-bag { width:230px; height:260px; left:340px; top:-15px; }
+.dress-item-cap { width:110px; height:110px; left:265px; top:220px; }
+.dress-item-mtm { width:285px; height:300px; left:350px; top:255px; }
+.dress-item-skirt { width:245px; height:310px; left:0; top:405px; }
+.dress-item-knit { width:275px; height:285px; left:255px; top:550px; }
+.dress-item-watch { width:140px; height:185px; left:520px; top:635px; }
+.dress-drag-ghost { position:fixed; pointer-events:none; z-index:1000; opacity:.85; object-fit:contain; transform:translate(-50%,-50%); filter:drop-shadow(0 8px 12px #0003); }
+.dress-sparkle { position:absolute; left:50%; top:32%; opacity:0; color:#f3ffac; font-size:100px; z-index:10; pointer-events:none; }
+.dress-model.is-snapping .dress-sparkle { animation:dress-spark .6s ease-out; }
+@keyframes dress-spark { 0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0)} 35%{opacity:1} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.8) rotate(80deg)} }
+#dress-reset { position:absolute; left:620px; top:1020px; border-bottom:1px solid; padding:6px 0; font-size:13px; }
+.dress-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+
+/* 왼쪽 아이보리 박스: 마지막으로 착장한 아이템 설명 */
+.dress-note-label { font-size:11px; letter-spacing:2px; margin-bottom:22px; }
+.dress-note h3 { font-size:29px; line-height:1.25; margin-bottom:20px; }
+#dress-note-description { font-size:15px; line-height:1.65; word-break:keep-all; white-space:pre-line; }
+
+/* 숨겨진 설명 패널이 사진 클릭을 가로채지 않도록 처리 */
+.editorial-copy { pointer-events:none; visibility:hidden; }
+.selected .editorial-copy { pointer-events:auto; visibility:visible; }
+.editorial-photo { cursor:pointer; }
+.editorial-photo .lime-overlay, .editorial-photo .story-number { pointer-events:none; }
+.editorial-photo:hover .lime-overlay, .editorial-photo:focus-visible .lime-overlay { opacity:.4; }
+.selected .editorial-photo:hover .lime-overlay { opacity:0; }
+.editorial-photo:focus-visible { outline:3px solid #222; outline-offset:-4px; }
+
+
+/* Dress-up slots: geometry and source crop metadata live in dress-up.js. */
+.dress-model { isolation:isolate; }
+.dress-model-base { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; z-index:0; }
+.dress-layers { position:absolute; inset:0; pointer-events:none; }
+.dress-slot, .dress-foreground { position:absolute; inset:0; pointer-events:none; }
+.dress-foreground { z-index:50; }
+.dress-worn-part { position:absolute; overflow:hidden; pointer-events:none; }
+.dress-worn-image { position:absolute; display:block; max-width:none; object-fit:contain; pointer-events:none; user-select:none; }
+.dress-model.has-pants .dress-model-base { clip-path:inset(0 0 7.5% 0); }
+.dress-model .dress-sparkle { z-index:80; }
+
+/* Upright replacement product thumbnail: retain the original tilted display. */
+.dress-item-pants img { transform:rotate(22deg) scale(.9); }
+
+/* Section six: 200px padding, compact circular controls. */
+.story-page .dress-section {height:auto; padding:180px 0; box-sizing:border-box;}
+.story-page .dress-section > .inner {height:900px; zoom:.9;}
+.story-page .dress-section h2 {top:0;}
+.story-page .dress-note {top:570px;}
+.dress-model {top:0;}
+.dress-wardrobe {top:0;}
+.dress-help {top:876px; margin:0; line-height:24px;}
+.dress-item {border-radius:50%; clip-path:circle(50%); border:0; outline:none; padding:0; background:transparent; -webkit-tap-highlight-color:transparent;}
+.dress-item:focus,.dress-item:focus-visible {outline:none; box-shadow:none;}
+.dress-item:focus-visible {filter:brightness(1.08) drop-shadow(0 0 3px #fff);}
+.dress-item[aria-pressed="true"] {background:rgba(255,255,255,.38);}
+.dress-item span {display:none; pointer-events:none;}
+.dress-item-pants {width:280px;height:280px;left:0;top:0;}
+.dress-item-bag {width:210px;height:210px;left:350px;top:0;}
+.dress-item-cap {width:112px;height:112px;left:254px;top:219px;z-index:3;}
+.dress-item-cap img {width:100px;height:100px;position:absolute;left:6px;top:6px;}
+.dress-item-mtm {width:275px;height:275px;left:365px;top:290px;}
+.dress-item-skirt {width:265px;height:265px;left:0;top:420px;}
+.dress-item-knit {width:255px;height:255px;left:257px;top:581px;}
+.dress-item-watch {width:110px;height:110px;left:535px;top:710px;}
+#dress-note-name:empty {display:none;}
+
+/* 마지막 단락: 이미지가 들어갈 추천 상품 프레임 */
+.story-page .future-section {
+  height: auto;
+  min-height: 1200px;
+  padding-top: 180px;
+  padding-bottom: 300px;
+  box-sizing: border-box;
+  background: #fff;
+}
+.recommend-layout { width:90%; max-width:1600px; margin:0 auto; }
+.recommend-layout h2 { width:30.73%; margin:0 0 14px auto; color:#ff345f; font-family:"Anton","Noto Sans KR",sans-serif; font-size:73.1px; font-weight:400; line-height:1; letter-spacing:-.055em; text-align:right; }
+/* Track itself must allow the center card to grow; the outer viewport clips only the horizontal slide. */
+.recommend-viewport { position:relative; overflow:hidden; padding:22px 0; }
+.recommend-track { position:relative; width:100%; overflow:visible; }
+.recommend-card { position:absolute; top:0; box-sizing:border-box; border:2px solid #222; background:#f1e8e3; }
+.recommend-card img { display:block; width:100%; height:100%; object-fit:contain; padding:10%; box-sizing:border-box; }
+.recommend-heart { position:absolute; top:6px; right:7px; color:#c64146; font-size:22px; line-height:1; z-index:1; }
+.recommend-tag { position:absolute; bottom:0; transform:rotate(-90deg); transform-origin:left bottom; color:#6d7066; font-size:38px; font-weight:800; line-height:1; z-index:2; }
+/* .story-page .future-section { padding:180px 0; min-height:0; } */
+.story-page .future-section {
+    height: auto;
+    min-height: 1000px;
+    padding: 180px 0 250px;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+/* 사진은 고정, 휴대폰 화면 평면만 교체 */
+.phone-stage { position:absolute; width:1536px; height:1024px; transform-origin:0 0; }
+.phone-photo .phone-base { position:absolute; inset:0; width:1536px; height:1024px; }
+.phone-screen-plane { position:absolute; left:0; top:0; width:600px; height:1200px; transform-origin:0 0; border-radius:65px; overflow:hidden; }
+.phone-photo .phone-screen-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:fill; opacity:0; transition:opacity .35s ease; }
+.phone-photo .phone-screen-slide.is-active { opacity:1; }
+.phone-styling-tap { position:absolute; left:7%; top:77%; width:86%; height:12%; border:0; border-radius:999px; background:transparent; cursor:pointer; }
+.phone-styling-tap:focus-visible { outline:4px solid #79acd0; outline-offset:-4px; }
+.phone-styling-tap.is-tapped { background:rgba(140,201,242,.28); }
+.phone-photo .phone-finger { position:absolute; width:650px; height:650px; object-fit:contain; opacity:0; pointer-events:none; transform-origin:26.7% 13.6%; }
+.phone-motion-toggle { position:absolute; right:12px; bottom:12px; width:30px; height:30px; border:0; border-radius:50%; background:rgba(255,255,255,.8); color:#222; cursor:pointer; }
+@media  (prefers-reduced-motion:reduce) { .phone-photo .phone-screen-slide { transition:none; } }
+
+/* 니트 실루엣 전체를 원 안에 넣고 투명 여백에 따른 중심 오차 보정 */
+.dress-item-knit img { transform:translate(2px, -10px) scale(.86); transform-origin:50% 50%; }
+
+/* 완성 사진으로 전환: 화면 덧씌우기와 손 가림 제거 */
+.phone-screen-plane { width:1536px; height:1024px; border-radius:0; overflow:visible; transform:none; }
+.phone-photo .phone-screen-slide { object-fit:cover; }
+.phone-styling-tap { left:37%; top:73%; width:28%; height:11%; transform:rotate(-10deg); }
+.stylist-message { top:125px; left:175px; width:580px; }
+.stylist-message-label { font-size:13px; letter-spacing:3px; margin:0 0 24px; color:#737373; }
+.stylist-message h3 { font-family:"Anton",sans-serif; font-size:60px; font-weight:400; line-height:1.14; letter-spacing:-1px; margin:0; }
+.stylist-message h3 em { font-style:normal; color:#79acd0; }
+.stylist-message-copy { margin-top:26px; font-size:18px; line-height:1.8; color:#555; }
+
+/* 하단 문구는 기존 링크 문구처럼 작고 가벼운 타이포로 */
+.stylist-message { top:240px; }
+.stylist-message-label { font-size:11px; letter-spacing:2px; margin-bottom:22px; }
+.stylist-message h3 { font-family:"Manrope","Noto Sans KR",sans-serif; font-size:19px; font-weight:600; line-height:1.9; letter-spacing:0; }
+.stylist-message h3 em { color:inherit; font-weight:600; }
+.stylist-message-copy { margin-top:24px; font-size:14px; line-height:1.8; color:#777; }
+
+/* 터치 직후 화면을 빠르게 전환 */
+.phone-photo .phone-screen-slide { transition-duration:.25s; }
+@media  (prefers-reduced-motion:reduce) { .phone-photo .phone-screen-slide { transition:none; } }
+
+
+/* 2단락: 기존 회전 각도를 유지하고 실루엣만 살짝 확대 */
+.outfit-item .outline-img { transition:opacity .35s, transform .25s; }
+.outfit-item:hover .outline-img { transform:scale(1.045); }
+
+/* 4단락: 제목의 기존 서체와 줄간격을 유지하는 애니메이션 단위 */
+.stylist-message h3 .weather-line { display:block; position:relative; width:auto; margin:0; padding:0; border:0; font:inherit; letter-spacing:inherit; }
+
+/* 6단락 상품 선택: 미세한 부유 움직임 + 이미지 윤곽의 흰색 빛 */
+@keyframes dress-item-float {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-12px); }
+}
+.dress-item { animation:dress-item-float 2.6s ease-in-out infinite; }
+.dress-item:nth-child(2) { animation-delay:-.7s; animation-duration:3.0s; }
+.dress-item:nth-child(3) { animation-delay:-1.6s; }
+.dress-item:nth-child(4) { animation-delay:-2.2s; animation-duration:3.2s; }
+.dress-item:nth-child(5) { animation-delay:-.4s; animation-duration:2.8s; }
+.dress-item:nth-child(6) { animation-delay:-1.3s; animation-duration:3.1s; }
+.dress-item:nth-child(7) { animation-delay:-2.5s; }
+.dress-item:hover,.dress-item:focus,.dress-item.is-dragging { animation-play-state:paused; filter:none; }
+.dress-item img { transition:filter .25s; }
+.dress-item:hover img,.dress-item:focus-visible img { filter:drop-shadow(0 0 4px rgba(255,255,255,.9)) drop-shadow(0 0 9px rgba(255,255,255,.5)); }
+.dress-item.ui-draggable-dragging { animation:none; transform:none; }
+@media (prefers-reduced-motion:reduce) { .dress-item { animation:none; } }
+
+/* Your의 자리는 유지하고 배경과 글자를 별도로 등장시킵니다. */
+.dress-section mark.dress-your { position:relative; background:transparent; }
+.dress-your-bg { position:absolute; left:0; top:0; width:100%; height:100%; background:#d0dd73; }
+.dress-your-text { position:relative; white-space:nowrap; }
+.dress-your-glyphs { display:inline-block; transform-origin:left center; }
+
+/* 상품 설명 메모패드: 스프링 아래의 종이 영역에 글씨 배치 */
+.story-page .dress-note { background:transparent url("../img/sub1_img/dress-notepad.png") center / 100% 100% no-repeat; padding:60px 32px 26px; }
+
+/* 상단 스프링 바로 아래를 축으로 종이가 위로 넘어갑니다. */
+.dress-note { perspective:1000px; }
+.note-turn-page { position:absolute; left:2.5%; top:14%; width:95%; height:82%; box-sizing:border-box; padding:14px 20px 12px; background:#f2eae2; z-index:3; transform-origin:center top; backface-visibility:hidden; animation:note-page-turn .55s ease-in-out forwards; box-shadow:3px 2px 8px #00000012; }
+.note-turn-description { font-size:15px; line-height:1.65; word-break:keep-all; white-space:pre-line; }
+@keyframes note-page-turn { 0% { transform:rotateX(0); opacity:1; } 70% {opacity:1;} 100% {transform:rotateX(105deg);opacity:0;} }
+
+
+/* =========================================================
+   4단락 이미지 스크롤 등장 (상단: 오른쪽 / 하단: 왼쪽)
+   사진 컨테이너만 이동하며 내부 클릭·사진 전환은 유지됩니다.
+   ========================================================= */
+.story-page #section4.od4-photo-reveal-ready .phone-photo,
+.story-page #section4.od4-photo-reveal-ready .magazine-placeholder.story-images {
+    opacity: 0;
+    transition: transform 0.95s cubic-bezier(.22, 1, .36, 1), opacity 0.85s ease;
+}
+.story-page #section4.od4-photo-reveal-ready .phone-photo {
+    transform: translateX(140px);
+}
+.story-page #section4.od4-photo-reveal-ready .magazine-placeholder.story-images {
+    transform: translateX(-140px);
+}
+.story-page #section4.od4-photo-reveal-ready .phone-photo.od4-photo-revealed,
+.story-page #section4.od4-photo-reveal-ready .magazine-placeholder.story-images.od4-photo-revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .story-page #section4.od4-photo-reveal-ready .phone-photo,
+    .story-page #section4.od4-photo-reveal-ready .magazine-placeholder.story-images {
+        transition: none;
+    }
+}
+
+
+/* =========================================================
+   ODDAY STORY 05 | 매거진 사진 & 선택한 사진 설명 애니메이션
+   사진 폭/기존 아코디언 구조는 그대로 둡니다.
+   ========================================================= */
+#section5.od5-enhanced .editorial-copy-inner > * {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .48s ease, transform .65s cubic-bezier(.22, 1, .36, 1);
+}
+#section5.od5-enhanced .editorial-item.od5-copy-visible.selected .editorial-copy-inner > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+#section5.od5-enhanced .editorial-copy-inner > :nth-child(1) { transition-delay: 0s; }
+#section5.od5-enhanced .editorial-copy-inner > :nth-child(2) { transition-delay: .13s; }
+#section5.od5-enhanced .editorial-copy-inner > :nth-child(3) { transition-delay: .26s; }
+#section5.od5-enhanced .editorial-copy-inner > :nth-child(4) { transition-delay: .39s; }
+#section5.od5-enhanced .editorial-copy-inner > :nth-child(5) { transition-delay: .52s; }
+
+/* =========================================================
+   ODDAY STORY 07 | 중앙 상품 강조 · 호버 정보 · 제목 등장
+   자동 슬라이드의 left/width/height 계산은 기존 JS를 유지
+   ========================================================= */
+#section7.od7-enhanced .recommend-card {
+    z-index: 1;
+    opacity: .70;
+    filter: saturate(.78);
+    transform: scale(1);
+    transform-origin: center center;
+    transition: opacity 1s ease-in-out, filter 1s ease-in-out, transform 1s cubic-bezier(.22,1,.36,1), box-shadow .65s ease;
+    box-shadow: 0 3px 8px rgba(34, 31, 30, .07);
+    overflow: hidden;
+}
+#section7.od7-enhanced .recommend-card.is-center {
+    z-index: 5;
+    opacity: 1;
+    filter: saturate(1);
+    transform: scale(1.027);
+    box-shadow: 0 14px 28px rgba(30,25,27,.20);
+}
+#section7.od7-enhanced .recommend-card img {
+    transition: transform .42s cubic-bezier(.22,1,.36,1);
+}
+/* 중앙 카드 전체가 실제 클릭 타깃임을 시각적으로 알려줍니다. */
+#section7.od7-enhanced .recommend-card.is-center { cursor:pointer; }
+#section7.od7-enhanced .recommend-card.is-center:focus-visible { outline:3px solid #ff345f; outline-offset:5px; }
+#section7.od7-enhanced .recommend-card:not(.is-center) { cursor:default; }
+#section7.od7-enhanced .recommend-card.is-center:hover {
+    transition-duration: 1s, 1s, .3s, .3s;
+    transform: scale(1.045);
+    box-shadow: 0 18px 32px rgba(30,25,27,.25);
+}
+#section7.od7-enhanced .recommend-card.is-center:hover img {
+    transform: scale(1.035);
+}
+#section7.od7-enhanced .recommend-heart { z-index: 6; }
+#section7.od7-enhanced .od7-hover-caption {
+    position: absolute;
+    left: 7%; right: 7%; bottom: 6%;
+    padding: 12px 14px;
+    background: rgba(255, 252, 248, .96);
+    border: 1px solid rgba(38,35,35,.12);
+    color: #282522;
+    box-shadow: 0 7px 18px rgba(0,0,0,.10);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity .33s ease, transform .37s cubic-bezier(.22,1,.36,1);
+    pointer-events: none;
+    z-index: 7;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+#section7.od7-enhanced .od7-hover-caption strong {
+    display: block; font-size: clamp(11px, .85vw, 16px); line-height: 1.25; letter-spacing: .03em;
+}
+#section7.od7-enhanced .od7-hover-caption small {
+    display: block; font-size: clamp(9px, .62vw, 12px); font-weight: 700;
+    letter-spacing: .07em; white-space: nowrap;
+}
+#section7.od7-enhanced .recommend-card.is-center:is(:hover, :focus-visible) .od7-hover-caption {
+    opacity: 1; transform: translateY(0);
+}
+#section7.od7-enhanced #recommend-title .od7-title-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(34px);
+    transition: opacity .66s ease, transform .76s cubic-bezier(.22, 1, .36, 1);
+}
+#section7.od7-enhanced #recommend-title .od7-title-line:nth-child(2) { transition-delay: .22s; }
+#section7.od7-enhanced.od7-title-visible #recommend-title .od7-title-line {
+    opacity: 1; transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    #section5.od5-enhanced .editorial-copy-inner > *,
+    #section7.od7-enhanced #recommend-title .od7-title-line {
+        transition: none;
+    }
+    #section7.od7-enhanced .recommend-card,
+    #section7.od7-enhanced .recommend-card img,
+    #section7.od7-enhanced .od7-hover-caption {
+        transition: none;
+    }
+}
+
+/* =========================================================
+   ODDAY 07 | EXPLORE + 클릭 시 상품 확대보기 모달
+   ========================================================= */
+body.od7-dialog-open { overflow:hidden; }
+.od7-detail-backdrop {
+    position:fixed; inset:0; z-index:20000;
+    display:flex; align-items:center; justify-content:center;
+    padding:24px; box-sizing:border-box;
+    background:rgba(19,19,20,.69);
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .3s ease, visibility .3s ease;
+}
+.od7-detail-backdrop.is-open {opacity:1;visibility:visible;pointer-events:auto;}
+.od7-detail-dialog {
+    position:relative; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr);
+    width:min(1060px, calc(100vw - 48px)); max-height:calc(100vh - 48px);
+    min-height:490px; overflow:hidden;
+    box-sizing:border-box; background:#fffdf9; box-shadow:0 26px 65px rgba(0,0,0,.26);
+    transform:translateY(20px) scale(.98); transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.od7-detail-backdrop.is-open .od7-detail-dialog {transform:translateY(0) scale(1);}
+.od7-detail-close {
+    position:absolute; top:20px; right:20px; z-index:3;
+    display:flex; align-items:center; justify-content:center;
+    width:44px; height:44px; padding:0; border:1px solid #363333;
+    background:#fffdf9; font:400 30px/1 Arial,sans-serif; color:#242424;
+    cursor:pointer; transition:background-color .2s,color .2s;
+}
+.od7-detail-close:hover,.od7-detail-close:focus-visible {background:#242424;color:#fff;}
+.od7-detail-picture {min-height:490px;background:#f1e8e3;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.od7-detail-picture img {display:block;width:100%;height:100%;max-height:calc(100vh - 48px);object-fit:contain;padding:10%;box-sizing:border-box;}
+.od7-detail-info {display:flex;flex-direction:column;justify-content:center;padding:84px 60px 72px 55px;box-sizing:border-box;}
+.od7-detail-kicker {font:700 12px/1.5 'Manrope',Arial,sans-serif;letter-spacing:.18em;color:#9b505e;}
+.od7-detail-number {font:700 12px/1.4 'Manrope',Arial,sans-serif;letter-spacing:.12em;color:#777;margin-top:48px;}
+#od7-detail-title {margin:12px 0 24px;color:#202020;font:400 clamp(48px,5vw,76px)/1.04 'Anton','Arial Narrow',Impact,sans-serif;letter-spacing:-.02em;overflow-wrap:anywhere;}
+#od7-detail-copy {font:500 17px/1.8 'Manrope','Noto Sans KR',sans-serif;color:#595553;word-break:keep-all;}
+.od7-detail-footer {margin-top:75px;border-top:1px solid #d8d0ca;padding-top:16px;font:700 11px/1.5 'Manrope',Arial,sans-serif;letter-spacing:.12em;color:#333;}
+@media(max-width:760px){
+  .od7-detail-dialog {grid-template-columns:1fr;grid-template-rows:minmax(200px,42vh) auto;min-height:0;overflow-y:auto;}
+  .od7-detail-picture {min-height:0;}
+  .od7-detail-picture img {height:100%;padding:6%;}
+  .od7-detail-info {padding:24px 28px 30px;}
+  .od7-detail-number {margin-top:12px;}
+  #od7-detail-title {margin:8px 0 12px;font-size:46px;}
+  .od7-detail-footer {margin-top:24px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .od7-detail-backdrop,.od7-detail-dialog{transition:none;}
+}
+
+/* 5단락 세 번째 사진: Seoul 글자와 남산타워가 보이는 왼쪽 영역 중심 */
+.editorial-photo-2 { background-position:20% center; }
+
+/* 첫 화면 배경이 살짝 가까운 구도에서 제자리로 정착 */
+@keyframes hero-opening-background { from {transform:scale(1.045);} to {transform:scale(1);} }
+.hero-opening-background { animation:hero-opening-background 1.4s ease-out both; }
+
+/* 3단락: 스크롤 진입 후 커서를 따라다니는 클릭 안내 */
+.photo-cursor-hint {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 12000;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, .94);
+    color: #202020;
+    border: 1px solid rgba(32, 32, 32, .18);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .10);
+    font-family: 'Manrope', Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+}
+.photo-cursor-hint.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .photo-cursor-hint {transition: none;}
+}
+
+/* SECTION 01: hide entrance text before JS is ready to prevent first-paint flicker.
+   JS uses the same initial values and then animates to opacity:1/top:0. */
+#section1 #hero-title,
+#section1 #hero-word {
+  display: inline-block;
+  position: relative;
+  opacity: 0;
+  top: 42px;
+}
+#section1 #hero-kicker,
+#section1 #hero-description,
+#section1 .hero-copy .short-line {
+  position: relative;
+  opacity: 0;
+  top: 12px;
+}
+
+/* SECTION 01: hide hero model before JS initialises to prevent first-paint flicker.
+   Matches JS opacity:0 / marginRight:-40 starting state. */
+#section1 .hero-model {
+  opacity: 0;
+  margin-right: -40px;
+}
+
+/* SUB1 section 3: right product image only - larger hover magnifier */
+#section3 .product-magnifier {
+    display:none;
+    position:absolute;
+    width:260px;
+    height:260px;
+    border:5px solid #fff;
+    border-radius:50%;
+    background-color:#fff;
+    background-repeat:no-repeat;
+    pointer-events:none;
+    z-index:30;
+    box-shadow:0 8px 28px rgba(0,0,0,.22);
+}
+#section3 .look-panel .look-product img { cursor:zoom-in; }
+
+
+/* SUB1 section spacing | 2026-11-06: add 60px to requested edges only.
+   Preserve existing content dimensions and section interactions. */
+.story-page #section2.outfit-section {
+    padding-top: 240px;    /* 180px + 60px */
+    padding-bottom: 240px; /* 180px + 60px */
+}
+/* 5단락: 섹션/사진에는 여백을 추가하지 않고,
+   클릭 후 오른쪽에 열리는 타이포 영역의 상하 여백만 조정 */
+.story-page #section5 .editorial-copy-inner {
+    padding-top: 250px;     /* 기존 190px에서 위쪽 +60px */
+    padding-bottom: 60px;
+}
+.story-page #section5 .editorial-signature {
+    margin-top: 110px;      /* 하단 공간도 확보하도록 기존 230px에서 조정 */
+}
+.story-page #section6.dress-section {
+    padding-top: 240px;    /* 180px + 60px */
+    padding-bottom: 240px; /* 180px + 60px */
+}
+.story-page #section7.future-section {
+    padding-top: 240px;    /* 180px + 60px; keep bottom unchanged */
+}
